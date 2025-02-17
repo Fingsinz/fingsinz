@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="" />
+    <meta name="hexo-theme-A4" content="v1.9.6" />
+    <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
+    <title>Fingsinz&#39;s space | 风信梓</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+
+
+<meta name="generator" content="Hexo 7.1.1">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
+    
+    <style>
+        :root {
+            --waline-theme-color: #000000; 
+            --waline-color: #000000; 
+            --waline-border-color: #000000; 
+            --waline-white: #000000; 
+            --waline-bgcolor-light: #white;  
+        }
+        body {
+            color: #000000;
+            background: #bed2bb;
+        }
+        .post-md code {
+            background: #e7f7f3;
+            color: #7f688d; 
+        }
+        .post-md pre, .post-md .highlight {
+            background: #e7f7f3;
+            color: #7f688d; 
+        }
+        pre .string, pre .value, pre .inheritance, pre .header, pre .ruby .symbol, pre .xml .cdata {
+            color: #000000;
+        }
+        pre .number, pre .preprocessor, pre .built_in, pre .literal, pre .params, pre .constant {
+            color: #000000;
+        }
+        .year-font-color {
+            color: #000000 !important;
+        }
+        .wl-card span.wl-nick {
+            color: #000000; 
+        }
+        .wl-card .wl-badge {
+            border: 1px solid #000000;
+            color: #000000; 
+        }
+        .wl-btn {
+            border: 1px solid #000000; 
+            color:  #000000;  
+        }
+        .wl-btn.primary {
+            color: #white; 
+        }
+        .wl-header label {
+            color: #000000;
+        }
+        a {
+            color: #6b798e;
+        }
+
+        .post-md a {
+            color: #6b798e;
+        }
+
+        .nav li a {
+            color: #6b798e;
+        }
+
+        .archive-main a:link {
+            color: #6b798e;
+        }
+        .archive-main a:visited {
+            color: #6b798e; 
+        }
+
+        .archive li span {
+            color: #000000;
+        }
+
+        .post-main-title {
+            color: #000000;
+        }
+
+        .post-md h1,
+        .post-md h2,
+        .post-md h3,
+        .post-md h4,
+        .post-md h5,
+        .post-md h6 {
+            color: #000000;
+        }
+
+        [data-waline] p {
+            color: #000000;
+        }
+        [data-waline] a {
+            color: #000000;
+        } 
+        .wl-sort li.active {
+            color: #000000;
+        }
+
+        .wl-card .wl-meta>span {
+            background: #white;
+        }
+
+        .paper {
+            background: #bed2bb;
+        }
+
+        .index-main {
+            background: #white;
+        }
+
+        .paper-main {
+            background: #white;
+        }
+
+        .wl-panel {
+            background: #white;
+        }
+
+        .archive li:nth-child(odd) {
+            background: #white;
+            ;
+        }
+
+        .archive li:nth-child(even) {
+            background: #white;
+        }
+
+        .post-md table tr:nth-child(odd) td {
+            background: #white;
+        }
+
+        .post-md table tr:nth-child(even) td {
+            background: #white;
+        }
+
+    
+        .progress-wrap::after {
+            color: #000000; /* 箭头的颜色 */
+        }
+        .progress-wrap svg.progress-circle path {
+	        stroke: #000000; /* 边框的颜色 */
+        }
+        .progress-wrap::before {
+	        background-image: linear-gradient(298deg, #6b798e, #6b798e); /* 鼠标滑过的箭头颜色 */
+         }
+
+        .return-to-last-progress-wrap::after {
+            color: #000000; /* 箭头的颜色 */
+        }
+        .return-to-last-progress-wrap svg.progress-circle path {
+	        stroke: #000000; /* 边框的颜色 */
+        }
+        .return-to-last-progress-wrap::before {
+	        background-image: linear-gradient(298deg, #6b798e, #6b798e); /* 鼠标滑过的箭头颜色 */
+         }
+
+         .left-toc-container::-webkit-scrollbar-thumb {
+            background-color: #000000; /* 设置滚动条拖动块的颜色 */
+        }
+
+        .bs-docs-sidebar .nav>.active>a,
+        .bs-docs-sidebar .nav>li>a:hover,
+        .bs-docs-sidebar .nav>li>a:focus {
+            color: #6b798e;
+            border-left-color: #6b798e;
+        }
+        .bs-docs-sidebar .nav>li>a {
+            color:  #000000;
+        }
+    </style>
+
+    
+    
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        
+            <div class="left-toc-container">
+                <nav id="toc" class="bs-docs-sidebar"></nav>
+            </div>
+        
+        <div class="paper">
+            
+            
+            
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <img style="
+        width: 56px;
+        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/favicon.webp" width="10%"></img>
+        <div class="header-content">
+            <a class="logo" href="/">Fingsinz&#39;s space</a> 
+            <span class="description">我在想，时下你所需要的，应该是痛痛快快换个心情，干干脆脆享受人生。</span> 
+        </div>
+        
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">首页🏚️</a></li>
+            
+        
+            
+                <li><a href="/list/">文章📄</a></li>
+            
+        
+            
+                <li><i>
+                    
+                        <u>
+                            <a  href="/notes/">笔记📔</a>
+                        </u>
+                    
+                </i></li>
+            
+        
+            
+                <li><a href="/funny/">趣事💡</a></li>
+            
+        
+            
+                <li><a href="/about/">关于🧑</a></li>
+            
+        
+    </ul>
+</div> 
+        
+                    
+                    
+
+                    
+                    
+                    
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+    
+
+    
+
+    
+
+    <div class="post-md">
+        
+            
+        
+        <div class=".article-gallery"><h1>个人使用软件</h1>
+<p><em>暂时记录的软件皆为 Windows 系统，自己亲身使用体验</em></p>
+<h2 id="目录">目录</h2>
+<ul>
+<li><a href="#%E9%80%9A%E7%94%A8%E8%BD%AF%E4%BB%B6">通用软件</a></li>
+<li><a href="#%E4%B8%93%E4%B8%9A%E8%BD%AF%E4%BB%B6">专业软件</a></li>
+<li><a href="#%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3%E5%8F%8A%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83">编程相关及开发环境</a>
+<ul>
+<li><a href="#IDE">IDE</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
+</ul>
+<h2 id="通用软件">通用软件</h2>
+<p>常见工具类：</p>
+<table>
+    <tbody><tr>
+    	<th>软件名</th>
+        <th>软件链接</th>
+        <th>介绍</th>
+    </tr>
+    <tr>
+        <td>Office 系列</td>
+        <td><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzA4MjU4MTg2Ng==&amp;action=getalbum&amp;album_id=3421475906659581960&amp;scene=21#wechat_redirect">公众号-软件管家</a></td>
+        <td>提供如 Word、Excel、PowerPoint等办公功能，平替有<a target="_blank" rel="noopener" href="https://cpclanding.jianguoyun.com/yiyang">怡氧</a></td>
+    </tr>
+    <tr>
+    	<td>Visio</td>
+        <td><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzA4MjU4MTg2Ng==&amp;action=getalbum&amp;album_id=3421491400485666822&amp;scene=21#wechat_redirect">公众号-软件管家</a></td>
+        <td>方便的流程图绘制软件，但个人感觉不如怡氧中的流程图绘制</td>
+    </tr>
+    <tr>
+    	<td>聊天软件</td>
+        <td><a target="_blank" rel="noopener" href="https://dldir1.qq.com/qqfile/qq/PCQQ9.7.22/QQ9.7.22.29317.exe">旧版QQ</a><br><a target="_blank" rel="noopener" href="https://weixin.qq.com/">微信</a></td>
+        <td>常用的聊天软件</td>
+    </tr>
+    <tr>
+    	<td>浏览器类</td>
+        <td><a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/edge/download">Edge</a><br><a target="_blank" rel="noopener" href="https://google.cn/chrome/">Chrome</a></td>
+        <td>多个浏览器以备不时之需</td>
+    </tr>
+    <tr>
+    	<td>Geek</td>
+        <td><a target="_blank" rel="noopener" href="https://geekuninstaller.com/download">官网下载</a></td>
+        <td>卸载工具，能够有效卸载软件，并扫除垃圾</td>
+    </tr>
+    <tr>
+    	<td>FreeFileSync</td>
+        <td><a target="_blank" rel="noopener" href="https://freefilesync.org/download.php">官网下载</a></td>
+        <td>能够比对两个文件夹之间的差异，并进行同步</td>
+    </tr>
+    <tr>
+    	<td>Bandizip</td>
+        <td><a target="_blank" rel="noopener" href="https://www.bandisoft.com/bandizip/">下载链接</a></td>
+        <td>解压软件，免费版功能就足够使用</td>
+    </tr>
+    <tr>
+    	<td>Everything</td>
+        <td><a target="_blank" rel="noopener" href="https://www.voidtools.com/zh-cn/downloads/">下载 - voidtools</a></td>
+        <td>小巧快速的文件查找工具</td>
+    </tr>
+    <tr>
+    	<td>Notepad3</td>
+        <td><a target="_blank" rel="noopener" href="http://notepad3.cn/">Notpad3 中文站</a><br><a target="_blank" rel="noopener" href="https://rizonesoft.com/downloads/notepad3/">Notepad3 → Rizonesoft.com</a></td>
+        <td>好用的记事本软件，必须要替代所谓的Notepad++</td>
+    </tr>
+    <tr>
+    	<td>ToDesk</td>
+        <td><a target="_blank" rel="noopener" href="https://www.todesk.com/download.html">官网下载</a></td>
+        <td>远程桌面操控软件，<a target="_blank" rel="noopener" href="https://sunlogin.oray.com/download?categ=personal&amp;ici=sunlogin_navigation">向日葵远程操控</a>也可</td>
+    </tr>
+    <tr>
+    	<td>uTools</td>
+        <td><a target="_blank" rel="noopener" href="https://u.tools/download/">官网下载</a></td>
+        <td>电脑的工具集，其中包含多种工具如截图，一键调用，但部分工具收费</td>
+    </tr>
+    <tr>
+    	<td>Snipaste</td>
+        <td><a target="_blank" rel="noopener" href="https://zh.snipaste.com/download.html">官网下载</a></td>
+        <td>纯粹的截图贴图软件，专业版收费</td>
+    </tr>
+    <tr>
+    	<td>ScreenToGif</td>
+        <td><a target="_blank" rel="noopener" href="https://www.screentogif.com/downloads">官网下载</a></td>
+        <td>录制 Gif 文件工具，截动态图</td>
+    </tr>
+    <tr>
+    	<td>格式工厂</td>
+        <td><a target="_blank" rel="noopener" href="http://formatfactory.org/CN/download.html">格式工厂下载</a></td>
+        <td>用于转换各种文件格式</td>
+    </tr>
+    <tr>
+    	<td>腾讯会议</td>
+        <td><a target="_blank" rel="noopener" href="https://meeting.tencent.com/download?mfrom=OfficialIndex_TopBanner1_Download">官网下载</a></td>
+        <td>平常上课、工作开会用</td>
+    </tr>
+    <tr>
+    	<td>Obsidian</td>
+        <td><a target="_blank" rel="noopener" href="https://obsidian.md/download">下载链接</a></td>
+        <td>不错的笔记软件，支持 Markdown，但是导出格式不太喜欢</td>
+    </tr>
+    <tr>
+        <td>Typora（付费）</td>
+        <td><a target="_blank" rel="noopener" href="https://typoraio.cn/">下载链接，官网89r永久</a></td>
+        <td>不错的笔记软件，支持 Markdown，导出 PDF 比较好看，但是略有卡顿感</td>
+    </tr>
+</tbody></table>
+<h2 id="专业软件">专业软件</h2>
+<table>
+    <tbody><tr>
+    	<th>软件名</th>
+        <th>软件链接</th>
+        <th>介绍</th>
+    </tr>
+    <tr>
+        <td>PhotoShop</td>
+        <td><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzA4MjU4MTg2Ng==&amp;action=getalbum&amp;album_id=3421506370241855488&amp;scene=21#wechat_redirect
+">公众号-软件管家</a></td>
+        <td>PS，用于处理图片</td>
+    </tr>
+    <tr>
+    	<td>LightRoom</td>
+        <td><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzA4MjU4MTg2Ng==&amp;action=getalbum&amp;album_id=3421515936576864257&amp;scene=21#wechat_redirect
+">公众号-软件管家</a></td>
+        <td>处理摄影图片</td>
+    </tr>
+</tbody></table>
+<h2 id="编程相关及开发环境">编程相关及开发环境</h2>
+<h3 id="ide">IDE</h3>
+<table>
+    <tbody><tr>
+    	<th>软件名</th>
+        <th>软件链接</th>
+        <th>介绍</th>
+    </tr>
+    <tr>
+    	<td>Visual Studio</td>
+        <td><a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/zh-hans/downloads/">官网下载</a></td>
+        <td>众所周知的 VS</td>
+    </tr>
+    <tr>
+    	<td>Visual Studio Code</td>
+        <td><a target="_blank" rel="noopener" href="https://code.visualstudio.com/Download#">官网下载</a></td>
+        <td>众所周知的 VS Code，实际上不算是 IDE，但是也放到这来，我常用的插件见下面</td>
+    </tr>
+</tbody></table>
+<p>Visual Studio</p>
+<p>CLion</p>
+<p>XBuilder</p>
+<h2 id="其他">其他</h2>
+<p>浏览器插件：</p>
+<ul>
+<li>终端设置：黑体，字体大小20</li>
+</ul>
+</div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+
+                
+            </div>
+    
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+                                      
+                    
+                    
+                    <div class="footer">
+    
+        <span> 
+            ©2023-2025 
+
+            
+                
+
+            
+                
+                    / <a href="/"> Fingsinz&#39;s Space </a>
+                
+
+            
+                
+                    / <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/fingsinz"> 知乎 </a>
+                
+
+            
+        </span>
+       
+    
+</div>
+
+
+
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>我在想，时下你所需要的，应该是痛痛快快换个心情，干干脆脆享受人生。</span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
+
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->  
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->  
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <meta name="description" content="" />
-    <meta name="hexo-theme-A4" content="v1.8.9" />
+    <meta name="hexo-theme-A4" content="v1.9.6" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
     <title>Fingsinz&#39;s space | 风信梓</title>
 
@@ -56,12 +56,25 @@
     
     
    
-<link rel="stylesheet" href="/css/lightgallery.min.css">
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
 
 
 <meta name="generator" content="Hexo 7.1.1">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
     
     <style>
         :root {
@@ -69,7 +82,7 @@
             --waline-color: #000000; 
             --waline-border-color: #000000; 
             --waline-white: #000000; 
-            --waline-bgcolor-light: white;  
+            --waline-bgcolor-light: #white;  
         }
         body {
             color: #000000;
@@ -104,7 +117,7 @@
             color:  #000000;  
         }
         .wl-btn.primary {
-            color: white; 
+            color: #white; 
         }
         .wl-header label {
             color: #000000;
@@ -156,7 +169,7 @@
         }
 
         .wl-card .wl-meta>span {
-            background: white;
+            background: #white;
         }
 
         .paper {
@@ -164,32 +177,32 @@
         }
 
         .index-main {
-            background: white;
+            background: #white;
         }
 
         .paper-main {
-            background: white;
+            background: #white;
         }
 
         .wl-panel {
-            background: white;
+            background: #white;
         }
 
         .archive li:nth-child(odd) {
-            background: white;
+            background: #white;
             ;
         }
 
         .archive li:nth-child(even) {
-            background: white;
+            background: #white;
         }
 
         .post-md table tr:nth-child(odd) td {
-            background: white;
+            background: #white;
         }
 
         .post-md table tr:nth-child(even) td {
-            background: white;
+            background: #white;
         }
 
     
@@ -229,7 +242,10 @@
     </style>
 
     
+    
     <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
         
             <div class="left-toc-container">
                 <nav id="toc" class="bs-docs-sidebar"></nav>
@@ -293,7 +309,7 @@
   <ul class="archive">
 
     
-    <span>📌<i>OpenGL</i></span>
+    <span><span class="darkmode-ignore">📌</span><i>OpenGL</i></span>
  
     
 
@@ -325,7 +341,7 @@
                     <div class="footer">
     
         <span> 
-            ©2023-2024 
+            ©2023-2025 
 
             
                 
@@ -342,8 +358,12 @@
 
             
         </span>
+       
     
 </div>
+
+
+
 <!--这是指一条线往下的内容-->
 <div class="footer-last">
     
@@ -386,8 +406,51 @@
 
 
 
-<script src="/js/lightgallery.min.js"></script>
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
 
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
 
 
                 </div>
@@ -409,6 +472,4 @@
                 </div>
             
     </body>
-
-
 </html>

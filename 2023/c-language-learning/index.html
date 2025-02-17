@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <meta name="description" content="C语言入门学习教程" />
-    <meta name="hexo-theme-A4" content="v1.8.9" />
+    <meta name="hexo-theme-A4" content="v1.9.6" />
     <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
     <title>Fingsinz&#39;s space | 风信梓</title>
 
@@ -56,12 +56,25 @@
     
     
    
-<link rel="stylesheet" href="/css/lightgallery.min.css">
+<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
 
 
 <meta name="generator" content="Hexo 7.1.1">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+    
+    
+
+    
+    
+
+
+
+    
+
+    
+    
+
     
     <style>
         :root {
@@ -69,7 +82,7 @@
             --waline-color: #000000; 
             --waline-border-color: #000000; 
             --waline-white: #000000; 
-            --waline-bgcolor-light: white;  
+            --waline-bgcolor-light: #white;  
         }
         body {
             color: #000000;
@@ -104,7 +117,7 @@
             color:  #000000;  
         }
         .wl-btn.primary {
-            color: white; 
+            color: #white; 
         }
         .wl-header label {
             color: #000000;
@@ -156,7 +169,7 @@
         }
 
         .wl-card .wl-meta>span {
-            background: white;
+            background: #white;
         }
 
         .paper {
@@ -164,32 +177,32 @@
         }
 
         .index-main {
-            background: white;
+            background: #white;
         }
 
         .paper-main {
-            background: white;
+            background: #white;
         }
 
         .wl-panel {
-            background: white;
+            background: #white;
         }
 
         .archive li:nth-child(odd) {
-            background: white;
+            background: #white;
             ;
         }
 
         .archive li:nth-child(even) {
-            background: white;
+            background: #white;
         }
 
         .post-md table tr:nth-child(odd) td {
-            background: white;
+            background: #white;
         }
 
         .post-md table tr:nth-child(even) td {
-            background: white;
+            background: #white;
         }
 
     
@@ -229,7 +242,10 @@
     </style>
 
     
+    
     <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
         
             <div class="left-toc-container">
                 <nav id="toc" class="bs-docs-sidebar"></nav>
@@ -291,12 +307,41 @@
                     <!--说明是文章post页面-->
                     
                         <div class="post-main">
+    
 
     
-        <div class="post-main-title">
-            C语言入门学习教程
-        </div>
+        
+            
+                <div class="post-main-title" style="text-align: center;">
+                    C语言入门学习教程
+                </div>
+            
+        
       
+    
+
+    
+
+        
+            <div class="post-head-meta-center">
+        
+                
+                    <span>最近更新：2024-09-16</span> 
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                     <span>字数总计：22.7k</span>
+                
+                
+                    
+                        &nbsp; | &nbsp;
+                    
+                    <span>阅读估时：88分钟</span>
+                
+                
+            </div>
     
 
     <div class="post-md">
@@ -1210,7 +1255,7 @@ D返回语句<br>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">运行结果：</span><br><span class="line">!aHello World!</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 <h2 id="4-2-格式化的输入">4.2 格式化的输入</h2>
 <ul>
-<li>用 <code>scanf()</code> 函数进行格式化的输出，其函数定义如下：</li>
+<li>用 <code>scanf()</code> 函数进行格式化的输入，其函数定义如下：</li>
 </ul>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">scanf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> * <span class="keyword">restrict</span> format,...)</span>;</span><br><span class="line"><span class="comment">// 第一参数为输入格式字符串，省略号表示存在可变形参</span></span><br><span class="line"><span class="comment">// 输入成功返回成功读入的数据项数，输入数据时遇到了结束则返回EOF（End Of File）。</span></span><br></pre></td></tr></tbody></table></figure>
 <p>也可以参考这样的格式： <code>scanf(格式控制，地址表列)；</code>。格式控制字符串同输入的规则。在使用 <code>scanf()</code> 的时候，我们应当注意， <code>scanf()</code> 函数的地址表列是需要输入的变量地址，而不是变量名，因此，我们要在变量名前加 <code>&amp;</code> 取地址符。如：</p>
@@ -1730,12 +1775,7 @@ D返回语句<br>
 <li>函数 <code>fscanf()</code> ：从文件中读取字符串，但是在遇到第一个空格和换行符时，它会停止读取。该函数形式与 <code>scanf</code> 函数类似，参考 <code>scanf</code> 函数使用，记得添加取地址符 <code>&amp;</code> 。</li>
 </ul>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fscanf</span><span class="params">(FILE *fp, <span class="type">const</span> <span class="type">char</span> *format, ...)</span></span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两函数比较</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a, &amp;b);</span><br><span class="line"><span class="built_in">fscanf</span>(fp, <span class="string">"%d%d"</span>, &amp;a, &amp;b);</span><br></pre></td></tr></tbody></table></figure></div><script src="https://jsd.onmicrosoft.cn/npm/hexo-theme-a4@latest/source/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
-        var options = {
-            selector: '.gallery-item'
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
-        }</script><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两函数比较</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a, &amp;b);</span><br><span class="line"><span class="built_in">fscanf</span>(fp, <span class="string">"%d%d"</span>, &amp;a, &amp;b);</span><br></pre></td></tr></tbody></table></figure></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
     </div>
 
     <div class="post-meta">
@@ -1770,10 +1810,23 @@ D返回语句<br>
     </div>
     <br>
     
-    <!-- <div class="post-footer-pre-next">
-        <span>上一篇：<a href=""></a></span>
-        <span class="post-footer-pre-next-last-span-right">上一篇：<a href=""></a></span>
-    </div> -->
+    
+        
+            
+    
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2023/12/'>Python源代码打包成.exe文件记录</a></span>
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2023/tofreshman/">给大一的你</a>
+                    </span>
+                
+            </div>
+    
+        
+    
 
     
         
@@ -1789,7 +1842,7 @@ D返回语句<br>
                     <div class="footer">
     
         <span> 
-            ©2023-2024 
+            ©2023-2025 
 
             
                 
@@ -1806,8 +1859,12 @@ D返回语句<br>
 
             
         </span>
+       
     
 </div>
+
+
+
 <!--这是指一条线往下的内容-->
 <div class="footer-last">
     
@@ -1850,8 +1907,51 @@ D返回语句<br>
 
 
 
-<script src="/js/lightgallery.min.js"></script>
+<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
 
+
+
+<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
+
+
+
+<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
+
+
+<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+     
+    if (typeof lightGallery !== "undefined") {
+        var options1 = {
+            selector: '.gallery-item',
+            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
+            thumbnail: true,          // 显示缩略图
+            zoom: true,               // 启用缩放功
+            rotate: true,             // 启用旋转功能能
+            autoplay: true,        // 启用自动播放功能
+            fullScreen: true,      // 启用全屏功能
+            pager: false, //页码,
+            zoomFromOrigin: true,   // 从原始位置缩放
+            actualSize: true,       // 启用查看实际大小的功能
+            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+    }
+    
+</script>
 
 
                 </div>
@@ -1873,6 +1973,4 @@ D返回语句<br>
                 </div>
             
     </body>
-
-
 </html>
