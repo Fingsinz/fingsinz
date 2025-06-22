@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="">
+    
+    
+    <meta name="description" content="None">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <script src="/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/static/css/search/style.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>搭建一个自己的简单博客 - Fingsinz's Space</title>
+    
+    <script type="text/javascript">js_vars = {}</script>
+    <script type="text/javascript">metadata = {"tags": [], "date": "2023-07-02", "update": [], "ts": 1688227200, "author": "", "brief": "", "cover": ""}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/">
+                
+                    <img class="site_logo" src="/static/images/logo.webp" alt="logo">
+                
+                
+                    <h2>Fingsinz's Space</h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class="active"><a  href="/articals/">随笔记录</a></li>
+<li class=""><a  href="/notes/">学习笔记</a></li>
+<li class=""><a  href="/collections/">收藏</a></li>
+<li class=""><a  href="/about/">关于我</a></li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+</ul>
+
+                <ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">Search</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">Keywords separated by space</span>
+                                <span id="search_loading_hint">Loading, wait please ...</span>
+                                <span id="search_download_err_hint">Download error, please check network and refresh again</span>
+                                <span id="search_other_docs_result_hint">Result from other docs</span>
+                                <span id="search_curr_doc_result_hint">Result from current doc</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="active_parent no_link"><a><span class="label">2023</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="not_active with_link"><a href="/articals/7.html"><span class="label">Windows下Python3.11.4的安装记录</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/articals/6.html"><span class="label">YOLOv5由pt文件转onnx文件报错解决</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/articals/5.html"><span class="label">C++报错：表达式必须含有常量值</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/articals/4.html"><span class="label">Windows 10下安装CUDA、TensorRT记录</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/articals/3.html"><span class="label">搭建一个自己的简单博客</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/articals/2.html"><span class="label">使用阿里云对象存储OSS实现图床</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/articals/1.html"><span class="label">第一个博客</span><span class=""></span></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>搭建一个自己的简单博客</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2023-07-02">
+                                    2023-07-02
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h2 id="%E5%B7%A5%E5%85%B7%E5%87%86%E5%A4%87">工具准备</h2>
+<h3 id="Nodejs">Nodejs</h3>
+<p>Nodejs简单来说就是运行在服务端的JavaScript，博客交互需要用到Nodejs。</p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/4_NodejsDonwload.png" alt="Nodejs下载页面" /></p>
+<p>选择合适的软件版本下载，<a href="https://nodejs.cn/download/"  target="_blank">下载地址：https://nodejs.cn/download/</a></p>
+<p>下载完成后按正常流程安装，可安装在非系统盘，记得选择“Add to PATH”配置PATH环境变量。我的Nodejs安装在<code>E:\Nodejs</code>中。</p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/4_Node.png" alt="选择" /></p>
+<p>注：为了软件安装简洁可控，还需要对Nodejs的内容（Cache和global）进行规划，具体可参考<a href="https://juejin.cn/post/7227434605392642104"  target="_blank">nodejs的安装及详细环境配置</a>或<a href="https://blog.csdn.net/Ouchieve_111/article/details/70878090"  target="_blank">修改项目默认node_modules路径</a>或<a href="https://blog.csdn.net/scorpio_meng/article/details/83314675"  target="_blank">node安装后的设置(node_global和node_cache) - windows</a>，或自行搜索。</p>
+<h3 id="Git">Git</h3>
+<p>Git是一个分布式版本控制系统，简单理解为它可以帮助我们管理文件各种版本，博客的更新之类的。</p>
+<p><a href="https://git-scm.com/"  target="_blank">下载地址：https://git-scm.com/</a></p>
+<p>下载完成后按正常流程安装，可安装在非系统盘，其他选项可以保持默认。我的Git安装在<code>E:\Git</code>中。</p>
+<h3 id="%E9%AA%8C%E8%AF%81Nodejs%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F">验证Nodejs是否安装成功</h3>
+<p>在桌面鼠标右键，选择菜单中的Git Bash Here。</p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/4_%E5%8F%B3%E9%94%AE.jpg" alt="右键菜单" /></p>
+<p>在弹出的窗口中输入以下指令</p>
+
+<pre class="language-bash"><code class="language-bash">node -v
+</code></pre>
+
+<pre class="language-bash"><code class="language-bash">npm -v
+</code></pre>
+<p>若出现了对应的版本号，则说明安装成功。若不出现版本号，则检查Nodejs的安装过程，或者必应搜索相关帮助。</p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/4_%E9%AA%8C%E8%AF%81.png" alt="验证Nodejs安装" /></p>
+<h3 id="cnpm">cnpm</h3>
+<p>上面的<code>npm -v</code>查看了npm的版本，可以简单理解为npm是一种下载工具。而npm下载一般是通过国外网络下载，速度比较慢。因此需要先通过npm安装cnpm（国内下载），之后就是用cnpm代替npm。</p>
+
+<pre class="language-bash"><code class="language-bash">npm install -g cnpm --registry=https://registry.npmmirror.com
+</code></pre>
+<p><em>可能出现镜像源过期的情况。</em></p>
+<p>通过查询版本号验证是否安装成功。</p>
+
+<pre class="language-bash"><code class="language-bash">cnpm -v
+</code></pre>
+<h2 id="%E5%AE%89%E8%A3%85Hexo">安装Hexo</h2>
+<p>Hexo是一种博客框架，通过它可以将简单的Markdown语言转化为带装饰的网页。</p>
+<p>通过下面命令安装Hexo。</p>
+
+<pre class="language-bash"><code class="language-bash">cnpm install hexo-cli -g
+</code></pre>
+<p>也可以通过查询版本号确认Hexo是否安装成功。</p>
+
+<pre class="language-bash"><code class="language-bash">hexo -V
+</code></pre>
+<p>Hexo的常用命令：<code>hexo -s</code>本地查看博客，<code>hexo g</code>生成博客，<code>hexo clean</code>删除当前博客所有网页页面。</p>
+<h2 id="%E5%BC%80%E5%A7%8B%E5%BB%BA%E9%80%A0%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2">开始建造你的博客</h2>
+<h3 id="%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%8C%E5%B0%BD%E9%87%8F%E4%B8%8D%E5%86%8D%E7%A7%BB%E5%8A%A8%E3%80%82">创建一个新的文件夹，尽量不再移动。</h3>
+<p>如我在F盘创建了一个文件夹叫<code>15.Blog</code>，就在15.Blog文件夹下右键选择Git Bash。</p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/4_%E5%8D%9A%E5%AE%A21.png" alt="" /></p>
+<h3 id="%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8D%9A%E5%AE%A2">初始化博客</h3>
+<p>在窗口中输入命令，等待完成。（如果运行至<code>Install dependencies</code>卡住，可以<code>Ctrl + C</code>结束命令）</p>
+
+<pre class="language-bash"><code class="language-bash">hexo init
+</code></pre>
+<h3 id="%E6%9F%A5%E7%9C%8B%E5%8D%9A%E5%AE%A2">查看博客</h3>
+<p>在窗口中输入命令，查看博客的初始页面。</p>
+
+<pre class="language-bash"><code class="language-bash">hexo s
+</code></pre>
+<h3 id="%E7%BB%99%E5%8D%9A%E5%AE%A2%E4%B8%8B%E8%BD%BD%E4%B8%BB%E9%A2%98%E2%80%94%E2%80%94Next">给博客下载主题——Next</h3>
+<p>点击<a href="https://hexo.io/themes/"  target="_blank">此处</a>寻找合适的主题，以Next为例，因为该主题基础、自定义程度高。</p>
+<p>可以用git指令将Github的主题压缩包下载到博客的<code>themes/</code>文件夹中：</p>
+
+<pre class="language-bash"><code class="language-bash">git clone 复制的地址 themes/主题名字
+</code></pre>
+<p>上面指令意思是将指定地址的内容克隆到本地<code>themes/</code>文件夹并命名为指定名字。<br />
+也可以直接下载压缩包粘贴至<code>themes/</code>文件夹中。</p>
+<h3 id="%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">修改配置文件</h3>
+<p>在博客的根目录中有一个名为<code>_config</code>的文本文件，在主题目录也有一个名为<code>_config</code>的文本文件，此处做区分，前者为博客配置文件，后者为主题配置文件。</p>
+<p>打开博客配置文件，可以根据<a href="https://hexo.io/zh-cn/docs/configuration"  target="_blank">官方配置介绍</a>进行修改个性化博客。<br />
+将博客配置文件中<code>themes</code>一行填入刚下载的next主题，即可使用该主题。在博客目录打开Git Bash，输入<code>hexo s</code>可以查看博客。</p>
+<p>注意：有些主题你更换之后是暂时无法预览的，因为有的主题还需要安装它需要的依赖。</p>
+<h2 id="%E7%BC%96%E5%86%99%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E6%9D%A1%E5%8D%9A%E5%AE%A2">编写你的第一条博客</h2>
+<p>在博客根目录打开Git Bash，输入下面的指令即可创建文章。</p>
+
+<pre class="language-bash"><code class="language-bash">$ hexo new &quot;文章名字&quot;
+</code></pre>
+<p>每次生成的文章都固定在你的博客根目录下面的<code>source/_posts</code>下，并以Markdown文件形式编写保存。</p>
+<h2 id="%E9%83%A8%E7%BD%B2%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2%E5%88%B0Github">部署你的博客到Github</h2>
+<p>首先需要有一个Github账号，并且新建仓库名为<code>用户名+.github.io</code>。</p>
+<p>接着需要进行一系列的密钥绑定：</p>
+<ol>
+<li>在博客根目录打开Git Bash，输入下面的命令，接着会出现你的密钥。</li>
+</ol>
+
+<pre class="language-bash"><code class="language-bash">ssh-keygen -t rsa -C “your_email@youremail.com“
+</code></pre>
+
+<pre class="language-bash"><code class="language-bash">cat ~/.ssh/id_rsa.pub
+</code></pre>
+<ol start="2">
+<li><p>在Github页面点击头像-&gt;Settings-&gt;SSH and GPG keys-&gt;New SSH key，接着把密钥复制上去。</p>
+</li>
+<li><p>再在Git Bash中执行下面命令。</p>
+</li>
+</ol>
+
+<pre class="language-bash"><code class="language-bash">ssh -T git@github.com
+</code></pre>
+<p>接着提示<code>Are you sure you want to continue connecting (yes/no/[fingerprint])?</code>，输入yes回车即可。</p>
+<ol start="4">
+<li><p>点击项目仓库，在左上角的Clone or download中点击Use SSH，复制git开头的地址。</p>
+</li>
+<li><p>打开博客配置文件，找到deploy一行，按照下面的指示修改。</p>
+</li>
+</ol>
+
+<pre class="language-none"><code class="language-none">deploy:
+    type: git
+    repo: 复制到的地址
+    branch: master
+</code></pre>
+<ol start="6">
+<li>在博客根目录打开Git Bash，分别执行下列命令。</li>
+</ol>
+
+<pre class="language-bash"><code class="language-bash">git config --global user.name &quot;yourname&quot;
+
+git config --global user.email &quot;youremail&quot;
+</code></pre>
+<ol start="7">
+<li>安装上传插件。</li>
+</ol>
+
+<pre class="language-bash"><code class="language-bash">cnpm install hexo-deployer-git --save
+</code></pre>
+<ol start="8">
+<li>使用下面指令上传博客。</li>
+</ol>
+
+<pre class="language-bash"><code class="language-bash">hexo d
+</code></pre>
+<ol start="9">
+<li>打开项目仓库，选择上方的Settings，找到Pages，在Source处选择Deploy from a branch。之后就会出现一个网站地址，便是博客地址。</li>
+</ol>
+<h2 id="%E6%B3%A8">注</h2>
+<p>如有纰漏，可同步参考<a href="https://www.cnblogs.com/huanhao/p/hexobase.html"  target="_blank">此篇博客</a>或自行搜索他人教程相互参考。</p>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/articals/4.html">
+                            <span class="icon"></span>
+                            <span class="label">Windows 10下安装CUDA、TensorRT记录</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/articals/2.html">
+                            <span class="label">使用阿里云对象存储OSS实现图床</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a></a><ul><li><a target="_blank" href="/#"></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">Generated by teedoc | Fingsinz's Space | ©2023-2025</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script src="/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/static/js/theme_default/main.js"></script>
+    
+        <script src="/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/static/js/search/search_main.js"></script>
+    
+        <script src="/static/js/custom.js"></script>
+    
+</body>
+
+</html>

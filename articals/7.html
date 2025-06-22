@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN"  class=" heading_no_counter ">
+<html lang="zh-CN"  class="">
 
 
 <head>
@@ -44,10 +44,10 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
         
     
     
-    <title>随笔记录 - Fingsinz's Space</title>
+    <title>Windows下Python3.11.4的安装记录 - Fingsinz's Space</title>
     
     <script type="text/javascript">js_vars = {}</script>
-    <script type="text/javascript">metadata = {"tags": [], "date": false, "update": [], "ts": 0, "author": "", "brief": "", "cover": "", "class": "heading_no_counter"}</script>
+    <script type="text/javascript">metadata = {"tags": ["Python"], "date": "2023-07-07", "update": [], "ts": 1688740733, "author": "", "brief": "", "cover": ""}</script>
 </head>
 
 
@@ -97,9 +97,9 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                 <div id="sidebar_title">
                     
                 </div>
-                <ul class="">
-<li class="not_active no_link"><a><span class="label">2023</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
-<li class="not_active with_link"><a href="/articals/7.html"><span class="label">Windows下Python3.11.4的安装记录</span><span class=""></span></a></li>
+                <ul class="show">
+<li class="active_parent no_link"><a><span class="label">2023</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="active with_link"><a href="/articals/7.html"><span class="label">Windows下Python3.11.4的安装记录</span><span class=""></span></a></li>
 <li class="not_active with_link"><a href="/articals/6.html"><span class="label">YOLOv5由pt文件转onnx文件报错解决</span><span class=""></span></a></li>
 <li class="not_active with_link"><a href="/articals/5.html"><span class="label">C++报错：表达式必须含有常量值</span><span class=""></span></a></li>
 <li class="not_active with_link"><a href="/articals/4.html"><span class="label">Windows 10下安装CUDA、TensorRT记录</span><span class=""></span></a></li>
@@ -122,11 +122,13 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     <div id="article_head">
                         <div id="article_title">
                             
-                            <h1>随笔记录</h1>
+                            <h1>Windows下Python3.11.4的安装记录</h1>
                             
                         </div>
                         <div id="article_tags">
                             <ul>
+                            
+                                <li>Python</li>
                             
                             </ul>
                         </div>
@@ -135,6 +137,10 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                             <span class="article_author">
                                 
                             </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2023-07-07">
+                                    2023-07-07
+                                </span>
                             
                         </div>
                         <div id="article_info_right">
@@ -151,16 +157,38 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     </div>
                     <div id="article_content">
                         
-                            <h2 id="2023">2023</h2>
+                            <h2 id="%E4%B8%8B%E8%BD%BDPython%E5%AE%89%E8%A3%85%E5%8C%85">下载Python安装包</h2>
+<p><a href="https://www.python.org/downloads/windows/"  target="_blank">官网</a>选择尽量较新的Python版本下载。</p>
+<h2 id="%E5%AE%89%E8%A3%85Python">安装Python</h2>
+<p>打开下载的Python安装包，选择<code>Customize installation</code>客制化安装，记得勾选下面的“Add python.exe to PATH”。</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/8_py1.jpg" alt="安装步骤1" /></p>
+<p>接着默认勾选：</p>
 <ul>
-<li>Windows下Python3.11.4的安装记录</li>
-<li>YOLOv5由pt文件转onnx文件报错解决</li>
-<li>C++报错：表达式必须含有常量值</li>
-<li>Windows 10下安装CUDA、TensorRT记录</li>
-<li>搭建一个自己的简单博客</li>
-<li>使用阿里云对象存储OSS实现图床</li>
-<li>第一个博客</li>
+<li>pip：包管理器，下载包时使用。建议勾选上</li>
 </ul>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/8_py2.jpg" alt="安装步骤2" /></p>
+<p>再接着更改安装路径，建议安装在非系统盘。</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/8_py3.jpg" alt="安装步骤3" /></p>
+<p>等待安装完成即可。</p>
+<h2 id="%E6%B5%8B%E8%AF%95Python">测试Python</h2>
+<p>按下<code>Win+R</code>输入<code>cmd</code>打开命令窗口，输入下面命令验证是否安装成功。</p>
+
+<pre class="language-cmd"><code class="language-cmd">python -V
+</code></pre>
+<p>如果出现版本号，即为安装成功。</p>
+<h2 id="%E9%99%84%EF%BC%9A%E6%9B%B4%E6%94%B9Python%E7%9A%84pip%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84">附：更改Python的pip安装路径</h2>
+<p>建议将pip安装的包放至非系统盘。进入Python的安装路径，如我的在<code>D:\Pyhton\Lib</code>，寻找文件<code>site.py</code>，使用记事本打开。使用<code>ctrl+f</code>查找关键字<code>USER_SITE</code>等字，将路径更改为自定义的路径。我更改情况如下图。</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/8_py.jpg" alt="更改路径" /></p>
+<p>更改路径后，打开cmd，使用下面指令安装numpy包。</p>
+
+<pre class="language-cmd"><code class="language-cmd">pip install numpy
+</code></pre>
+<p>安装成功后，再使用下面指令查看numpy包的安装位置。</p>
+
+<pre class="language-cmd"><code class="language-cmd">pip show numpy
+</code></pre>
+<p>我成功更改pip的安装路径，新下载的numpy包位于<code>D:\Pyhton\Lib\site-packages</code>。</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/8_py4.jpg" alt="更改路径后" /></p>
 
                         
                     </div>
@@ -170,6 +198,11 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                         
                     </div>
                     <div id="next">
+                        
+                        <a href="/articals/6.html">
+                            <span class="label">YOLOv5由pt文件转onnx文件报错解决</span>
+                            <span class="icon"></span>
+                        </a>
                         
                     </div>
                 </div>

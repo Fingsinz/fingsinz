@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN"  class=" heading_no_counter ">
+<html lang="zh-CN"  class="">
 
 
 <head>
@@ -10,7 +10,7 @@
     <meta name="keywords" content="">
     
     
-    <meta name="description" content="None">
+    <meta name="description" content="">
     
     <meta name="generator" content="teedoc">
     <meta name="theme" content="teedoc-plugin-theme-default">
@@ -44,10 +44,10 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
         
     
     
-    <title>随笔记录 - Fingsinz's Space</title>
+    <title>Visual Studio2022的C++项目打包成软件记录 - Fingsinz's Space</title>
     
     <script type="text/javascript">js_vars = {}</script>
-    <script type="text/javascript">metadata = {"tags": [], "date": false, "update": [], "ts": 0, "author": "", "brief": "", "cover": "", "class": "heading_no_counter"}</script>
+    <script type="text/javascript">metadata = {"tags": ["CPP"], "date": "2023-07-17", "update": [], "ts": 1689582458, "author": "", "brief": "", "cover": "", "categories": "日常"}</script>
 </head>
 
 
@@ -98,16 +98,7 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     
                 </div>
                 <ul class="">
-<li class="not_active no_link"><a><span class="label">2023</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
-<li class="not_active with_link"><a href="/articals/7.html"><span class="label">Windows下Python3.11.4的安装记录</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/6.html"><span class="label">YOLOv5由pt文件转onnx文件报错解决</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/5.html"><span class="label">C++报错：表达式必须含有常量值</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/4.html"><span class="label">Windows 10下安装CUDA、TensorRT记录</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/3.html"><span class="label">搭建一个自己的简单博客</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/2.html"><span class="label">使用阿里云对象存储OSS实现图床</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/1.html"><span class="label">第一个博客</span><span class=""></span></a></li>
-</ul>
-</li>
+<li class="not_active with_link"><a href="/articals/index.html"><span class="label">Brief</span><span class=""></span></a></li>
 </ul>
 
             </div>
@@ -122,11 +113,13 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     <div id="article_head">
                         <div id="article_title">
                             
-                            <h1>随笔记录</h1>
+                            <h1>Visual Studio2022的C++项目打包成软件记录</h1>
                             
                         </div>
                         <div id="article_tags">
                             <ul>
+                            
+                                <li>CPP</li>
                             
                             </ul>
                         </div>
@@ -135,6 +128,10 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                             <span class="article_author">
                                 
                             </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2023-07-17">
+                                    2023-07-17
+                                </span>
                             
                         </div>
                         <div id="article_info_right">
@@ -151,16 +148,30 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     </div>
                     <div id="article_content">
                         
-                            <h2 id="2023">2023</h2>
-<ul>
-<li>Windows下Python3.11.4的安装记录</li>
-<li>YOLOv5由pt文件转onnx文件报错解决</li>
-<li>C++报错：表达式必须含有常量值</li>
-<li>Windows 10下安装CUDA、TensorRT记录</li>
-<li>搭建一个自己的简单博客</li>
-<li>使用阿里云对象存储OSS实现图床</li>
-<li>第一个博客</li>
-</ul>
+                            <p>介绍如何将VS的C++项目打包</p>
+<p>关键词：C++</p>
+<!-- more -->
+<hr />
+<!-- toc -->
+<h1 id="1.%E7%BC%96%E8%AF%91%E5%87%BA.exe%E6%96%87%E4%BB%B6">1.编译出.exe文件</h1>
+<p>选择Release生成，我在此是<code>Realease x64</code>编译。</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/11_vs.jpg" alt="编译" /></p>
+<h1 id="2.%E6%89%93%E5%8C%85%E9%A1%B9%E7%9B%AE">2.打包项目</h1>
+<p>将刚才构建出来的.exe文件复制到一个新的文件夹（目录尽量不带中文），该目录作为软件的工作目录。比如我复制到F:\test\HelloWorld1.0，软件工作目录就是这个文件夹，test目录下的一个新建文件夹。</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/11_exe.jpg" alt="软件工作目录" /></p>
+<p>打开Visual Studio的安装目录，找到<code>dumpbin.exe</code>并复制其路径，可以按照下面的路径查找：<br />
+<code>E:\Microsoft_Visual_Studio\VS\VC\Tools\MSVC\14.36.32532\bin\Hostx64\x64</code></p>
+<p>回到软件工作目录，在地址栏输入cmd打开命令提示符，按格式输入：<br />
+<code>dumpbin.exe路径 /dependents 发布软件的路径</code></p>
+<p>如：</p>
+
+<pre class="language-cmd"><code class="language-cmd">E:\Microsoft_Visual_Studio\VS\VC\Tools\MSVC\14.36.32532\bin\Hostx64\x64\dumpbin.exe /dependents HelloWorld.exe
+</code></pre>
+<p>接着将出现的.dll文件找出来，推荐使用<a href="https://www.voidtools.com/zh-cn/downloads/"  target="_blank">Everything软件</a>搜索，选择路径上对应的平台（x86或x64），复制到软件的工作目录即可。</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/11_dependents.jpg" alt="软件依赖" /></p>
+<p>如图：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/11_last.jpg" alt="完整的软件工作目录" /></p>
+<p>这样即可直接点击.exe文件运行。</p>
 
                         
                     </div>
@@ -219,6 +230,8 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
         <script src="/static/js/search/search_main.js"></script>
     
         <script src="/static/js/custom.js"></script>
+    
+        <script type="text/javascript" src="/static/js/live.js"></script>
     
 </body>
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN"  class=" heading_no_counter ">
+<html lang="zh-CN"  class="">
 
 
 <head>
@@ -10,7 +10,7 @@
     <meta name="keywords" content="">
     
     
-    <meta name="description" content="None">
+    <meta name="description" content="">
     
     <meta name="generator" content="teedoc">
     <meta name="theme" content="teedoc-plugin-theme-default">
@@ -44,10 +44,10 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
         
     
     
-    <title>随笔记录 - Fingsinz's Space</title>
+    <title>Qt的下载地址记录 - Fingsinz's Space</title>
     
     <script type="text/javascript">js_vars = {}</script>
-    <script type="text/javascript">metadata = {"tags": [], "date": false, "update": [], "ts": 0, "author": "", "brief": "", "cover": "", "class": "heading_no_counter"}</script>
+    <script type="text/javascript">metadata = {"tags": ["Qt"], "date": "2023-08-03", "update": [], "ts": 1691066372, "author": "", "brief": "", "cover": "", "categories": "日常"}</script>
 </head>
 
 
@@ -98,16 +98,7 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     
                 </div>
                 <ul class="">
-<li class="not_active no_link"><a><span class="label">2023</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
-<li class="not_active with_link"><a href="/articals/7.html"><span class="label">Windows下Python3.11.4的安装记录</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/6.html"><span class="label">YOLOv5由pt文件转onnx文件报错解决</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/5.html"><span class="label">C++报错：表达式必须含有常量值</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/4.html"><span class="label">Windows 10下安装CUDA、TensorRT记录</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/3.html"><span class="label">搭建一个自己的简单博客</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/2.html"><span class="label">使用阿里云对象存储OSS实现图床</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/1.html"><span class="label">第一个博客</span><span class=""></span></a></li>
-</ul>
-</li>
+<li class="not_active with_link"><a href="/articals/index.html"><span class="label">Brief</span><span class=""></span></a></li>
 </ul>
 
             </div>
@@ -122,11 +113,13 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     <div id="article_head">
                         <div id="article_title">
                             
-                            <h1>随笔记录</h1>
+                            <h1>Qt的下载地址记录</h1>
                             
                         </div>
                         <div id="article_tags">
                             <ul>
+                            
+                                <li>Qt</li>
                             
                             </ul>
                         </div>
@@ -135,6 +128,10 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                             <span class="article_author">
                                 
                             </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2023-08-03">
+                                    2023-08-03
+                                </span>
                             
                         </div>
                         <div id="article_info_right">
@@ -151,16 +148,61 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     </div>
                     <div id="article_content">
                         
-                            <h2 id="2023">2023</h2>
+                            <p>Qt（C++）和pyQt的安装记录</p>
+<p>关键词：Qt</p>
+<!-- more -->
+<hr />
+<!-- toc -->
+<h1 id="Qt%EF%BC%88C-plus-plus%EF%BC%89">Qt（C plus plus）</h1>
 <ul>
-<li>Windows下Python3.11.4的安装记录</li>
-<li>YOLOv5由pt文件转onnx文件报错解决</li>
-<li>C++报错：表达式必须含有常量值</li>
-<li>Windows 10下安装CUDA、TensorRT记录</li>
-<li>搭建一个自己的简单博客</li>
-<li>使用阿里云对象存储OSS实现图床</li>
-<li>第一个博客</li>
+<li><p><a href="https://www.qt.io/offline-installers"  target="_blank">开源版离线官网下载</a></p>
+</li>
+<li><p><a href="https://mirrors.tuna.tsinghua.edu.cn/qt/archive/"  target="_blank">清华镜像下载</a></p>
+</li>
 </ul>
+<h1 id="Qt%EF%BC%88Python%EF%BC%89">Qt（Python）</h1>
+<p>参考<a href="https://zhuanlan.zhihu.com/p/162866700"  target="_blank">此篇文章</a></p>
+<ol>
+<li>下载PyQt5</li>
+</ol>
+
+<pre class="language-bash"><code class="language-bash">pip install PyQt5
+</code></pre>
+<p>网络不好的可选择豆瓣的镜像：</p>
+
+<pre class="language-bash"><code class="language-bash">pip install PyQt5 -i https://pypi.douban.com/simple
+</code></pre>
+<ol start="2">
+<li>下载PyQt5-tools</li>
+</ol>
+
+<pre class="language-bash"><code class="language-bash">pip install PyQt5-tools
+</code></pre>
+<p>网络不好的可选择豆瓣的镜像：</p>
+
+<pre class="language-bash"><code class="language-bash">pip install PyQt5-tools -i https://pypi.douban.com/simple
+</code></pre>
+<p>PyQt 5.15.x 之前，安装完成后在 <code>%Python_path%\Lib\site-packages</code> 目录中可以看到PyQt5、pyqt5-tools、PyQt5-sip 目录。</p>
+<p>PyQt 5.15.x 之后，安装完成后在 <code>%Python_path%\Lib\site-packages</code> 目录中可以看到PyQt5、pyqt5-tools、PyQt5-sip 以及多了的 qt_applications 、qt5-tools 目录。</p>
+<ol start="3">
+<li>添加环境变量</li>
+</ol>
+<p>在系统变量Path中添加 <code>pyqt5-tools</code> 目录的绝对路径。</p>
+<ol start="4">
+<li>验证</li>
+</ol>
+<p>运行下面代码，出现窗口即为成功。</p>
+
+<pre class="language-python"><code class="language-python">import sys
+from PyQt5.QtWidgets import QWidget, QApplication
+
+app = QApplication(sys.argv)
+widget = QWidget()
+widget.resize(640, 480)
+widget.setWindowTitle(&quot;Hello, PyQt5!&quot;)
+widget.show()
+sys.exit(app.exec())
+</code></pre>
 
                         
                     </div>
@@ -219,6 +261,8 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
         <script src="/static/js/search/search_main.js"></script>
     
         <script src="/static/js/custom.js"></script>
+    
+        <script type="text/javascript" src="/static/js/live.js"></script>
     
 </body>
 

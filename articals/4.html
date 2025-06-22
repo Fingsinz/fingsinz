@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN"  class=" heading_no_counter ">
+<html lang="zh-CN"  class="">
 
 
 <head>
@@ -44,10 +44,10 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
         
     
     
-    <title>随笔记录 - Fingsinz's Space</title>
+    <title>Windows 10下安装CUDA、TensorRT记录 - Fingsinz's Space</title>
     
     <script type="text/javascript">js_vars = {}</script>
-    <script type="text/javascript">metadata = {"tags": [], "date": false, "update": [], "ts": 0, "author": "", "brief": "", "cover": "", "class": "heading_no_counter"}</script>
+    <script type="text/javascript">metadata = {"tags": ["深度学习", "YOLOv5", "TensorRT", "CPP"], "date": "2023-07-04", "update": [], "ts": 1688440070, "author": "", "brief": "", "cover": ""}</script>
 </head>
 
 
@@ -97,12 +97,12 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                 <div id="sidebar_title">
                     
                 </div>
-                <ul class="">
-<li class="not_active no_link"><a><span class="label">2023</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+                <ul class="show">
+<li class="active_parent no_link"><a><span class="label">2023</span><span class="sub_indicator"></span></a><ul class="show">
 <li class="not_active with_link"><a href="/articals/7.html"><span class="label">Windows下Python3.11.4的安装记录</span><span class=""></span></a></li>
 <li class="not_active with_link"><a href="/articals/6.html"><span class="label">YOLOv5由pt文件转onnx文件报错解决</span><span class=""></span></a></li>
 <li class="not_active with_link"><a href="/articals/5.html"><span class="label">C++报错：表达式必须含有常量值</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/4.html"><span class="label">Windows 10下安装CUDA、TensorRT记录</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/articals/4.html"><span class="label">Windows 10下安装CUDA、TensorRT记录</span><span class=""></span></a></li>
 <li class="not_active with_link"><a href="/articals/3.html"><span class="label">搭建一个自己的简单博客</span><span class=""></span></a></li>
 <li class="not_active with_link"><a href="/articals/2.html"><span class="label">使用阿里云对象存储OSS实现图床</span><span class=""></span></a></li>
 <li class="not_active with_link"><a href="/articals/1.html"><span class="label">第一个博客</span><span class=""></span></a></li>
@@ -122,11 +122,19 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     <div id="article_head">
                         <div id="article_title">
                             
-                            <h1>随笔记录</h1>
+                            <h1>Windows 10下安装CUDA、TensorRT记录</h1>
                             
                         </div>
                         <div id="article_tags">
                             <ul>
+                            
+                                <li>深度学习</li>
+                            
+                                <li>YOLOv5</li>
+                            
+                                <li>TensorRT</li>
+                            
+                                <li>CPP</li>
                             
                             </ul>
                         </div>
@@ -135,6 +143,10 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                             <span class="article_author">
                                 
                             </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2023-07-04">
+                                    2023-07-04
+                                </span>
                             
                         </div>
                         <div id="article_info_right">
@@ -151,16 +163,60 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     </div>
                     <div id="article_content">
                         
-                            <h2 id="2023">2023</h2>
+                            <h2 id="%E4%B8%8B%E8%BD%BDCUDA">下载CUDA</h2>
+<h3 id="%E7%A1%AE%E5%AE%9A%E9%80%82%E9%85%8D%E6%9C%AC%E6%9C%BA%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8%E7%9A%84CUDA%E7%89%88%E6%9C%AC">确定适配本机显卡驱动的CUDA版本</h3>
+<p>系统搜索打开NVIDIA控制面板，点击帮助，选择系统信息-&gt;组件，找到CUDA字样。此处我的CUDA适配版本为<code>12.0</code>。</p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/5_CUDA%E7%89%88%E6%9C%AC.jpg" alt="CUDA版本查看" /></p>
+<h3 id="%E4%B8%8B%E8%BD%BD%E5%AF%B9%E5%BA%94%E7%89%88%E6%9C%AC%E7%9A%84CUDA">下载对应版本的CUDA</h3>
+<p><a href="https://developer.nvidia.com/cuda-toolkit-archive"  target="_blank">下载地址 - NVIDIA官网</a></p>
+<h3 id="%E5%AE%89%E8%A3%85CUDA">安装CUDA</h3>
+<p>点击下载的安装exe文件，可以更改文件安装位置，记住文件安装位置。此处我的安装位置是<code>G:\NVIDIA_GPU_Computing_Toolkit_CUDA_v12.0</code>。</p>
+<h2 id="%E4%B8%8B%E8%BD%BDcuDNN%E5%8C%85">下载cuDNN包</h2>
+<h3 id="%E9%80%89%E6%8B%A9%E9%80%82%E9%85%8DCUDA%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%8B%E8%BD%BD%E5%AF%B9%E5%BA%94%E7%9A%84cuDNN%E5%8C%85">选择适配CUDA的版本下载对应的cuDNN包</h3>
+<p><a href="https://developer.nvidia.com/rdp/cudnn-archive"  target="_blank">下载地址 - NVIDIA官网</a></p>
+<h3 id="%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E4%BD%8D%E7%BD%AE%E8%A7%A3%E5%8E%8BcuDNN%E5%8E%8B%E7%BC%A9%E5%8C%85">选择合适的位置解压cuDNN压缩包</h3>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/5_cuDNN.jpg" alt="解压cuDNN后的文件" /></p>
+<h3 id="%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6">复制文件</h3>
+<p>cuDNN属于是CUDA的一个补丁包，因此无需安装。需要将<code>bin</code>、<code>include</code>、<code>lib</code>文件夹中的相关文件拷贝到CUDA安装位置的<code>bin</code>、<code>include</code>、<code>lib的x64</code>文件夹中。</p>
+<p>我的CUDA安装位置是：<code>G:\NVIDIA_GPU_Computing_Toolkit_CUDA_v12.0</code>。</p>
+<h3 id="%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E6%88%90%E5%8A%9F">验证是否成功</h3>
+<p><code>Win + R</code>输入cmd打开cmd窗口。<br />
+直接输入盘符如<code>F:</code>跳转到F盘，<code>cd</code>进入到具体地址。<br />
+比如我的CUDA安装在<code>G:\NVIDIA_GPU_Computing_Toolkit_CUDA_v12.0</code>，<br />
+那么进入到<code>G:\NVIDIA_GPU_Computing_Toolkit_CUDA_v12.0\extras\demo_suite</code></p>
+<p>接着在cmd窗口输入下面的指令分别运行两个exe文件，结果出现PASS（如图）则验证成功。</p>
+
+<pre class="language-cmd"><code class="language-cmd">bandwidthTest.exe
+</code></pre>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/5_cuDNN%E9%AA%8C%E8%AF%81.jpg" alt="第一个exe运行结果" /></p>
+
+<pre class="language-cmd"><code class="language-cmd">deviceQuery.exe
+</code></pre>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/5_cuDNN%E9%AA%8C%E8%AF%812.jpg" alt="第二个exe运行结果" /></p>
+<h2 id="%E4%B8%8B%E8%BD%BDTensorRT%E5%8C%85">下载TensorRT包</h2>
+<h3 id="%E9%80%89%E6%8B%A9%E9%80%82%E9%85%8DCUDA%E7%89%88%E6%9C%AC%E7%9A%84TensorRT%E5%8C%85%E4%B8%8B%E8%BD%BD">选择适配CUDA版本的TensorRT包下载</h3>
+<p>进入<a href="https://developer.nvidia.com/nvidia-tensorrt-download"  target="_blank">官网</a>，选择较新的大版本，再选择适合自己安装的CUDA版本下载。</p>
+<p>我在此处下载Windows的支持CUDA12.0的版本。</p>
+<h3 id="%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E4%BD%8D%E7%BD%AE%E8%A7%A3%E5%8E%8BTensorRT%E5%8E%8B%E7%BC%A9%E5%8C%85">选择合适的位置解压TensorRT压缩包</h3>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/5_TensorRT.jpg" alt="解压TensorRT后的文件" /></p>
+<h3 id="%E5%AE%89%E8%A3%85TensorRT">安装TensorRT</h3>
 <ul>
-<li>Windows下Python3.11.4的安装记录</li>
-<li>YOLOv5由pt文件转onnx文件报错解决</li>
-<li>C++报错：表达式必须含有常量值</li>
-<li>Windows 10下安装CUDA、TensorRT记录</li>
-<li>搭建一个自己的简单博客</li>
-<li>使用阿里云对象存储OSS实现图床</li>
-<li>第一个博客</li>
+<li>将TensorRT的<code>include</code>文件夹中文件复制到CUDA安装位置的<code>include</code>文件夹。</li>
 </ul>
+<p>我的操作是：<code>copy \TensorRT-8.6.1.6\include → NVIDIA_GPU_Computing_Toolkit_CUDA_v12.0\include</code></p>
+<ul>
+<li><p>将TensorRT的<code>lib</code>中所有lib文件复制到CUDA安装位置的<code>lib\x64</code>文件夹</p>
+</li>
+<li><p>将TensorRT的<code>lib</code>中所有dll文件复制到CUDA安装位置的<code>bin</code>文件夹</p>
+</li>
+</ul>
+<h3 id="%E9%AA%8C%E8%AF%81TensoRT">验证TensoRT</h3>
+<p>检查系统环境变量中是否有包含了CUDA的bin文件夹，没有则添加。</p>
+<p>使用Visual Studio打开sampleMNIST示例，即打开<code>../TensorRT-8.6.1.6\samples\sampleOnnxMNIST</code>文件夹中的sln文件，必要时对项目属性的常规、VC++目录、C/C++里面的环境进行配置，添加依赖。<a href="https://blog.csdn.net/shanglianlm/article/details/92847719"  target="_blank">参考</a></p>
+<p>右键项目，点击重新生成。可以点击不调试运行测试。</p>
+<h2 id="%E5%8F%82%E8%80%83">参考</h2>
+<p><a href="https://blog.csdn.net/shanglianlm/article/details/92847719"  target="_blank">TensorRT之安装与测试（Windows和Linux环境下安装TensorRT）</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/305854081"  target="_blank">Window下Python+CUDA+PyTorch安装</a></p>
 
                         
                     </div>
@@ -168,8 +224,18 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                 <div id="previous_next">
                     <div id="previous">
                         
+                        <a href="/articals/5.html">
+                            <span class="icon"></span>
+                            <span class="label">C++报错：表达式必须含有常量值</span>
+                        </a>
+                        
                     </div>
                     <div id="next">
+                        
+                        <a href="/articals/3.html">
+                            <span class="label">搭建一个自己的简单博客</span>
+                            <span class="icon"></span>
+                        </a>
                         
                     </div>
                 </div>

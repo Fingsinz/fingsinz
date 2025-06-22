@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN"  class=" heading_no_counter ">
+<html lang="zh-CN"  class="">
 
 
 <head>
@@ -10,7 +10,7 @@
     <meta name="keywords" content="">
     
     
-    <meta name="description" content="None">
+    <meta name="description" content="">
     
     <meta name="generator" content="teedoc">
     <meta name="theme" content="teedoc-plugin-theme-default">
@@ -44,10 +44,10 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
         
     
     
-    <title>随笔记录 - Fingsinz's Space</title>
+    <title>如何暂停Windows的系统升级 - Fingsinz's Space</title>
     
     <script type="text/javascript">js_vars = {}</script>
-    <script type="text/javascript">metadata = {"tags": [], "date": false, "update": [], "ts": 0, "author": "", "brief": "", "cover": "", "class": "heading_no_counter"}</script>
+    <script type="text/javascript">metadata = {"tags": ["Windows"], "date": "2023-08-01", "update": [], "ts": 1690879999, "author": "", "brief": "", "cover": "", "categories": "日常"}</script>
 </head>
 
 
@@ -98,16 +98,7 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     
                 </div>
                 <ul class="">
-<li class="not_active no_link"><a><span class="label">2023</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
-<li class="not_active with_link"><a href="/articals/7.html"><span class="label">Windows下Python3.11.4的安装记录</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/6.html"><span class="label">YOLOv5由pt文件转onnx文件报错解决</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/5.html"><span class="label">C++报错：表达式必须含有常量值</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/4.html"><span class="label">Windows 10下安装CUDA、TensorRT记录</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/3.html"><span class="label">搭建一个自己的简单博客</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/2.html"><span class="label">使用阿里云对象存储OSS实现图床</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/1.html"><span class="label">第一个博客</span><span class=""></span></a></li>
-</ul>
-</li>
+<li class="not_active with_link"><a href="/articals/index.html"><span class="label">Brief</span><span class=""></span></a></li>
 </ul>
 
             </div>
@@ -122,11 +113,13 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     <div id="article_head">
                         <div id="article_title">
                             
-                            <h1>随笔记录</h1>
+                            <h1>如何暂停Windows的系统升级</h1>
                             
                         </div>
                         <div id="article_tags">
                             <ul>
+                            
+                                <li>Windows</li>
                             
                             </ul>
                         </div>
@@ -135,6 +128,10 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                             <span class="article_author">
                                 
                             </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2023-08-01">
+                                    2023-08-01
+                                </span>
                             
                         </div>
                         <div id="article_info_right">
@@ -151,16 +148,24 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     </div>
                     <div id="article_content">
                         
-                            <h2 id="2023">2023</h2>
-<ul>
-<li>Windows下Python3.11.4的安装记录</li>
-<li>YOLOv5由pt文件转onnx文件报错解决</li>
-<li>C++报错：表达式必须含有常量值</li>
-<li>Windows 10下安装CUDA、TensorRT记录</li>
-<li>搭建一个自己的简单博客</li>
-<li>使用阿里云对象存储OSS实现图床</li>
-<li>第一个博客</li>
-</ul>
+                            <p>关闭Windows的自动更新</p>
+<p>关键词：Windows</p>
+<!-- more -->
+<hr />
+<!-- toc -->
+<h1 id="1.%E4%BF%AE%E6%94%B9%E6%B3%A8%E5%86%8C%E8%A1%A8%E7%BC%96%E8%BE%91%E5%99%A8">1.修改注册表编辑器</h1>
+<p>按住 <code>Win</code> + <code>R</code> 输入 <code>regedit</code> 进入注册表编辑器。</p>
+<p>找到 <code>HKEY_LOCAL_MACHINE → SOFTWARE → Microsoft → WindowsUpdate → UX → Settings</code></p>
+<p>点击右边空白处，选择新建DWORD（32位）值，重命名为 <code>FlightSettingsMaxPauseDays</code> ，</p>
+<p>双击打开，选择十进制，输入想要暂停的最大天数，我这里输入 <code>8888</code> 。</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/13_1.jpg" alt="添加新项" /></p>
+<h1 id="2.%E6%89%93%E5%BC%80%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE">2.打开系统设置</h1>
+<p>按住 <code>Win</code> + <code>I</code> 打开系统设置，搜索 <code>Windows更新</code> ，进入Windows更新设置，在暂停更新处选择最大值即可。</p>
+<p>Windows 10的暂停更新在 <code>Windows 更新设置 → 高级选项 → 暂停更新</code></p>
+<p>效果如图：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/13_2.jpg" alt="暂停8888天" /></p>
+<h1 id="3.%E6%81%A2%E5%A4%8D%E6%9B%B4%E6%96%B0">3.恢复更新</h1>
+<p>直接点击继续更新即可。</p>
 
                         
                     </div>
@@ -219,6 +224,8 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
         <script src="/static/js/search/search_main.js"></script>
     
         <script src="/static/js/custom.js"></script>
+    
+        <script type="text/javascript" src="/static/js/live.js"></script>
     
 </body>
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN"  class=" heading_no_counter ">
+<html lang="zh-CN"  class="">
 
 
 <head>
@@ -10,7 +10,7 @@
     <meta name="keywords" content="">
     
     
-    <meta name="description" content="None">
+    <meta name="description" content="">
     
     <meta name="generator" content="teedoc">
     <meta name="theme" content="teedoc-plugin-theme-default">
@@ -44,10 +44,10 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
         
     
     
-    <title>随笔记录 - Fingsinz's Space</title>
+    <title>利用Ping指令进行基本网络检测 - Fingsinz's Space</title>
     
     <script type="text/javascript">js_vars = {}</script>
-    <script type="text/javascript">metadata = {"tags": [], "date": false, "update": [], "ts": 0, "author": "", "brief": "", "cover": "", "class": "heading_no_counter"}</script>
+    <script type="text/javascript">metadata = {"tags": ["网络"], "date": "2023-10-07", "update": [], "ts": 1696688340, "author": "", "brief": "", "cover": null, "categories": "日常"}</script>
 </head>
 
 
@@ -98,16 +98,7 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     
                 </div>
                 <ul class="">
-<li class="not_active no_link"><a><span class="label">2023</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
-<li class="not_active with_link"><a href="/articals/7.html"><span class="label">Windows下Python3.11.4的安装记录</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/6.html"><span class="label">YOLOv5由pt文件转onnx文件报错解决</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/5.html"><span class="label">C++报错：表达式必须含有常量值</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/4.html"><span class="label">Windows 10下安装CUDA、TensorRT记录</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/3.html"><span class="label">搭建一个自己的简单博客</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/2.html"><span class="label">使用阿里云对象存储OSS实现图床</span><span class=""></span></a></li>
-<li class="not_active with_link"><a href="/articals/1.html"><span class="label">第一个博客</span><span class=""></span></a></li>
-</ul>
-</li>
+<li class="not_active with_link"><a href="/articals/index.html"><span class="label">Brief</span><span class=""></span></a></li>
 </ul>
 
             </div>
@@ -122,11 +113,13 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     <div id="article_head">
                         <div id="article_title">
                             
-                            <h1>随笔记录</h1>
+                            <h1>利用Ping指令进行基本网络检测</h1>
                             
                         </div>
                         <div id="article_tags">
                             <ul>
+                            
+                                <li>网络</li>
                             
                             </ul>
                         </div>
@@ -135,6 +128,10 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                             <span class="article_author">
                                 
                             </span>
+                            
+                                <span class="article_date" title="最后修改日期： 2023-10-07">
+                                    2023-10-07
+                                </span>
                             
                         </div>
                         <div id="article_info_right">
@@ -151,15 +148,50 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
                     </div>
                     <div id="article_content">
                         
-                            <h2 id="2023">2023</h2>
+                            <p>利用Ping指令对本地IP、网关和远程网站等进行基本网络检测</p>
+<p>关键词：网络</p>
+<!-- more -->
+<hr />
+<h1 id="%E6%B5%8B%E8%AF%95TCP/IP%E5%8D%8F%E8%AE%AE%E6%A0%88">测试TCP/IP协议栈</h1>
+
+<pre class="language-cmd"><code class="language-cmd">ping 127.0.0.1
+</code></pre>
+<p><code>127.0.0.1</code> 是你本地主机的环回地址，实际上只要是 <code>127.0.0.1</code> 到 <code>127.255.255.254</code> 都是本地主机环回地址。</p>
 <ul>
-<li>Windows下Python3.11.4的安装记录</li>
-<li>YOLOv5由pt文件转onnx文件报错解决</li>
-<li>C++报错：表达式必须含有常量值</li>
-<li>Windows 10下安装CUDA、TensorRT记录</li>
-<li>搭建一个自己的简单博客</li>
-<li>使用阿里云对象存储OSS实现图床</li>
-<li>第一个博客</li>
+<li>作用：用于检查本地主机TCP/IP协议栈是否正常。</li>
+</ul>
+<h1 id="%E6%B5%8B%E8%AF%95%E6%9C%AC%E5%9C%B0%E7%BD%91%E5%8D%A1">测试本地网卡</h1>
+<p>打开cmd（命令提示符），输入：</p>
+
+<pre class="language-cmd"><code class="language-cmd">ipconfig
+</code></pre>
+<p>记住自己的本地ip，接着输入：</p>
+
+<pre class="language-cmd"><code class="language-cmd">ping [本地ip]
+</code></pre>
+<ul>
+<li>作用：用于检查本地网卡工作是否正常。</li>
+</ul>
+<h1 id="%E6%B5%8B%E8%AF%95%E4%B8%8E%E7%BD%91%E5%85%B3%E7%9A%84%E9%93%BE%E8%B7%AF">测试与网关的链路</h1>
+<p>打开cmd（命令提示符），输入：</p>
+
+<pre class="language-cmd"><code class="language-cmd">ipconfig
+</code></pre>
+<p>记住自己的默认网关，接着输入：</p>
+
+<pre class="language-cmd"><code class="language-cmd">ping [默认网关]
+</code></pre>
+<ul>
+<li>用于检查本地主机与网关的链路是否正常。</li>
+</ul>
+<h1 id="%E6%B5%8B%E8%AF%95%E4%B8%8E%E5%A4%96%E7%BD%91%E8%BF%9C%E7%A8%8B%E7%BD%91%E7%AB%99%E7%9A%84%E9%93%BE%E8%B7%AF">测试与外网远程网站的链路</h1>
+<p>以连通百度网站为测试：</p>
+<p>打开cmd（命令提示符），输入：</p>
+
+<pre class="language-cmd"><code class="language-cmd">ping www.baidu.com
+</code></pre>
+<ul>
+<li>用于检查本地主机与外网远程网站的链路是否正常。</li>
 </ul>
 
                         
@@ -219,6 +251,8 @@ MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"]
         <script src="/static/js/search/search_main.js"></script>
     
         <script src="/static/js/custom.js"></script>
+    
+        <script type="text/javascript" src="/static/js/live.js"></script>
     
 </body>
 
