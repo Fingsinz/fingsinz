@@ -1,7 +1,7 @@
 
 
 #home_page h1 {
-    color: #4caf7d;
+    color: #99bcac;
 }
 .dark #home_page h1{
     color: white;
@@ -14,7 +14,7 @@
 }
 
 body {
-    font-family: "霞鹭文楷", "Times New Roman";
+    font-family: "霞骛文楷", "Times New Roman", Helvetica, sans-serif;
 }
 
 #content_body img {
