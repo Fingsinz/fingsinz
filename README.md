@@ -1,16 +1,16 @@
-<!--
-**Fingsinz/fingsinz** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+你好，这里是风信梓，Fingsinz，25届智能科学与技术毕业生，一名初级研发工程师，很高兴遇见你。
 
-Here are some ideas to get you started:
+以下是我的联系方式，如果你有想法、反馈、建议，欢迎与我联系，幸会。
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+- 📧电子邮箱：fingsinz@foxmail.com（推荐）
 
-[![Fingsinz's GitHub stats](https://github-readme-stats.vercel.app/api?username=Fingsinz&&hide=stars,prs,issues,contribs)](https://github.com/anuraghazra/github-readme-stats)
+<table>
+  <tr>
+    <td width="60%">
+      <img src="https://github-readme-stats.vercel.app/api?username=Fingsinz&theme=transparent&show_icons=true&include_all_commits=true&hide=stars,prs,issues,contribs" />
+    </td>
+    <td width="40%">
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Fingsinz&layout=compact&hide=html,JavaScript,CSS" />
+    </td>
+  </tr>
+</table>
