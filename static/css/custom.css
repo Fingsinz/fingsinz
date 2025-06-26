@@ -1,4 +1,9 @@
-
+@font-face {
+    font-family: 'LXGW WenKai';
+    src: url('/static/font/LXGWWenKai-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 #home_page h1 {
     color: #99bcac;
@@ -14,7 +19,8 @@
 }
 
 body {  
-    font-family: "LXGW WenKai Screen", "Consolas", Helvetica, sans-serif;
+    font-family: "LXGW WenKai", "Consolas", Helvetica, sans-serif;
+    font-size: 18px;
 }
 
 #content_body img {
