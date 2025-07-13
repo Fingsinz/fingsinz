@@ -1,356 +1,80 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-    
-    <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <meta name="description" content="Python语言入门学习教程" />
-    <meta name="hexo-theme-A4" content="v1.9.6" />
-    <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
-    <title>Fingsinz&#39;s space | 风信梓</title>
 
-    
-        
-<link rel="stylesheet" href="/css/highlight/style1.css">
+<!DOCTYPE html><html lang="zh-CN">
 
-        
-<link rel="stylesheet" href="/css/reset.css">
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0" theme-name="Stellar" theme-version="1.33.0">
+  
+  
+  <meta name="generator" content="Hexo 7.1.1">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>Python语言入门学习教程 - Fingsinz</title>
 
-        
-<link rel="stylesheet" href="/css/markdown.css">
+  
+  <meta name="description" content="个人整理面向入门基础级别的Python语言学习教程。
+关键词：Python">
+  
+  <meta name="keywords" content="Python">
 
-        
-<link rel="stylesheet" href="/css/fonts.css">
- 
-         <!--注意：首页既不是post也不是page-->
-        
-        
-        
-<link rel="stylesheet" href="/css/ui.css">
- 
-        
-<link rel="stylesheet" href="/css/style.css">
+  <!-- feed -->
+  
 
-
-        
-            <!--返回顶部css-->
-            
-<link rel="stylesheet" href="/css/returnToTop.css">
-
-            
-<link rel="stylesheet" href="/css/unicons.css">
-
-        
-        
-            <!--目录-->
-            
-<link rel="stylesheet" href="/css/toc.css">
-
-        
-    
-
-    
-        
-<link rel="stylesheet" href="/css/returnToLastPage.css">
-
-    
-    
-   
-<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+  <link rel="stylesheet" href="/css/main.css?v=1.33.0">
 
 
-<meta name="generator" content="Hexo 7.1.1">
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Fingsinz","sameAs":[],"image":"/images/avatar.jpg"},"dateCreated":"2023-08-18T16:09:00+08:00","dateModified":"2024-03-01T16:03:34+08:00","datePublished":"2023-08-18T16:09:00+08:00","description":"个人整理面向入门基础级别的Python语言学习教程。\n关键词：Python","headline":"Python语言入门学习教程","mainEntityOfPage":{"@type":"WebPage","@id":"https://fingsinz.space/2023/python-language-learning/"},"publisher":{"@type":"Organization","name":"Fingsinz","sameAs":[],"image":"/images/avatar.jpg","logo":{"@type":"ImageObject","url":"/images/avatar.jpg"}},"url":"https://fingsinz.space/2023/python-language-learning/","keywords":"Python","thumbnailUrl":"https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/python-learning.jpg","image":1}</script>
+  
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+<body>
+
+<div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">Fingsinz</div><div class="sub cap">Fingsinz's space</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#c7c6b6"><span>博客</span></a><a class="nav-item" title="笔记" href="/notebooks/" style="color:#9a6655"><span>笔记</span></a><a class="nav-item" title="文档" href="/wiki/" style="color:#a72126"><span>文档</span></a><a class="nav-item" title="探索" href="/explore/" style="color:#12264f"><span>探索</span></a></nav>
+</div>
+<div class="widgets"></div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2023-08-18T08:09:00.000Z">2023-08-18</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-03-01T08:03:34.120Z">2024-03-01</time></span></div></div></div>
     
-    
-
-    
-    
-
-
-
-    
-
-    
-    
-
-    
-    <style>
-        :root {
-            --waline-theme-color: #000000; 
-            --waline-color: #000000; 
-            --waline-border-color: #000000; 
-            --waline-white: #000000; 
-            --waline-bgcolor-light: #white;  
-        }
-        body {
-            color: #000000;
-            background: #bed2bb;
-        }
-        .post-md code {
-            background: #e7f7f3;
-            color: #7f688d; 
-        }
-        .post-md pre, .post-md .highlight {
-            background: #e7f7f3;
-            color: #7f688d; 
-        }
-        pre .string, pre .value, pre .inheritance, pre .header, pre .ruby .symbol, pre .xml .cdata {
-            color: #000000;
-        }
-        pre .number, pre .preprocessor, pre .built_in, pre .literal, pre .params, pre .constant {
-            color: #000000;
-        }
-        .year-font-color {
-            color: #000000 !important;
-        }
-        .wl-card span.wl-nick {
-            color: #000000; 
-        }
-        .wl-card .wl-badge {
-            border: 1px solid #000000;
-            color: #000000; 
-        }
-        .wl-btn {
-            border: 1px solid #000000; 
-            color:  #000000;  
-        }
-        .wl-btn.primary {
-            color: #white; 
-        }
-        .wl-header label {
-            color: #000000;
-        }
-        a {
-            color: #6b798e;
-        }
-
-        .post-md a {
-            color: #6b798e;
-        }
-
-        .nav li a {
-            color: #6b798e;
-        }
-
-        .archive-main a:link {
-            color: #6b798e;
-        }
-        .archive-main a:visited {
-            color: #6b798e; 
-        }
-
-        .archive li span {
-            color: #000000;
-        }
-
-        .post-main-title {
-            color: #000000;
-        }
-
-        .post-md h1,
-        .post-md h2,
-        .post-md h3,
-        .post-md h4,
-        .post-md h5,
-        .post-md h6 {
-            color: #000000;
-        }
-
-        [data-waline] p {
-            color: #000000;
-        }
-        [data-waline] a {
-            color: #000000;
-        } 
-        .wl-sort li.active {
-            color: #000000;
-        }
-
-        .wl-card .wl-meta>span {
-            background: #white;
-        }
-
-        .paper {
-            background: #bed2bb;
-        }
-
-        .index-main {
-            background: #white;
-        }
-
-        .paper-main {
-            background: #white;
-        }
-
-        .wl-panel {
-            background: #white;
-        }
-
-        .archive li:nth-child(odd) {
-            background: #white;
-            ;
-        }
-
-        .archive li:nth-child(even) {
-            background: #white;
-        }
-
-        .post-md table tr:nth-child(odd) td {
-            background: #white;
-        }
-
-        .post-md table tr:nth-child(even) td {
-            background: #white;
-        }
-
-    
-        .progress-wrap::after {
-            color: #000000; /* 箭头的颜色 */
-        }
-        .progress-wrap svg.progress-circle path {
-	        stroke: #000000; /* 边框的颜色 */
-        }
-        .progress-wrap::before {
-	        background-image: linear-gradient(298deg, #6b798e, #6b798e); /* 鼠标滑过的箭头颜色 */
-         }
-
-        .return-to-last-progress-wrap::after {
-            color: #000000; /* 箭头的颜色 */
-        }
-        .return-to-last-progress-wrap svg.progress-circle path {
-	        stroke: #000000; /* 边框的颜色 */
-        }
-        .return-to-last-progress-wrap::before {
-	        background-image: linear-gradient(298deg, #6b798e, #6b798e); /* 鼠标滑过的箭头颜色 */
-         }
-
-         .left-toc-container::-webkit-scrollbar-thumb {
-            background-color: #000000; /* 设置滚动条拖动块的颜色 */
-        }
-
-        .bs-docs-sidebar .nav>.active>a,
-        .bs-docs-sidebar .nav>li>a:hover,
-        .bs-docs-sidebar .nav>li>a:focus {
-            color: #6b798e;
-            border-left-color: #6b798e;
-        }
-        .bs-docs-sidebar .nav>li>a {
-            color:  #000000;
-        }
-    </style>
-
-    
-    
-    <body>
-        <script src="/js/darkmode-js.min.js"></script>
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>Python语言入门学习教程</span></h1>
         
-        
-            <div class="left-toc-container">
-                <nav id="toc" class="bs-docs-sidebar"></nav>
-            </div>
-        
-        <div class="paper">
-            
-            
-            
-            
-                <div class="shadow-drop-2-bottom paper-main">
-                    
-
-
-<div class="header">
-    <div class="header-container">
-        <img style="
-        width: 56px;
-        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/favicon.webp" width="10%"></img>
-        <div class="header-content">
-            <a class="logo" href="/">Fingsinz&#39;s space</a> 
-            <span class="description">我在想，时下你所需要的，应该是痛痛快快换个心情，干干脆脆享受人生。</span> 
-        </div>
-        
+      </div>
     </div>
     
-   
-    <ul class="nav">
-        
-            
-                <li><a href="/">首页🏚️</a></li>
-            
-        
-            
-                <li><a href="/list/">文章📄</a></li>
-            
-        
-            
-                <li><a href="/notes/">笔记📔</a></li>
-            
-        
-            
-                <li><a href="/funny/">趣事💡</a></li>
-            
-        
-            
-                <li><a href="/about/">关于🧑</a></li>
-            
-        
-    </ul>
-</div> 
-        
-                    
-                    
-
-                    
-                    
-                    
-                    <!--说明是文章post页面-->
-                    
-                        <div class="post-main">
-    
-
-    
-        
-            
-                <div class="post-main-title" style="text-align: center;">
-                    Python语言入门学习教程
-                </div>
-            
-        
-      
-    
-
-    
-
-        
-            <div class="post-head-meta-center">
-        
-                
-                    <span>最近更新：2024-03-01</span> 
-                
-                
-                    
-                        &nbsp; | &nbsp;
-                    
-                     <span>字数总计：16k</span>
-                
-                
-                    
-                        &nbsp; | &nbsp;
-                    
-                    <span>阅读估时：62分钟</span>
-                
-                
-            </div>
-    
-
-    <div class="post-md">
-        
-            
-                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">一. Python的基本观念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AFpython%E8%AF%AD%E8%A8%80"><span class="post-toc-text">1.1 什么是Python语言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-2-%E6%80%8E%E4%B9%88%E5%86%99python%E7%A8%8B%E5%BA%8F"><span class="post-toc-text">1.2 怎么写Python程序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-3-import%E6%A8%A1%E5%9D%97"><span class="post-toc-text">1.3 import模块</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">二. 函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-%E5%87%BD%E6%95%B0%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="post-toc-text">2.1 函数的基本结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">2.2 函数的定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E5%92%8C%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="post-toc-text">2.3 传递参数和调用函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-4-%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="post-toc-text">2.4 内置函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-5-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="post-toc-text">2.5 匿名函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">三. Python的变量与基本运算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%98%E9%87%8F"><span class="post-toc-text">3.1 什么是变量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.2 运算符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-1-%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.2.1 算术运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-2-%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.2.2 赋值运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-3-%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.2.3 比较运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-4-%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.2.4 位运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-5-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.2.5 逻辑运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-6-%E6%88%90%E5%91%98%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.2.6 成员运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-7-%E8%BA%AB%E4%BB%BD%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.2.7 身份运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-8-%E5%88%A0%E9%99%A4%E5%8F%98%E9%87%8F"><span class="post-toc-text">3.2.8 删除变量</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-3-python%E7%9A%84%E6%96%AD%E8%A1%8C"><span class="post-toc-text">3.3 Python的断行</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">四. Python的基本数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-1-type-%E5%87%BD%E6%95%B0"><span class="post-toc-text">4.1 type()函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-2-%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">4.2 数值数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">4.2.1 什么是数值数据类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-2-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BF%90%E7%AE%97"><span class="post-toc-text">4.2.2 数值类型的运算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-3-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="post-toc-text">4.2.3 数值类型的方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-3-%E5%B8%83%E5%B0%94%E5%80%BC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">4.3 布尔值数据类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">4.4 字符串数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">4.4.1 什么是字符串数据类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4-1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BF%90%E7%AE%97"><span class="post-toc-text">4.4.1 字符串的运算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="post-toc-text">4.4.2 字符串的类型转换</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4-3-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="post-toc-text">4.4.3 转义字符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-4-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%87%BD%E6%95%B0%E6%96%B9%E6%B3%95"><span class="post-toc-text">4.4.4 字符串的函数方法</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">五. Python的输入和输出</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-1-%E8%BE%85%E5%8A%A9%E5%B8%AE%E5%8A%A9%E8%AF%B4%E6%98%8E%E8%BE%93%E5%87%BA"><span class="post-toc-text">5.1 辅助帮助说明输出</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-2-%E8%BE%93%E5%87%BA"><span class="post-toc-text">5.2 输出</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-2-1-%E9%80%9A%E8%BF%87print-%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA"><span class="post-toc-text">5.2.1 通过print()函数输出</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-2-2-%E6%A0%BC%E5%BC%8F%E5%8C%96print-%E7%9A%84%E8%BE%93%E5%87%BA"><span class="post-toc-text">5.2.2 格式化print()的输出</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-2-3-format-%E5%87%BD%E6%95%B0"><span class="post-toc-text">5.2.3 format()函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-2-4-dir-%E5%87%BD%E6%95%B0"><span class="post-toc-text">5.2.4 dir()函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-3-%E8%BE%93%E5%85%A5"><span class="post-toc-text">5.3 输入</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">六. Python的条件结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-1-if%E8%AF%AD%E5%8F%A5"><span class="post-toc-text">6.1 if语句</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-2-if-else%E8%AF%AD%E5%8F%A5"><span class="post-toc-text">6.2 if-else语句</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-3-if-elif-else%E8%AF%AD%E5%8F%A5"><span class="post-toc-text">6.3 if-elif-else语句</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-4-%E5%B5%8C%E5%A5%97%E7%9A%84if%E8%AF%AD%E5%8F%A5"><span class="post-toc-text">6.4 嵌套的if语句</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">七. Python的循环结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-1-for%E5%BE%AA%E7%8E%AF"><span class="post-toc-text">7.1 for循环</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-2-while%E5%BE%AA%E7%8E%AF"><span class="post-toc-text">7.2 while循环</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-3-break-continue%E5%92%8Cpass"><span class="post-toc-text">7.3 break、continue和pass</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">八. Python面向对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-1-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="post-toc-text">8.1 面向对象的相关概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-2-%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">8.2 类的定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-3-%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95"><span class="post-toc-text">8.3 类的方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-3-1-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="post-toc-text">8.3.1 构造方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-3-2-%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="post-toc-text">8.3.2 其他方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-4-%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="post-toc-text">8.4 类的继承</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">九. 列表 List</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%97%E8%A1%A8"><span class="post-toc-text">9.1 什么是列表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-2-%E5%88%97%E8%A1%A8%E7%9A%84%E8%BF%90%E7%AE%97%E5%92%8C%E6%96%B9%E6%B3%95"><span class="post-toc-text">9.2 列表的运算和方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-2-1-%E8%BE%93%E5%87%BA%E5%88%97%E8%A1%A8"><span class="post-toc-text">9.2.1 输出列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-2-2-%E8%AF%BB%E5%8F%96-%E4%BF%AE%E6%94%B9%E5%92%8C%E5%88%A0%E9%99%A4%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0"><span class="post-toc-text">9.2.2 读取、修改和删除列表元素</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-2-3-%E5%88%97%E8%A1%A8%E5%88%87%E7%89%87"><span class="post-toc-text">9.2.3 列表切片</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-2-4-%E5%88%97%E8%A1%A8%E7%9A%84%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95"><span class="post-toc-text">9.2.4 列表的统计方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-2-5-%E5%88%97%E8%A1%A8%E7%9A%84%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="post-toc-text">9.2.5 列表的元素个数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-2-6-%E5%88%97%E8%A1%A8%E7%9A%84%E5%8A%A0%E6%B3%95-%E4%B9%98%E6%B3%95"><span class="post-toc-text">9.2.6 列表的加法、乘法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-3-%E5%88%97%E8%A1%A8%E7%9A%84%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="post-toc-text">9.3 列表的其他方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">十. 元组 Tuple</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%83%E7%BB%84"><span class="post-toc-text">10.1 什么是元组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-2-%E5%85%83%E7%BB%84%E7%9A%84%E8%BF%90%E7%AE%97%E5%92%8C%E6%96%B9%E6%B3%95"><span class="post-toc-text">10.2 元组的运算和方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-2-1-%E8%BE%93%E5%87%BA%E5%85%83%E7%BB%84"><span class="post-toc-text">10.2.1 输出元组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-2-2-%E8%AF%BB%E5%8F%96%E5%85%83%E7%BB%84%E5%85%83%E7%B4%A0"><span class="post-toc-text">10.2.2 读取元组元素</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-2-3-%E5%85%83%E7%BB%84%E6%88%AA%E5%8F%96"><span class="post-toc-text">10.2.3 元组截取</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-2-4-%E5%88%97%E8%A1%A8%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%87%BD%E6%95%B0"><span class="post-toc-text">10.2.4 列表的统计函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-2-5-%E5%85%83%E7%BB%84%E7%9A%84%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="post-toc-text">10.2.5 元组的元素个数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-2-6-%E5%85%83%E7%BB%84%E7%9A%84%E5%8A%A0%E6%B3%95-%E4%B9%98%E6%B3%95"><span class="post-toc-text">10.2.6 元组的加法、乘法</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">十一. 字典 Dict</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%97%E5%85%B8"><span class="post-toc-text">11.1 什么是字典</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-2-%E5%AD%97%E5%85%B8%E7%9A%84%E8%BF%90%E7%AE%97%E5%92%8C%E6%96%B9%E6%B3%95"><span class="post-toc-text">11.2 字典的运算和方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11-2-1-%E8%BE%93%E5%87%BA%E5%AD%97%E5%85%B8"><span class="post-toc-text">11.2.1 输出字典</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11-2-2-%E8%AF%BB%E5%8F%96-%E4%BF%AE%E6%94%B9%E5%92%8C%E5%88%A0%E9%99%A4%E5%AD%97%E5%85%B8"><span class="post-toc-text">11.2.2 读取、修改和删除字典</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11-2-3-%E5%AD%97%E5%85%B8%E7%9A%84%E9%94%AE%E5%80%BC%E5%AF%B9%E6%95%B0"><span class="post-toc-text">11.2.3 字典的键值对数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-3-%E5%AD%97%E5%85%B8%E7%9A%84%E6%96%B9%E6%B3%95"><span class="post-toc-text">11.3 字典的方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">十二. 集合 Set</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#12-1-%E4%BB%80%E4%B9%88%E6%98%AF%E9%9B%86%E5%90%88"><span class="post-toc-text">12.1 什么是集合</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#12-2-%E9%9B%86%E5%90%88%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="post-toc-text">12.2 集合基本操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12-2-1-%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="post-toc-text">12.2.1 添加元素</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12-2-2-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0"><span class="post-toc-text">12.2.2 移除元素</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12-2-3-%E8%AE%A1%E7%AE%97%E9%9B%86%E5%90%88%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="post-toc-text">12.2.3 计算集合元素个数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12-2-4-%E6%B8%85%E7%A9%BA%E9%9B%86%E5%90%88"><span class="post-toc-text">12.2.4 清空集合</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12-2-5-%E5%88%A4%E6%96%AD%E5%85%83%E7%B4%A0%E6%98%AF%E5%90%A6%E5%9C%A8%E9%9B%86%E5%90%88%E4%B8%AD"><span class="post-toc-text">12.2.5 判断元素是否在集合中</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#12-3-%E9%9B%86%E5%90%88%E7%9A%84%E6%96%B9%E6%B3%95"><span class="post-toc-text">12.3 集合的方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">十三. 迭代器和生成器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#13-1-%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="post-toc-text">13.1 迭代器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#13-2-%E7%94%9F%E6%88%90%E5%99%A8"><span class="post-toc-text">13.2 生成器</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">十四. 推导式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#14-1-%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="post-toc-text">14.1 列表推导式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#14-2-%E5%AD%97%E5%85%B8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="post-toc-text">14.2 字典推导式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#14-3-%E9%9B%86%E5%90%88%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="post-toc-text">14.3 集合推导式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#14-4-%E5%85%83%E7%BB%84%E6%8E%A8%E5%AF%BC%E5%BC%8F-%E7%94%9F%E6%88%90%E5%99%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="post-toc-text">14.4 元组推导式（生成器表达式）</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">十五. 文件的读写</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#15-1-%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6"><span class="post-toc-text">15.1 打开文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#15-2-%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="post-toc-text">15.2 文件对象的方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#15-3-%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="post-toc-text">15.3 读取文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#15-4-%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5"><span class="post-toc-text">15.4 文件写入</span></a></li></ol></li></ol>
-            
-        
-        <div class=".article-gallery"><p>个人整理面向入门基础级别的Python语言学习教程。</p>
+  </div>
+  </div><article class="md-text content"><p>个人整理面向入门基础级别的Python语言学习教程。</p>
 <p>关键词：Python</p>
 <span id="more"></span>
 <hr>
@@ -369,11 +93,11 @@
 <ol>
 <li>记事本方式：新建记事本，命名为 <code>xxx.py</code> ，在里面编写Python代码，之后启用命令提示符cmd使用python命令直译运行。</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/py-language-leaning_write.jpg" title="记事本编写Python" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/py-language-leaning_write.jpg" alt="记事本编写Python"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/py-language-leaning_write.jpg" alt="记事本编写Python"></p>
 <ol start="2">
 <li>Visual Studio Code方式：直接编写代码运行。</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/py-language-leaning_write2.jpg" title="VSCode编写Python" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/py-language-leaning_write2.jpg" alt="VSCode编写Python"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/py-language-leaning_write2.jpg" alt="VSCode编写Python"></p>
 <p>在Python中，使用 <code>#</code> 作为整行注释符号，三个单引号或双引号作为整段注释符号。</p>
 <p>同时，Python不像C语言，Python的每句最后不需要添加分号 <code>;</code> ，还把相同的缩进作为一整个语句块，这些特性会在后面的代码慢慢体现。</p>
 <h2 id="1-3-import模块">1.3 import模块</h2>
@@ -1467,11 +1191,11 @@
 <ul>
 <li><code>break</code> 语句可以跳出 <code>for</code> 和 <code>while</code> 的循环体。如果从 <code>for</code> 或 <code>while</code> 循环中终止，任何对应的循环 else 块将不执行。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/py-language-leaning_break.png" title="break的过程" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/py-language-leaning_break.png" alt="break的过程"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/py-language-leaning_break.png" alt="break的过程"></p>
 <ul>
 <li><code>continue</code> 语句被用来告诉Python跳过当前循环块中的剩余语句，然后继续进行下一轮循环。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/py-language-leaning_continue.png" title="continue的过程" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/py-language-leaning_continue.png" alt="continue的过程"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/py-language-leaning_continue.png" alt="continue的过程"></p>
 <ul>
 <li><code>pass</code> 语句不做任何事情，一般用做占位语句。</li>
 </ul>
@@ -2121,202 +1845,743 @@
 <ul>
 <li><code>f.write(string)</code> 将 string 写入到文件中, 然后返回写入的字符数。</li>
 </ul>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># test.txt中为空</span></span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">'test.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">num = f.write(<span class="string">'111\n222'</span>)</span><br><span class="line"><span class="built_in">print</span>(num)	<span class="comment"># 7</span></span><br><span class="line"><span class="comment"># test.txt输出结果：</span></span><br><span class="line"><span class="comment"># 111</span></span><br><span class="line"><span class="comment"># 222</span></span><br><span class="line">f.close()</span><br></pre></td></tr></tbody></table></figure></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-    </div>
-
-    <div class="post-meta">
-        <i>
-        
-            <span>2023-08-18</span>
-            
-                <span>该篇文章被 Fingsinz</span>
-            
-            
-                <span>打上标签:
-                    
-                    
-                        <a href='/tags/Python/'>
-                            Python
-                        </a>
-                    
-                </span>
-             
-             
-                <span>归为分类:
-                    
-                    
-                        <a href='/categories/%E7%AC%94%E8%AE%B0/'>
-                            笔记
-                        </a>
-                    
-                </span>
-            
-        
-        </i>
-    </div>
-    <br>
-    
-    
-        
-            
-    
-            <div class="post-footer-pre-next">
-                
-                    <span>上一篇：<a href='/2023/15/'>利用Ping指令进行基本网络检测</a></span>
-                
-
-                
-                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2023/fmusicplayer/">基于Qt的音频播放器程序设计记录</a>
-                    </span>
-                
-            </div>
-    
-        
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># test.txt中为空</span></span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">'test.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">num = f.write(<span class="string">'111\n222'</span>)</span><br><span class="line"><span class="built_in">print</span>(num)	<span class="comment"># 7</span></span><br><span class="line"><span class="comment"># test.txt输出结果：</span></span><br><span class="line"><span class="comment"># 111</span></span><br><span class="line"><span class="comment"># 222</span></span><br><span class="line">f.close()</span><br></pre></td></tr></tbody></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script></article>
+<div class="article-footer">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
     
 
-    
-        
-
-     
 </div>
 
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/15/">利用Ping指令进行基本网络检测</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/fmusicplayer/">基于Qt的音频播放器程序设计记录</a></div></section></div>
 
 
-                                      
-                    
-                    
-                    <div class="footer">
-    
-        <span> 
-            ©2023-2025 
 
-            
-                
 
-            
-                
-                    / <a href="/"> Fingsinz&#39;s Space </a>
-                
 
-            
-                
-                    / <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/fingsinz"> 知乎 </a>
-                
 
-            
-        </span>
-       
-    
+<footer class="page-footer footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/blog/categories/">分类</a><a href="/blog/tags/">标签</a><a href="/blog/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="/about/me/">关于我</a><a href="/about/site/">关于博客</a></div></div><div class="text"><p>本站由 <a href="/">Fingsinz</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0">Stellar 1.33.0</a> 主题创建。<br>
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="true"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AFpython%E8%AF%AD%E8%A8%80"><span class="toc-text">1.1 什么是Python语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%80%8E%E4%B9%88%E5%86%99python%E7%A8%8B%E5%BA%8F"><span class="toc-text">1.2 怎么写Python程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-import%E6%A8%A1%E5%9D%97"><span class="toc-text">1.3 import模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%87%BD%E6%95%B0%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">2.1 函数的基本结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">2.2 函数的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E5%92%8C%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">2.3 传递参数和调用函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-text">2.4 内置函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="toc-text">2.5 匿名函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%98%E9%87%8F"><span class="toc-text">3.1 什么是变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.2 运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.2.1 算术运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.2.2 赋值运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-3-%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.2.3 比较运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-4-%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.2.4 位运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-5-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.2.5 逻辑运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-6-%E6%88%90%E5%91%98%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.2.6 成员运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-7-%E8%BA%AB%E4%BB%BD%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.2.7 身份运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-8-%E5%88%A0%E9%99%A4%E5%8F%98%E9%87%8F"><span class="toc-text">3.2.8 删除变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-python%E7%9A%84%E6%96%AD%E8%A1%8C"><span class="toc-text">3.3 Python的断行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-type-%E5%87%BD%E6%95%B0"><span class="toc-text">4.1 type()函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">4.2 数值数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">4.2.1 什么是数值数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-text">4.2.2 数值类型的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-3-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">4.2.3 数值类型的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E5%B8%83%E5%B0%94%E5%80%BC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">4.3 布尔值数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">4.4 字符串数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">4.4.1 什么是字符串数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-text">4.4.1 字符串的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">4.4.2 字符串的类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-3-%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6"><span class="toc-text">4.4.3 转义字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%87%BD%E6%95%B0%E6%96%B9%E6%B3%95"><span class="toc-text">4.4.4 字符串的函数方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E8%BE%85%E5%8A%A9%E5%B8%AE%E5%8A%A9%E8%AF%B4%E6%98%8E%E8%BE%93%E5%87%BA"><span class="toc-text">5.1 辅助帮助说明输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E8%BE%93%E5%87%BA"><span class="toc-text">5.2 输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-1-%E9%80%9A%E8%BF%87print-%E5%87%BD%E6%95%B0%E8%BE%93%E5%87%BA"><span class="toc-text">5.2.1 通过print()函数输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-2-%E6%A0%BC%E5%BC%8F%E5%8C%96print-%E7%9A%84%E8%BE%93%E5%87%BA"><span class="toc-text">5.2.2 格式化print()的输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-3-format-%E5%87%BD%E6%95%B0"><span class="toc-text">5.2.3 format()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-4-dir-%E5%87%BD%E6%95%B0"><span class="toc-text">5.2.4 dir()函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-%E8%BE%93%E5%85%A5"><span class="toc-text">5.3 输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-if%E8%AF%AD%E5%8F%A5"><span class="toc-text">6.1 if语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-if-else%E8%AF%AD%E5%8F%A5"><span class="toc-text">6.2 if-else语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-if-elif-else%E8%AF%AD%E5%8F%A5"><span class="toc-text">6.3 if-elif-else语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-%E5%B5%8C%E5%A5%97%E7%9A%84if%E8%AF%AD%E5%8F%A5"><span class="toc-text">6.4 嵌套的if语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-for%E5%BE%AA%E7%8E%AF"><span class="toc-text">7.1 for循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-while%E5%BE%AA%E7%8E%AF"><span class="toc-text">7.2 while循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-break-continue%E5%92%8Cpass"><span class="toc-text">7.3 break、continue和pass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="toc-text">8.1 面向对象的相关概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">8.2 类的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-3-%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">8.3 类的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-1-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="toc-text">8.3.1 构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-2-%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="toc-text">8.3.2 其他方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-4-%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF"><span class="toc-text">8.4 类的继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%97%E8%A1%A8"><span class="toc-text">9.1 什么是列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-%E5%88%97%E8%A1%A8%E7%9A%84%E8%BF%90%E7%AE%97%E5%92%8C%E6%96%B9%E6%B3%95"><span class="toc-text">9.2 列表的运算和方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-1-%E8%BE%93%E5%87%BA%E5%88%97%E8%A1%A8"><span class="toc-text">9.2.1 输出列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-2-%E8%AF%BB%E5%8F%96-%E4%BF%AE%E6%94%B9%E5%92%8C%E5%88%A0%E9%99%A4%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0"><span class="toc-text">9.2.2 读取、修改和删除列表元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-3-%E5%88%97%E8%A1%A8%E5%88%87%E7%89%87"><span class="toc-text">9.2.3 列表切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-4-%E5%88%97%E8%A1%A8%E7%9A%84%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95"><span class="toc-text">9.2.4 列表的统计方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-5-%E5%88%97%E8%A1%A8%E7%9A%84%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="toc-text">9.2.5 列表的元素个数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-6-%E5%88%97%E8%A1%A8%E7%9A%84%E5%8A%A0%E6%B3%95-%E4%B9%98%E6%B3%95"><span class="toc-text">9.2.6 列表的加法、乘法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-%E5%88%97%E8%A1%A8%E7%9A%84%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="toc-text">9.3 列表的其他方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%85%83%E7%BB%84"><span class="toc-text">10.1 什么是元组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2-%E5%85%83%E7%BB%84%E7%9A%84%E8%BF%90%E7%AE%97%E5%92%8C%E6%96%B9%E6%B3%95"><span class="toc-text">10.2 元组的运算和方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-1-%E8%BE%93%E5%87%BA%E5%85%83%E7%BB%84"><span class="toc-text">10.2.1 输出元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-2-%E8%AF%BB%E5%8F%96%E5%85%83%E7%BB%84%E5%85%83%E7%B4%A0"><span class="toc-text">10.2.2 读取元组元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-3-%E5%85%83%E7%BB%84%E6%88%AA%E5%8F%96"><span class="toc-text">10.2.3 元组截取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-4-%E5%88%97%E8%A1%A8%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%87%BD%E6%95%B0"><span class="toc-text">10.2.4 列表的统计函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-5-%E5%85%83%E7%BB%84%E7%9A%84%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="toc-text">10.2.5 元组的元素个数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-6-%E5%85%83%E7%BB%84%E7%9A%84%E5%8A%A0%E6%B3%95-%E4%B9%98%E6%B3%95"><span class="toc-text">10.2.6 元组的加法、乘法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%97%E5%85%B8"><span class="toc-text">11.1 什么是字典</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2-%E5%AD%97%E5%85%B8%E7%9A%84%E8%BF%90%E7%AE%97%E5%92%8C%E6%96%B9%E6%B3%95"><span class="toc-text">11.2 字典的运算和方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-1-%E8%BE%93%E5%87%BA%E5%AD%97%E5%85%B8"><span class="toc-text">11.2.1 输出字典</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-2-%E8%AF%BB%E5%8F%96-%E4%BF%AE%E6%94%B9%E5%92%8C%E5%88%A0%E9%99%A4%E5%AD%97%E5%85%B8"><span class="toc-text">11.2.2 读取、修改和删除字典</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2-3-%E5%AD%97%E5%85%B8%E7%9A%84%E9%94%AE%E5%80%BC%E5%AF%B9%E6%95%B0"><span class="toc-text">11.2.3 字典的键值对数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-3-%E5%AD%97%E5%85%B8%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">11.3 字典的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-1-%E4%BB%80%E4%B9%88%E6%98%AF%E9%9B%86%E5%90%88"><span class="toc-text">12.1 什么是集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-2-%E9%9B%86%E5%90%88%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-text">12.2 集合基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-1-%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="toc-text">12.2.1 添加元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-2-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0"><span class="toc-text">12.2.2 移除元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-3-%E8%AE%A1%E7%AE%97%E9%9B%86%E5%90%88%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="toc-text">12.2.3 计算集合元素个数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-4-%E6%B8%85%E7%A9%BA%E9%9B%86%E5%90%88"><span class="toc-text">12.2.4 清空集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-2-5-%E5%88%A4%E6%96%AD%E5%85%83%E7%B4%A0%E6%98%AF%E5%90%A6%E5%9C%A8%E9%9B%86%E5%90%88%E4%B8%AD"><span class="toc-text">12.2.5 判断元素是否在集合中</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-3-%E9%9B%86%E5%90%88%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">12.3 集合的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-1-%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-text">13.1 迭代器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-2-%E7%94%9F%E6%88%90%E5%99%A8"><span class="toc-text">13.2 生成器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-1-%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-text">14.1 列表推导式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-2-%E5%AD%97%E5%85%B8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-text">14.2 字典推导式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-3-%E9%9B%86%E5%90%88%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-text">14.3 集合推导式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-4-%E5%85%83%E7%BB%84%E6%8E%A8%E5%AF%BC%E5%BC%8F-%E7%94%9F%E6%88%90%E5%99%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">14.4 元组推导式（生成器表达式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-1-%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6"><span class="toc-text">15.1 打开文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-2-%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">15.2 文件对象的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-3-%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="toc-text">15.3 读取文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-4-%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5"><span class="toc-text">15.4 文件写入</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
 </div>
-
-
-
-<!--这是指一条线往下的内容-->
-<div class="footer-last">
-    
-            <span>我在想，时下你所需要的，应该是痛痛快快换个心情，干干脆脆享受人生。</span>
-            
-    
-</div>
-
-
-    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-    <!--目录-->
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
-        
-<script src="/js/toc.js"></script>
-
-    
-
-    
-<script src="/js/randomHeaderContent.js"></script>
-
-    <!--回到顶部按钮-->
-    
-        
-<script src="/js/returnToTop.js"></script>
-
-    
-
-    
-        
-<script src="/js/returnToLastPage.js"></script>
-
-    
-
-
-
-
-
-<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
-
-
-
-<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
-
-
-
-<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
-
-
-<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
-
-
-<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
-
-
-<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
-
-
-<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
-
-
+</div><div class="scripts">
 
 
 <script type="text/javascript">
-     
-    if (typeof lightGallery !== "undefined") {
-        var options1 = {
-            selector: '.gallery-item',
-            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
-            thumbnail: true,          // 显示缩略图
-            zoom: true,               // 启用缩放功
-            rotate: true,             // 启用旋转功能能
-            autoplay: true,        // 启用自动播放功能
-            fullScreen: true,      // 启用全屏功能
-            pager: false, //页码,
-            zoomFromOrigin: true,   // 从原始位置缩放
-            actualSize: true,       // 启用查看实际大小的功能
-            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+  window.canonical = {"originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
     }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
     
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.0" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
 </script>
 
 
-                </div>
-            
-            
-                <!-- 回到顶部的按钮-->  
-                <div class="progress-wrap shadow-drop-2-bottom">
-                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
-                    </svg>
-                </div>
-            
-            
-                <!-- 返回的按钮-->  
-                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
-                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
-                    </svg>
-                </div>
-            
-    </body>
-</html>
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

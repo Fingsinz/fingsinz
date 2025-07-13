@@ -1,356 +1,80 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-    
-    <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <meta name="description" content="C语言入门学习教程" />
-    <meta name="hexo-theme-A4" content="v1.9.6" />
-    <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
-    <title>Fingsinz&#39;s space | 风信梓</title>
 
-    
-        
-<link rel="stylesheet" href="/css/highlight/style1.css">
+<!DOCTYPE html><html lang="zh-CN">
 
-        
-<link rel="stylesheet" href="/css/reset.css">
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0" theme-name="Stellar" theme-version="1.33.0">
+  
+  
+  <meta name="generator" content="Hexo 7.1.1">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>C语言入门学习教程 - Fingsinz</title>
 
-        
-<link rel="stylesheet" href="/css/markdown.css">
+  
+  <meta name="description" content="个人整理面向入门基础级别的C语言学习教程。
+关键词：C语言">
+  
+  <meta name="keywords" content="C">
 
-        
-<link rel="stylesheet" href="/css/fonts.css">
- 
-         <!--注意：首页既不是post也不是page-->
-        
-        
-        
-<link rel="stylesheet" href="/css/ui.css">
- 
-        
-<link rel="stylesheet" href="/css/style.css">
+  <!-- feed -->
+  
 
-
-        
-            <!--返回顶部css-->
-            
-<link rel="stylesheet" href="/css/returnToTop.css">
-
-            
-<link rel="stylesheet" href="/css/unicons.css">
-
-        
-        
-            <!--目录-->
-            
-<link rel="stylesheet" href="/css/toc.css">
-
-        
-    
-
-    
-        
-<link rel="stylesheet" href="/css/returnToLastPage.css">
-
-    
-    
-   
-<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
+  <link rel="stylesheet" href="/css/main.css?v=1.33.0">
 
 
-<meta name="generator" content="Hexo 7.1.1">
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Fingsinz","sameAs":[],"image":"/images/avatar.jpg"},"dateCreated":"2023-07-25T14:00:47+08:00","dateModified":"2025-07-13T12:06:04+08:00","datePublished":"2023-07-25T14:00:47+08:00","description":"个人整理面向入门基础级别的C语言学习教程。\n关键词：C语言","headline":"C语言入门学习教程","mainEntityOfPage":{"@type":"WebPage","@id":"https://fingsinz.space/2023/c-language-learning/"},"publisher":{"@type":"Organization","name":"Fingsinz","sameAs":[],"image":"/images/avatar.jpg","logo":{"@type":"ImageObject","url":"/images/avatar.jpg"}},"url":"https://fingsinz.space/2023/c-language-learning/","keywords":"C","thumbnailUrl":"https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c-language-learning.webp","image":1}</script>
+  
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+<body>
+
+<div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">Fingsinz</div><div class="sub cap">Fingsinz's space</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#c7c6b6"><span>博客</span></a><a class="nav-item" title="笔记" href="/notebooks/" style="color:#9a6655"><span>笔记</span></a><a class="nav-item" title="文档" href="/wiki/" style="color:#a72126"><span>文档</span></a><a class="nav-item" title="探索" href="/explore/" style="color:#12264f"><span>探索</span></a></nav>
+</div>
+<div class="widgets"></div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2023-07-25T06:00:47.000Z">2023-07-25</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-07-13T04:06:04.205Z">2025-07-13</time></span></div></div></div>
     
-    
-
-    
-    
-
-
-
-    
-
-    
-    
-
-    
-    <style>
-        :root {
-            --waline-theme-color: #000000; 
-            --waline-color: #000000; 
-            --waline-border-color: #000000; 
-            --waline-white: #000000; 
-            --waline-bgcolor-light: #white;  
-        }
-        body {
-            color: #000000;
-            background: #bed2bb;
-        }
-        .post-md code {
-            background: #e7f7f3;
-            color: #7f688d; 
-        }
-        .post-md pre, .post-md .highlight {
-            background: #e7f7f3;
-            color: #7f688d; 
-        }
-        pre .string, pre .value, pre .inheritance, pre .header, pre .ruby .symbol, pre .xml .cdata {
-            color: #000000;
-        }
-        pre .number, pre .preprocessor, pre .built_in, pre .literal, pre .params, pre .constant {
-            color: #000000;
-        }
-        .year-font-color {
-            color: #000000 !important;
-        }
-        .wl-card span.wl-nick {
-            color: #000000; 
-        }
-        .wl-card .wl-badge {
-            border: 1px solid #000000;
-            color: #000000; 
-        }
-        .wl-btn {
-            border: 1px solid #000000; 
-            color:  #000000;  
-        }
-        .wl-btn.primary {
-            color: #white; 
-        }
-        .wl-header label {
-            color: #000000;
-        }
-        a {
-            color: #6b798e;
-        }
-
-        .post-md a {
-            color: #6b798e;
-        }
-
-        .nav li a {
-            color: #6b798e;
-        }
-
-        .archive-main a:link {
-            color: #6b798e;
-        }
-        .archive-main a:visited {
-            color: #6b798e; 
-        }
-
-        .archive li span {
-            color: #000000;
-        }
-
-        .post-main-title {
-            color: #000000;
-        }
-
-        .post-md h1,
-        .post-md h2,
-        .post-md h3,
-        .post-md h4,
-        .post-md h5,
-        .post-md h6 {
-            color: #000000;
-        }
-
-        [data-waline] p {
-            color: #000000;
-        }
-        [data-waline] a {
-            color: #000000;
-        } 
-        .wl-sort li.active {
-            color: #000000;
-        }
-
-        .wl-card .wl-meta>span {
-            background: #white;
-        }
-
-        .paper {
-            background: #bed2bb;
-        }
-
-        .index-main {
-            background: #white;
-        }
-
-        .paper-main {
-            background: #white;
-        }
-
-        .wl-panel {
-            background: #white;
-        }
-
-        .archive li:nth-child(odd) {
-            background: #white;
-            ;
-        }
-
-        .archive li:nth-child(even) {
-            background: #white;
-        }
-
-        .post-md table tr:nth-child(odd) td {
-            background: #white;
-        }
-
-        .post-md table tr:nth-child(even) td {
-            background: #white;
-        }
-
-    
-        .progress-wrap::after {
-            color: #000000; /* 箭头的颜色 */
-        }
-        .progress-wrap svg.progress-circle path {
-	        stroke: #000000; /* 边框的颜色 */
-        }
-        .progress-wrap::before {
-	        background-image: linear-gradient(298deg, #6b798e, #6b798e); /* 鼠标滑过的箭头颜色 */
-         }
-
-        .return-to-last-progress-wrap::after {
-            color: #000000; /* 箭头的颜色 */
-        }
-        .return-to-last-progress-wrap svg.progress-circle path {
-	        stroke: #000000; /* 边框的颜色 */
-        }
-        .return-to-last-progress-wrap::before {
-	        background-image: linear-gradient(298deg, #6b798e, #6b798e); /* 鼠标滑过的箭头颜色 */
-         }
-
-         .left-toc-container::-webkit-scrollbar-thumb {
-            background-color: #000000; /* 设置滚动条拖动块的颜色 */
-        }
-
-        .bs-docs-sidebar .nav>.active>a,
-        .bs-docs-sidebar .nav>li>a:hover,
-        .bs-docs-sidebar .nav>li>a:focus {
-            color: #6b798e;
-            border-left-color: #6b798e;
-        }
-        .bs-docs-sidebar .nav>li>a {
-            color:  #000000;
-        }
-    </style>
-
-    
-    
-    <body>
-        <script src="/js/darkmode-js.min.js"></script>
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>C语言入门学习教程</span></h1>
         
-        
-            <div class="left-toc-container">
-                <nav id="toc" class="bs-docs-sidebar"></nav>
-            </div>
-        
-        <div class="paper">
-            
-            
-            
-            
-                <div class="shadow-drop-2-bottom paper-main">
-                    
-
-
-<div class="header">
-    <div class="header-container">
-        <img style="
-        width: 56px;
-        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/favicon.webp" width="10%"></img>
-        <div class="header-content">
-            <a class="logo" href="/">Fingsinz&#39;s space</a> 
-            <span class="description">我在想，时下你所需要的，应该是痛痛快快换个心情，干干脆脆享受人生。</span> 
-        </div>
-        
+      </div>
     </div>
     
-   
-    <ul class="nav">
-        
-            
-                <li><a href="/">首页🏚️</a></li>
-            
-        
-            
-                <li><a href="/list/">文章📄</a></li>
-            
-        
-            
-                <li><a href="/notes/">笔记📔</a></li>
-            
-        
-            
-                <li><a href="/funny/">趣事💡</a></li>
-            
-        
-            
-                <li><a href="/about/">关于🧑</a></li>
-            
-        
-    </ul>
-</div> 
-        
-                    
-                    
-
-                    
-                    
-                    
-                    <!--说明是文章post页面-->
-                    
-                        <div class="post-main">
-    
-
-    
-        
-            
-                <div class="post-main-title" style="text-align: center;">
-                    C语言入门学习教程
-                </div>
-            
-        
-      
-    
-
-    
-
-        
-            <div class="post-head-meta-center">
-        
-                
-                    <span>最近更新：2024-09-16</span> 
-                
-                
-                    
-                        &nbsp; | &nbsp;
-                    
-                     <span>字数总计：22.7k</span>
-                
-                
-                    
-                        &nbsp; | &nbsp;
-                    
-                    <span>阅读估时：88分钟</span>
-                
-                
-            </div>
-    
-
-    <div class="post-md">
-        
-            
-                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Ⅰ —— 基础知识介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-1-c%E8%AF%AD%E8%A8%80%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86"><span class="post-toc-text">1.1 C语言背景知识</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-2-%E7%94%A8%E4%BB%80%E4%B9%88%E5%86%99c%E8%AF%AD%E8%A8%80"><span class="post-toc-text">1.2 用什么写C语言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-3-%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="post-toc-text">1.3 从代码到执行程序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-4-%E8%AE%A4%E8%AF%86%E6%9C%80%E5%9F%BA%E7%A1%80%E7%9A%84c%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81"><span class="post-toc-text">1.4 认识最基础的C语言代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-5-%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="post-toc-text">1.5 头文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-6-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="post-toc-text">1.6 关键字</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Ⅱ —— 函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-%E5%87%BD%E6%95%B0%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="post-toc-text">2.1 函数的基本结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89"><span class="post-toc-text">2.2 函数声明和定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="post-toc-text">2.3 调用函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-4-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="post-toc-text">2.4 函数参数传递</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Ⅲ —— 数据、运算符及语句</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A1%A8%E7%8E%B0%E5%BD%A2%E5%BC%8F"><span class="post-toc-text">3.1 数据的表现形式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-%E6%95%B0%E6%8D%AE%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">3.2 数据的类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-1-%E6%95%B4%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="post-toc-text">3.2.1 整型数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-2-%E6%B5%AE%E7%82%B9%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="post-toc-text">3.2.2 浮点型数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-3-void%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">3.2.3 Void类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-2-4-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="post-toc-text">3.2.4 类型转换</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-3-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.3 运算符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-1-%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.3.1 算术运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-2-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.3.2 关系运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-3-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.3.3 逻辑运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-4-%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.3.4 位运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-5-%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.3.5 赋值运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-6-%E5%85%B6%E4%BB%96%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="post-toc-text">3.3.6 其他运算符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-3-7-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="post-toc-text">3.3.7 运算符优先级</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-4-%E8%AF%AD%E5%8F%A5"><span class="post-toc-text">3.4 语句</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-5-%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E8%8C%83%E5%9B%B4"><span class="post-toc-text">3.5 变量的作用范围</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Ⅳ —— 格式化输入输出</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-1-%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%9A%84%E8%BE%93%E5%87%BA"><span class="post-toc-text">4.1 格式化的输出</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-2-%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%9A%84%E8%BE%93%E5%85%A5"><span class="post-toc-text">4.2 格式化的输入</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Ⅴ —— 条件结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-1-if%E6%9E%84%E6%88%90%E7%9A%84%E6%9D%A1%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="post-toc-text">5.1 if构成的条件结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-2-switch%E6%9E%84%E6%88%90%E7%9A%84%E6%9D%A1%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="post-toc-text">5.2 switch构成的条件结构</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Ⅵ —— 循环结构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-1-while%E6%9E%84%E6%88%90%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="post-toc-text">6.1 while构成的循环结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-2-do-while%E6%9E%84%E6%88%90%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="post-toc-text">6.2 do-while构成的循环结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-3-for%E6%9E%84%E6%88%90%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="post-toc-text">6.3 for构成的循环结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-4-%E5%BE%AA%E7%8E%AF%E7%9A%84%E7%BB%88%E6%AD%A2%E4%B8%8E%E7%BB%A7%E7%BB%AD"><span class="post-toc-text">6.4 循环的终止与继续</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Ⅶ —— 枚举</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Ⅷ —— 数组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-1-%E6%95%B0%E7%BB%84%E7%BB%93%E6%9E%84"><span class="post-toc-text">8.1 数组结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-2-%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E8%AE%BF%E9%97%AE"><span class="post-toc-text">8.2 数组的定义和访问</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-3-%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="post-toc-text">8.3 数组的初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-4-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="post-toc-text">8.4 多维数组</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-5-%E6%95%B0%E7%BB%84%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="post-toc-text">8.5 数组的使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Ⅸ —— 指针</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-1-%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="post-toc-text">9.1 指针变量的定义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-2-%E6%8C%87%E9%92%88%E7%9A%84%E8%BF%90%E7%AE%97"><span class="post-toc-text">9.2 指针的运算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-3-%E6%8C%87%E9%92%88%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="post-toc-text">9.3 指针的使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Ⅹ —— 共用体与结构体</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-1-%E5%85%B1%E7%94%A8%E4%BD%93"><span class="post-toc-text">10.1 共用体</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-2-%E7%BB%93%E6%9E%84%E4%BD%93"><span class="post-toc-text">10.2 结构体</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Ⅺ —— 链表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-1-%E9%93%BE%E8%A1%A8%E5%8F%8A%E5%85%B6%E6%9E%84%E6%88%90"><span class="post-toc-text">11.1 链表及其构成</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-2-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E7%9A%84%E5%87%BD%E6%95%B0"><span class="post-toc-text">11.2 内存管理的函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-3-%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8"><span class="post-toc-text">11.3 单向链表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-4-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8"><span class="post-toc-text">11.4 双向链表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11-5-%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="post-toc-text">11.5 循环链表</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link"><span class="post-toc-text">Ⅻ —— 对文件的读写</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#12-1-%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6"><span class="post-toc-text">12.1 打开文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#12-2-%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6"><span class="post-toc-text">12.2 写入文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#12-3-%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="post-toc-text">12.3 读取文件</span></a></li></ol></li></ol>
-            
-        
-        <div class=".article-gallery"><p>个人整理面向入门基础级别的C语言学习教程。</p>
+  </div>
+  </div><article class="md-text content"><p>个人整理面向入门基础级别的C语言学习教程。</p>
 <p>关键词：C语言</p>
 <span id="more"></span>
 <hr>
@@ -374,7 +98,7 @@
 </li>
 </ul>
 <p>此教程的代码使用Dev-C++，均在Dev-C++下成功运行。</p>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_devcpp.jpg" title="Dev-C++界面" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_devcpp.jpg" alt="Dev-C++界面"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_devcpp.jpg" alt="Dev-C++界面"></p>
 <p>按 <code>Ctrl</code> + <code>N</code> 可以新建文件，或者点击左上角文件新建文件。</p>
 <p>在 工具 → 编译选项 → 代码生成/优化 → 代码生成 处可以找到语言标准。</p>
 <h2 id="1-3-从代码到执行程序">1.3 从代码到执行程序</h2>
@@ -644,7 +368,7 @@ D返回语句<br>
 </li>
 </ol>
 <h2 id="3-2-数据的类型">3.2 数据的类型</h2>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_type.jpg" title="数据类型" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_type.jpg" alt="数据类型"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_type.jpg" alt="数据类型"></p>
 <h3 id="3-2-1-整型数据">3.2.1 整型数据</h3>
 <table>
 <thead>
@@ -779,7 +503,7 @@ D返回语句<br>
 </ul>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> d = <span class="number">3.14159</span>;</span><br><span class="line"><span class="type">int</span> i = (<span class="type">int</span>)d; <span class="comment">// 显式将double类型转换为int类型</span></span><br></pre></td></tr></tbody></table></figure>
 <h2 id="3-3-运算符">3.3 运算符</h2>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_cop.jpg" title="运算符" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_cop.jpg" alt="运算符"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_cop.jpg" alt="运算符"></p>
 <h3 id="3-3-1-算术运算符">3.3.1 算术运算符</h3>
 <table>
 <thead>
@@ -1039,7 +763,7 @@ D返回语句<br>
 </li>
 </ul>
 <h3 id="3-3-7-运算符优先级">3.3.7 运算符优先级</h3>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_pre.jpg" title="运算符优先级" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_pre.jpg" alt="运算符优先级"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_pre.jpg" alt="运算符优先级"></p>
 <h2 id="3-4-语句">3.4 语句</h2>
 <ol>
 <li><strong>控制语句</strong></li>
@@ -1404,7 +1128,7 @@ D返回语句<br>
 <p>数组是一种可以存储固定大小的相同类型元素的顺序集合。简单来说，数组可以存放一串相同的数据类型。</p>
 <h2 id="8-1-数组结构">8.1 数组结构</h2>
 <p>数组的结构如下图：</p>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_array.png" title="数组的结构" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_array.png" alt="数组的结构"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_array.png" alt="数组的结构"></p>
 <p>数组的每一个单体称作 <strong>元素</strong> ，每个元素有它的 <strong>索引号</strong> ，用于访问该元素。 <strong>索引号从0开始。</strong></p>
 <h2 id="8-2-数组的定义和访问">8.2 数组的定义和访问</h2>
 <p>数组的定义十分简单，其定义格式是：</p>
@@ -1425,7 +1149,7 @@ D返回语句<br>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type arrayName [x][y];</span><br></pre></td></tr></tbody></table></figure>
 <p>如一个二维数组初始化如下：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="built_in">array</span>[<span class="number">3</span>][<span class="number">4</span>] = {  </span><br><span class="line"> {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>} ,   <span class="comment">/*  初始化索引号为 0 的行 */</span></span><br><span class="line"> {<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>} ,   <span class="comment">/*  初始化索引号为 1 的行 */</span></span><br><span class="line"> {<span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>}   <span class="comment">/*  初始化索引号为 2 的行 */</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_array2.png" title="二维数组" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_array2.png" alt="二维数组"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_array2.png" alt="二维数组"></p>
 <p>二维数组中的元素是通过使用下标（即数组的行索引和列索引）访问。</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.c</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span> </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span> <span class="params">()</span></span><br><span class="line">{</span><br><span class="line">	<span class="comment">// 一个带有 5 行 2 列的数组</span></span><br><span class="line">	<span class="type">int</span> a[<span class="number">5</span>][<span class="number">2</span>] = { {<span class="number">0</span>,<span class="number">0</span>}, {<span class="number">1</span>,<span class="number">2</span>}, {<span class="number">2</span>,<span class="number">4</span>}, {<span class="number">3</span>,<span class="number">6</span>},{<span class="number">4</span>,<span class="number">8</span>}};</span><br><span class="line">	<span class="type">int</span> i, j;</span><br><span class="line"> </span><br><span class="line">	<span class="comment">// 输出数组中每个元素的值</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++)</span><br><span class="line">		{</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"a[%d][%d] = %d\n"</span>, i, j, a[i][j]);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="8-5-数组的使用">8.5 数组的使用</h2>
@@ -1504,7 +1228,7 @@ D返回语句<br>
 <p>同时，我们可以对数组首元素进行取地址，即下代码等价：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = a;      <span class="comment">//p指向数组首元素的地址，即a[0]的地址；</span></span><br><span class="line">p = &amp;a[<span class="number">0</span>];  <span class="comment">//p指向a[0]的地址</span></span><br></pre></td></tr></tbody></table></figure>
 <p>当我们正确把指针指向一个数组的时候，可以对指针进行以下运算： <code>p++</code> , <code>++p</code> , <code>p--</code> , <code>--p</code> , <code>p = p + 1</code> , <code>p = p - 1</code> 等。</p>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_pointer.png" title="指针访问数组" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_pointer.png" alt="指针访问数组"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_pointer.png" alt="指针访问数组"></p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.c</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">{</span><br><span class="line">	<span class="type">int</span> a[<span class="number">5</span>] = {<span class="number">101</span>,<span class="number">102</span>,<span class="number">103</span>,<span class="number">104</span>,<span class="number">105</span>};</span><br><span class="line">	<span class="type">int</span> *p;</span><br><span class="line">	p = a;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d "</span>, *p);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d "</span>, *(p+<span class="number">1</span>));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>, *(p+<span class="number">2</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;      </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输出结果：</span><br><span class="line"><span class="number">101</span> <span class="number">102</span> <span class="number">103</span></span><br></pre></td></tr></tbody></table></figure>
 <p>因为数组名也有地址的属性，所以输出语句还可以改成：</p>
@@ -1524,7 +1248,7 @@ D返回语句<br>
 </ul>
 <p>二维数组有两个下标，那么一个指针怎么指，我们将指针分为 <strong>行指针</strong> 和 <strong>列指针</strong> 。行指针，即指向某一行元素的指针；列指针，即指向某一列元素的指针。</p>
 <p>下有二维数组 <code>a[4][5]</code> ：</p>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_pointer2.png" title="指针指向二维数组" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_pointer2.png" alt="指针指向二维数组"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_pointer2.png" alt="指针指向二维数组"></p>
 <ul>
 <li>动态数组</li>
 </ul>
@@ -1613,7 +1337,7 @@ D返回语句<br>
 <p>链表还可分为动态链表和静态链表，此处不讨论静态链表，均为动态链表。</p>
 <p>使用链表结构可以克服数组链表需要预先知道数据大小的缺点，链表结构可以充分利用计算机内存空间，实现灵活的内存动态管理。但是链表失去了数组随机读取的优点，同时链表由于增加了结点的指针域，空间开销比较大。</p>
 <p>链表最明显的好处就是，常规数组排列关联项目的方式可能不同于这些数据项目在记忆体或磁盘上顺序，数据的存取往往要在不同的排列顺序中转换。链表允许插入和移除表上任意位置上的节点，但是不允许随机存取。</p>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_arrayandlist.png" title="链表与数组" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_arrayandlist.png" alt="链表与数组"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_arrayandlist.png" alt="链表与数组"></p>
 <h2 id="11-2-内存管理的函数">11.2 内存管理的函数</h2>
 <p>关于动态储存分配函数有 <code>calloc()</code> 、 <code>malloc()</code> 、 <code>free()</code> 、 <code>realloc()</code> 。他们都存在于 <code>stdlib.h</code> 头文件中。</p>
 <p>有的编译系统要求用 <code>malloc.h</code> 头文件而不是 <code>stdlib.h</code> 头文件，实际上这两个头文件都包含以上的动态储存分配函数。</p>
@@ -1663,18 +1387,18 @@ D返回语句<br>
 </ul>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//链表创建，返回一个表头head</span></span><br><span class="line"><span class="keyword">struct</span> test *<span class="title function_">creat</span><span class="params">()</span>  </span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">test</span> *<span class="title">head</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">test</span> *<span class="title">p1</span>, *<span class="title">p2</span>;</span></span><br><span class="line">	<span class="type">int</span> n = <span class="number">0</span>;</span><br><span class="line">	p1 = p2 = (<span class="keyword">struct</span> test *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> test));  <span class="comment">//开辟一个内存单元</span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;p1-&gt;num);  <span class="comment">//输入第一个信息</span></span><br><span class="line">	head = <span class="literal">NULL</span>;  <span class="comment">//指针必须初始化，无地址则指向NULL</span></span><br><span class="line">	<span class="keyword">while</span>(p1-&gt;num != <span class="number">0</span>) <span class="comment">// 设计当输入0时停止创建链表</span></span><br><span class="line">	{</span><br><span class="line">		n += <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(n == <span class="number">1</span>)  head = p1; <span class="comment">// 当链表为空，即创建的是第一个结点，则使头结点指向p1的地址</span></span><br><span class="line">		<span class="keyword">else</span>  p2-&gt;next = p1;	<span class="comment">// 当链表非空，用next指针连接</span></span><br><span class="line">		p2 = p1; <span class="comment">// p2指向p1所指的地址，p2为当前链表末尾</span></span><br><span class="line">		p1 = (<span class="keyword">struct</span> test *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> test));  <span class="comment">//再开辟内存单元，并将起始地址赋值给p1</span></span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;p1-&gt;num);   <span class="comment">//循环输入信息</span></span><br><span class="line">	}</span><br><span class="line">	<span class="built_in">free</span>(p1); <span class="comment">// 释放最后一个结点，即释放输入为0的结点</span></span><br><span class="line">	p2-&gt;next = <span class="literal">NULL</span>; <span class="comment">// 链表的末尾指向NULL</span></span><br><span class="line">	<span class="keyword">return</span> head;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>根据上述代码，演示过程如图：</p>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_create.png" title="链表创建过程" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_create.png" alt="链表创建过程"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_create.png" alt="链表创建过程"></p>
 <ul>
 <li>链表的插入</li>
 </ul>
 <p>链表的插入思路如图：</p>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_insert.png" title="链表的插入" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_insert.png" alt="链表的插入"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_insert.png" alt="链表的插入"></p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在某链表中插入一个新的由指针引用的结构体</span></span><br><span class="line"><span class="keyword">struct</span> test *<span class="title function_">add</span><span class="params">(<span class="keyword">struct</span> test *head, <span class="keyword">struct</span> test *insert)</span></span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">test</span> *<span class="title">p0</span>, *<span class="title">p1</span>, *<span class="title">p2</span>;</span></span><br><span class="line">	p0 = insert;  <span class="comment">//将新的由指针引用的结构体赋值给p0</span></span><br><span class="line">	p1 = head;</span><br><span class="line">	<span class="keyword">if</span>(head == <span class="literal">NULL</span>)<span class="comment">//判断是否为空链表</span></span><br><span class="line">	{</span><br><span class="line">		head = p0;  <span class="comment">//是空链表则从头插入，头指针为p0</span></span><br><span class="line">		p0-&gt;next = <span class="literal">NULL</span>;<span class="comment">//后面无新的数据</span></span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span>    <span class="comment">//链表非空，按num排序，找到适合的位置或者到链表末端停下</span></span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">while</span>((p0-&gt;num &gt; p1-&gt;num) &amp;&amp; (p1-&gt;next != <span class="literal">NULL</span>))</span><br><span class="line">		{</span><br><span class="line">			p2=p1;</span><br><span class="line">			p1=p1-&gt;next;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(p0-&gt;num &lt;= p1-&gt;num) <span class="comment">// 找到合适的位置</span></span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span>(head == p1) head = p0;</span><br><span class="line">			<span class="keyword">else</span>  p2-&gt;next = p0;</span><br><span class="line">			p0-&gt;next = p1;</span><br><span class="line">		}</span><br><span class="line">		<span class="keyword">else</span> <span class="comment">// 找不到合适位置，插入到链表末尾</span></span><br><span class="line">		{</span><br><span class="line">			p1-&gt;next = p0;</span><br><span class="line">			p0-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">		}		</span><br><span class="line">	}		</span><br><span class="line">	<span class="keyword">return</span> head; <span class="comment">// 返回更新后的链表表头</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>链表的删除</li>
 </ul>
 <p>链表的删除思路如图：</p>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_delete.png" title="链表的删除" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_delete.png" alt="链表的删除"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_delete.png" alt="链表的删除"></p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在某链表中查找num并删除该结构体，返回更新后的表头</span></span><br><span class="line"><span class="keyword">struct</span> test *<span class="title function_">del</span><span class="params">(<span class="keyword">struct</span> test *head, <span class="type">int</span> num)</span> </span><br><span class="line">{</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">test</span> *<span class="title">p1</span>, *<span class="title">p2</span>;</span></span><br><span class="line">	<span class="keyword">if</span>(head == <span class="literal">NULL</span>)  <span class="comment">// 判断是否为空链表</span></span><br><span class="line">	{</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"这是一个空链表\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> head;</span><br><span class="line">	}  </span><br><span class="line">	</span><br><span class="line">	p1 = head;</span><br><span class="line">	<span class="comment">// 链表非空，将创建好的链表头指针head赋值给p1</span></span><br><span class="line">	<span class="comment">// 不能直接对表头进行操作，否则变动完之后找不到表头</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 当没匹配到元素或者已经到链表末端，停止循环</span></span><br><span class="line">	<span class="keyword">while</span>(p1-&gt;num != num &amp;&amp; p1-&gt;next != <span class="literal">NULL</span>)  </span><br><span class="line">	{</span><br><span class="line">		p2 = p1;		<span class="comment">// p2指向的是p1的前一个结点</span></span><br><span class="line">		p1 = p1-&gt;next;		<span class="comment">// p1指针遍历链表</span></span><br><span class="line">	} <span class="comment">// 此处寻找元素</span></span><br><span class="line">  </span><br><span class="line">	<span class="keyword">if</span>(p1-&gt;num == num)  <span class="comment">// 如果是找到了元素而停止循环的情况</span></span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">if</span>(p1 == head)</span><br><span class="line">		{</span><br><span class="line">			head = p1-&gt;next;<span class="comment">// 如果删除的是头指针，则将头指针指向下一个，修改表头</span></span><br><span class="line">			<span class="built_in">free</span>(p1);</span><br><span class="line">		}  </span><br><span class="line">			</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		{</span><br><span class="line">			p2-&gt;next = p1-&gt;next;  <span class="comment">// 删除节点，即跳过某结构体直接连向下一个</span></span><br><span class="line">			<span class="built_in">free</span>(p1);</span><br><span class="line">		}  </span><br><span class="line">			</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">else</span> </span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Not found!"</span>);   <span class="comment">// 到链表末端而停止循环的情况，也就是没找到</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> head;	<span class="comment">// 返回修改后的表头</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>链表的查找</li>
@@ -1691,18 +1415,18 @@ D返回语句<br>
 <p>双向链表是由结点构成，所讨论的双向链表结点如下：</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="type">int</span> num;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">test</span> *<span class="title">next</span>;</span>	<span class="comment">// 指向后一个结构体</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">test</span> *<span class="title">pre</span>;</span>	<span class="comment">// 指向前一个结构体</span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <p>双向链表结构如下图：</p>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_dlist.png" title="双向链表" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_dlist.png" alt="双向链表"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_dlist.png" alt="双向链表"></p>
 <p>至于双向链表的创建，插入，删除，查找，不详细介绍。多一个方向的指针使得该链表可以往前遍历，提高其方便性。</p>
 <h2 id="11-5-循环链表">11.5 循环链表</h2>
 <p>循环链表的首位是相接的，构成一个环。所以还可以分成单向循环链表和双向循环链表。</p>
 <ul>
 <li>循环单向链表</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_clist.png" title="循环单向链表" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_clist.png" alt="循环单向链表"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_clist.png" alt="循环单向链表"></p>
 <ul>
 <li>循环双向链表</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_cdlist.png" title="循环双向链表" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_cdlist.png" alt="循环双向链表"></a></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/c_cdlist.png" alt="循环双向链表"></p>
 <p><br><br><br></p>
 <h1>Ⅻ —— 对文件的读写</h1>
 <h2 id="12-1-打开文件">12.1 打开文件</h2>
@@ -1775,202 +1499,743 @@ D返回语句<br>
 <li>函数 <code>fscanf()</code> ：从文件中读取字符串，但是在遇到第一个空格和换行符时，它会停止读取。该函数形式与 <code>scanf</code> 函数类似，参考 <code>scanf</code> 函数使用，记得添加取地址符 <code>&amp;</code> 。</li>
 </ul>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fscanf</span><span class="params">(FILE *fp, <span class="type">const</span> <span class="type">char</span> *format, ...)</span></span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两函数比较</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a, &amp;b);</span><br><span class="line"><span class="built_in">fscanf</span>(fp, <span class="string">"%d%d"</span>, &amp;a, &amp;b);</span><br></pre></td></tr></tbody></table></figure></div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-    </div>
-
-    <div class="post-meta">
-        <i>
-        
-            <span>2023-07-25</span>
-            
-                <span>该篇文章被 Fingsinz</span>
-            
-            
-                <span>打上标签:
-                    
-                    
-                        <a href='/tags/C/'>
-                            C
-                        </a>
-                    
-                </span>
-             
-             
-                <span>归为分类:
-                    
-                    
-                        <a href='/categories/%E7%AC%94%E8%AE%B0/'>
-                            笔记
-                        </a>
-                    
-                </span>
-            
-        
-        </i>
-    </div>
-    <br>
-    
-    
-        
-            
-    
-            <div class="post-footer-pre-next">
-                
-                    <span>上一篇：<a href='/2023/12/'>Python源代码打包成.exe文件记录</a></span>
-                
-
-                
-                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2023/tofreshman/">给大一的你</a>
-                    </span>
-                
-            </div>
-    
-        
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两函数比较</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a, &amp;b);</span><br><span class="line"><span class="built_in">fscanf</span>(fp, <span class="string">"%d%d"</span>, &amp;a, &amp;b);</span><br></pre></td></tr></tbody></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script></article>
+<div class="article-footer">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
     
 
-    
-        
-
-     
 </div>
 
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/12/">Python源代码打包成.exe文件记录</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/tofreshman/">给大一的你</a></div></section></div>
 
 
-                                      
-                    
-                    
-                    <div class="footer">
-    
-        <span> 
-            ©2023-2025 
 
-            
-                
 
-            
-                
-                    / <a href="/"> Fingsinz&#39;s Space </a>
-                
 
-            
-                
-                    / <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/fingsinz"> 知乎 </a>
-                
 
-            
-        </span>
-       
-    
+<footer class="page-footer footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/blog/categories/">分类</a><a href="/blog/tags/">标签</a><a href="/blog/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="/about/me/">关于我</a><a href="/about/site/">关于博客</a></div></div><div class="text"><p>本站由 <a href="/">Fingsinz</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0">Stellar 1.33.0</a> 主题创建。<br>
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="true"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-c%E8%AF%AD%E8%A8%80%E8%83%8C%E6%99%AF%E7%9F%A5%E8%AF%86"><span class="toc-text">1.1 C语言背景知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E7%94%A8%E4%BB%80%E4%B9%88%E5%86%99c%E8%AF%AD%E8%A8%80"><span class="toc-text">1.2 用什么写C语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E4%BB%8E%E4%BB%A3%E7%A0%81%E5%88%B0%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="toc-text">1.3 从代码到执行程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E8%AE%A4%E8%AF%86%E6%9C%80%E5%9F%BA%E7%A1%80%E7%9A%84c%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81"><span class="toc-text">1.4 认识最基础的C语言代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E5%A4%B4%E6%96%87%E4%BB%B6"><span class="toc-text">1.5 头文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-text">1.6 关键字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%87%BD%E6%95%B0%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-text">2.1 函数的基本结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E%E5%92%8C%E5%AE%9A%E4%B9%89"><span class="toc-text">2.2 函数声明和定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">2.3 调用函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-text">2.4 函数参数传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A1%A8%E7%8E%B0%E5%BD%A2%E5%BC%8F"><span class="toc-text">3.1 数据的表现形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E6%95%B0%E6%8D%AE%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">3.2 数据的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-%E6%95%B4%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="toc-text">3.2.1 整型数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-%E6%B5%AE%E7%82%B9%E5%9E%8B%E6%95%B0%E6%8D%AE"><span class="toc-text">3.2.2 浮点型数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-3-void%E7%B1%BB%E5%9E%8B"><span class="toc-text">3.2.3 Void类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-4-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">3.2.4 类型转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.3 运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-1-%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.3.1 算术运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-2-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.3.2 关系运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-3-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.3.3 逻辑运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-4-%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.3.4 位运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-5-%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.3.5 赋值运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-6-%E5%85%B6%E4%BB%96%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.3.6 其他运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-7-%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">3.3.7 运算符优先级</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E8%AF%AD%E5%8F%A5"><span class="toc-text">3.4 语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%9C%E7%94%A8%E8%8C%83%E5%9B%B4"><span class="toc-text">3.5 变量的作用范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%9A%84%E8%BE%93%E5%87%BA"><span class="toc-text">4.1 格式化的输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%9A%84%E8%BE%93%E5%85%A5"><span class="toc-text">4.2 格式化的输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-if%E6%9E%84%E6%88%90%E7%9A%84%E6%9D%A1%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-text">5.1 if构成的条件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-switch%E6%9E%84%E6%88%90%E7%9A%84%E6%9D%A1%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-text">5.2 switch构成的条件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-while%E6%9E%84%E6%88%90%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="toc-text">6.1 while构成的循环结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-do-while%E6%9E%84%E6%88%90%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="toc-text">6.2 do-while构成的循环结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-for%E6%9E%84%E6%88%90%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="toc-text">6.3 for构成的循环结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-%E5%BE%AA%E7%8E%AF%E7%9A%84%E7%BB%88%E6%AD%A2%E4%B8%8E%E7%BB%A7%E7%BB%AD"><span class="toc-text">6.4 循环的终止与继续</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-%E6%95%B0%E7%BB%84%E7%BB%93%E6%9E%84"><span class="toc-text">8.1 数组结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E8%AE%BF%E9%97%AE"><span class="toc-text">8.2 数组的定义和访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-3-%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">8.3 数组的初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-4-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="toc-text">8.4 多维数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-5-%E6%95%B0%E7%BB%84%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">8.5 数组的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">9.1 指针变量的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-%E6%8C%87%E9%92%88%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-text">9.2 指针的运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-%E6%8C%87%E9%92%88%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">9.3 指针的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-%E5%85%B1%E7%94%A8%E4%BD%93"><span class="toc-text">10.1 共用体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2-%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-text">10.2 结构体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1-%E9%93%BE%E8%A1%A8%E5%8F%8A%E5%85%B6%E6%9E%84%E6%88%90"><span class="toc-text">11.1 链表及其构成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-text">11.2 内存管理的函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-3-%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8"><span class="toc-text">11.3 单向链表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-4-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8"><span class="toc-text">11.4 双向链表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-5-%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="toc-text">11.5 循环链表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-1-%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6"><span class="toc-text">12.1 打开文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-2-%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6"><span class="toc-text">12.2 写入文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-3-%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6"><span class="toc-text">12.3 读取文件</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
 </div>
-
-
-
-<!--这是指一条线往下的内容-->
-<div class="footer-last">
-    
-            <span>我在想，时下你所需要的，应该是痛痛快快换个心情，干干脆脆享受人生。</span>
-            
-    
-</div>
-
-
-    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-    <!--目录-->
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
-        
-<script src="/js/toc.js"></script>
-
-    
-
-    
-<script src="/js/randomHeaderContent.js"></script>
-
-    <!--回到顶部按钮-->
-    
-        
-<script src="/js/returnToTop.js"></script>
-
-    
-
-    
-        
-<script src="/js/returnToLastPage.js"></script>
-
-    
-
-
-
-
-
-<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
-
-
-
-<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
-
-
-
-<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
-
-
-<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
-
-
-<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
-
-
-<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
-
-
-<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
-
-
+</div><div class="scripts">
 
 
 <script type="text/javascript">
-     
-    if (typeof lightGallery !== "undefined") {
-        var options1 = {
-            selector: '.gallery-item',
-            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
-            thumbnail: true,          // 显示缩略图
-            zoom: true,               // 启用缩放功
-            rotate: true,             // 启用旋转功能能
-            autoplay: true,        // 启用自动播放功能
-            fullScreen: true,      // 启用全屏功能
-            pager: false, //页码,
-            zoomFromOrigin: true,   // 从原始位置缩放
-            actualSize: true,       // 启用查看实际大小的功能
-            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+  window.canonical = {"originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
     }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
     
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.0" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
 </script>
 
 
-                </div>
-            
-            
-                <!-- 回到顶部的按钮-->  
-                <div class="progress-wrap shadow-drop-2-bottom">
-                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
-                    </svg>
-                </div>
-            
-            
-                <!-- 返回的按钮-->  
-                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
-                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
-                    </svg>
-                </div>
-            
-    </body>
-</html>
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

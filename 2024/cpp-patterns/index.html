@@ -1,356 +1,79 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-    
-    <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <meta name="description" content="设计模式 - C++" />
-    <meta name="hexo-theme-A4" content="v1.9.6" />
-    <link rel="alternate icon" type="image/webp" href="/img/favicon.webp">
-    <title>Fingsinz&#39;s space | 风信梓</title>
 
-    
-        
-<link rel="stylesheet" href="/css/highlight/style1.css">
+<!DOCTYPE html><html lang="zh-CN">
 
-        
-<link rel="stylesheet" href="/css/reset.css">
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0" theme-name="Stellar" theme-version="1.33.0">
+  
+  
+  <meta name="generator" content="Hexo 7.1.1">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>设计模式 - C++ - Fingsinz</title>
 
-        
-<link rel="stylesheet" href="/css/markdown.css">
+  
+  <meta name="description" content="关键词：C++、设计模式">
+  
+  <meta name="keywords" content="CPP,设计模式">
 
-        
-<link rel="stylesheet" href="/css/fonts.css">
- 
-         <!--注意：首页既不是post也不是page-->
-        
-        
-        
-<link rel="stylesheet" href="/css/ui.css">
- 
-        
-<link rel="stylesheet" href="/css/style.css">
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.0">
 
 
-        
-            <!--返回顶部css-->
-            
-<link rel="stylesheet" href="/css/returnToTop.css">
+  
 
-            
-<link rel="stylesheet" href="/css/unicons.css">
+  
 
-        
-        
-            <!--目录-->
-            
-<link rel="stylesheet" href="/css/toc.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Fingsinz","sameAs":[],"image":"/images/avatar.jpg"},"dateCreated":"2024-03-24T21:01:22+08:00","dateModified":"2024-08-07T14:15:18+08:00","datePublished":"2024-03-24T21:01:22+08:00","description":"关键词：C++、设计模式","headline":"设计模式 - C++","mainEntityOfPage":{"@type":"WebPage","@id":"https://fingsinz.space/2024/cpp-patterns/"},"publisher":{"@type":"Organization","name":"Fingsinz","sameAs":[],"image":"/images/avatar.jpg","logo":{"@type":"ImageObject","url":"/images/avatar.jpg"}},"url":"https://fingsinz.space/2024/cpp-patterns/","keywords":"CPP, 设计模式","image":[]}</script>
+  
 
-        
-    
-
-    
-        
-<link rel="stylesheet" href="/css/returnToLastPage.css">
-
-    
-    
-   
-<link rel="stylesheet" href="/css/lightgallery-bundle.min.css">
-
-
-<meta name="generator" content="Hexo 7.1.1">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+<body>
+
+<div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">Fingsinz</div><div class="sub cap">Fingsinz's space</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#c7c6b6"><span>博客</span></a><a class="nav-item" title="笔记" href="/notebooks/" style="color:#9a6655"><span>笔记</span></a><a class="nav-item" title="文档" href="/wiki/" style="color:#a72126"><span>文档</span></a><a class="nav-item" title="探索" href="/explore/" style="color:#12264f"><span>探索</span></a></nav>
+</div>
+<div class="widgets"></div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-03-24T13:01:22.000Z">2024-03-24</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-08-07T06:15:18.663Z">2024-08-07</time></span></div></div></div>
     
-    
-
-    
-    
-
-
-
-    
-
-    
-    
-
-    
-    <style>
-        :root {
-            --waline-theme-color: #000000; 
-            --waline-color: #000000; 
-            --waline-border-color: #000000; 
-            --waline-white: #000000; 
-            --waline-bgcolor-light: #white;  
-        }
-        body {
-            color: #000000;
-            background: #bed2bb;
-        }
-        .post-md code {
-            background: #e7f7f3;
-            color: #7f688d; 
-        }
-        .post-md pre, .post-md .highlight {
-            background: #e7f7f3;
-            color: #7f688d; 
-        }
-        pre .string, pre .value, pre .inheritance, pre .header, pre .ruby .symbol, pre .xml .cdata {
-            color: #000000;
-        }
-        pre .number, pre .preprocessor, pre .built_in, pre .literal, pre .params, pre .constant {
-            color: #000000;
-        }
-        .year-font-color {
-            color: #000000 !important;
-        }
-        .wl-card span.wl-nick {
-            color: #000000; 
-        }
-        .wl-card .wl-badge {
-            border: 1px solid #000000;
-            color: #000000; 
-        }
-        .wl-btn {
-            border: 1px solid #000000; 
-            color:  #000000;  
-        }
-        .wl-btn.primary {
-            color: #white; 
-        }
-        .wl-header label {
-            color: #000000;
-        }
-        a {
-            color: #6b798e;
-        }
-
-        .post-md a {
-            color: #6b798e;
-        }
-
-        .nav li a {
-            color: #6b798e;
-        }
-
-        .archive-main a:link {
-            color: #6b798e;
-        }
-        .archive-main a:visited {
-            color: #6b798e; 
-        }
-
-        .archive li span {
-            color: #000000;
-        }
-
-        .post-main-title {
-            color: #000000;
-        }
-
-        .post-md h1,
-        .post-md h2,
-        .post-md h3,
-        .post-md h4,
-        .post-md h5,
-        .post-md h6 {
-            color: #000000;
-        }
-
-        [data-waline] p {
-            color: #000000;
-        }
-        [data-waline] a {
-            color: #000000;
-        } 
-        .wl-sort li.active {
-            color: #000000;
-        }
-
-        .wl-card .wl-meta>span {
-            background: #white;
-        }
-
-        .paper {
-            background: #bed2bb;
-        }
-
-        .index-main {
-            background: #white;
-        }
-
-        .paper-main {
-            background: #white;
-        }
-
-        .wl-panel {
-            background: #white;
-        }
-
-        .archive li:nth-child(odd) {
-            background: #white;
-            ;
-        }
-
-        .archive li:nth-child(even) {
-            background: #white;
-        }
-
-        .post-md table tr:nth-child(odd) td {
-            background: #white;
-        }
-
-        .post-md table tr:nth-child(even) td {
-            background: #white;
-        }
-
-    
-        .progress-wrap::after {
-            color: #000000; /* 箭头的颜色 */
-        }
-        .progress-wrap svg.progress-circle path {
-	        stroke: #000000; /* 边框的颜色 */
-        }
-        .progress-wrap::before {
-	        background-image: linear-gradient(298deg, #6b798e, #6b798e); /* 鼠标滑过的箭头颜色 */
-         }
-
-        .return-to-last-progress-wrap::after {
-            color: #000000; /* 箭头的颜色 */
-        }
-        .return-to-last-progress-wrap svg.progress-circle path {
-	        stroke: #000000; /* 边框的颜色 */
-        }
-        .return-to-last-progress-wrap::before {
-	        background-image: linear-gradient(298deg, #6b798e, #6b798e); /* 鼠标滑过的箭头颜色 */
-         }
-
-         .left-toc-container::-webkit-scrollbar-thumb {
-            background-color: #000000; /* 设置滚动条拖动块的颜色 */
-        }
-
-        .bs-docs-sidebar .nav>.active>a,
-        .bs-docs-sidebar .nav>li>a:hover,
-        .bs-docs-sidebar .nav>li>a:focus {
-            color: #6b798e;
-            border-left-color: #6b798e;
-        }
-        .bs-docs-sidebar .nav>li>a {
-            color:  #000000;
-        }
-    </style>
-
-    
-    
-    <body>
-        <script src="/js/darkmode-js.min.js"></script>
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>设计模式 - C++</span></h1>
         
-        
-            <div class="left-toc-container">
-                <nav id="toc" class="bs-docs-sidebar"></nav>
-            </div>
-        
-        <div class="paper">
-            
-            
-            
-            
-                <div class="shadow-drop-2-bottom paper-main">
-                    
-
-
-<div class="header">
-    <div class="header-container">
-        <img style="
-        width: 56px;
-        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/favicon.webp" width="10%"></img>
-        <div class="header-content">
-            <a class="logo" href="/">Fingsinz&#39;s space</a> 
-            <span class="description">我在想，时下你所需要的，应该是痛痛快快换个心情，干干脆脆享受人生。</span> 
-        </div>
-        
+      </div>
     </div>
     
-   
-    <ul class="nav">
-        
-            
-                <li><a href="/">首页🏚️</a></li>
-            
-        
-            
-                <li><a href="/list/">文章📄</a></li>
-            
-        
-            
-                <li><a href="/notes/">笔记📔</a></li>
-            
-        
-            
-                <li><a href="/funny/">趣事💡</a></li>
-            
-        
-            
-                <li><a href="/about/">关于🧑</a></li>
-            
-        
-    </ul>
-</div> 
-        
-                    
-                    
-
-                    
-                    
-                    
-                    <!--说明是文章post页面-->
-                    
-                        <div class="post-main">
-    
-
-    
-        
-            
-                <div class="post-main-title" style="text-align: center;">
-                    设计模式 - C++
-                </div>
-            
-        
-      
-    
-
-    
-
-        
-            <div class="post-head-meta-center">
-        
-                
-                    <span>最近更新：2024-08-07</span> 
-                
-                
-                    
-                        &nbsp; | &nbsp;
-                    
-                     <span>字数总计：16.1k</span>
-                
-                
-                    
-                        &nbsp; | &nbsp;
-                    
-                    <span>阅读估时：61分钟</span>
-                
-                
-            </div>
-    
-
-    <div class="post-md">
-        
-            
-                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%9B%E5%BB%BA%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">创建型设计模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">单例模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">单例模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%82%B9"><span class="post-toc-text">单例模式的优点</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"><span class="post-toc-text">单例模式的基本原则</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">单例模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">单例模式设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">工厂方法模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">工厂方法模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">工厂方法模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">工厂方法模式设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">抽象工厂模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="post-toc-text">简单工厂、工厂方法、抽象工厂的区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">工厂方法模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">抽象工厂模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">抽象工厂模式设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">建造者模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">建造者模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%82%B9%E5%92%8C%E7%BC%BA%E7%82%B9"><span class="post-toc-text">建造者模式的优点和缺点</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">建造者模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">建造者模式设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">原型模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">原型模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">原型模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">原型模式设计题</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%93%E6%9E%84%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">结构型设计模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">适配器模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">适配器模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">适配器模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">适配器模式设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">代理模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">代理模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">代理模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">代理模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">装饰模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">装饰模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">装饰模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">装饰模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">外观模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">外观模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">外观模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">外观模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">桥接模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">桥接模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">桥接模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">桥接模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">组合模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">组合模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">组合模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">组合模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">享元模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">享元模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">享元模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">享元模式的设计题</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">行为型设计模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">观察者模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">观察者模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">观察者模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">观察者模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">策略模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">策略模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">策略模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">策略模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">命令模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">命令模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">命令模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">命令模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">中介者模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%8E%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB"><span class="post-toc-text">与代理模式区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">中介者模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">中介者模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">中介者模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">备忘录模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">备忘录模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">备忘录模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">备忘录模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">模板方法模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">模板方法模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">模板方法模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">模板方法模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">迭代器模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">迭代器模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">迭代器模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">迭代器模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">状态模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">状态模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">状态模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">状态模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">责任链模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">责任链模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">责任链模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">责任链模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">解释器模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">解释器模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">解释器模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">解释器模式的设计题</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="post-toc-text">访问者模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="post-toc-text">访问者模式的使用情形</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="post-toc-text">访问者模式的实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="post-toc-text">访问者模式的设计题</span></a></li></ol></li></ol></li></ol>
-            
-        
-        <div class=".article-gallery"><p>关键词：C++、设计模式</p>
+  </div>
+  </div><article class="md-text content"><p>关键词：C++、设计模式</p>
 <span id="more"></span>
 <hr>
 <blockquote>
@@ -387,7 +110,7 @@
 </li>
 </ol>
 <p>单例模式参考代码：</p>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Singleton.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Singleton.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Singleton.png" alt=""></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Singleton</span> {</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">Singleton</span>() = <span class="keyword">default</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> Singleton *<span class="title">GetInstance</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="type">static</span> Singleton instance;</span><br><span class="line">        <span class="keyword">return</span> &amp;instance;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Singleton</span>(Singleton <span class="type">const</span> &amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">    <span class="built_in">Singleton</span>(Singleton <span class="type">const</span> &amp;&amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">    Singleton &amp;<span class="keyword">operator</span>=(Singleton <span class="type">const</span> &amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">    Singleton &amp;<span class="keyword">operator</span>=(Singleton <span class="type">const</span> &amp;&amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="单例模式设计题">单例模式设计题</h4>
 <p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1074">【设计模式专题之单例模式】1.小明的购物车 (kamacoder.com)</a>：</p>
@@ -404,7 +127,7 @@
 <ul>
 <li>三个主要角色，工厂类、抽象产品、具体产品。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_SimpleFactory.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_SimpleFactory.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_SimpleFactory.png" alt=""></p>
 <p>工厂方法模式是<strong>创建型设计模式</strong>。</p>
 <ul>
 <li>简单工厂模式只有一个工厂类，负责创建所有产品，如果要添加新的产品，通常需要修改工厂类的代码。</li>
@@ -420,7 +143,7 @@
 <h4 id="工厂方法模式的使用情形">工厂方法模式的使用情形</h4>
 <p>工厂方法模式使得每个工厂类的职责单一，每个工厂只负责创建一种产品。当创建对象涉及一系列复杂的初始化逻 辑，而这些逻辑在不同的子类中可能有所不同时，可以使用工厂方法模式将这些初始化逻辑封装在子类的工厂中。</p>
 <h4 id="工厂方法模式的实现">工厂方法模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_FactoryMethod.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_FactoryMethod.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_FactoryMethod.png" alt=""></p>
 <p>参考代码：</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Product</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Product</span>() {};</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">use</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteProductA</span> : <span class="keyword">public</span> Product {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">ConcreteProductA</span>() {}</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">use</span><span class="params">()</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"use ConcreteProductA\n"</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteProductB</span> : <span class="keyword">public</span> Product {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">ConcreteProductB</span>() {};</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">use</span><span class="params">()</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"use ConcreteProductB\n"</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Factory</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Factory</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Factory</span>() {};</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> Product *<span class="title">createProduct</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteFactoryA</span> : <span class="keyword">public</span> Factory {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">ConcreteFactoryA</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">ConcreteFactoryA</span>() {}</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> Product *<span class="title">createProduct</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ConcreteProductA</span>();</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteFactoryB</span> : <span class="keyword">public</span> Factory {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">ConcreteFactoryB</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">ConcreteFactoryB</span>() {};</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> Product *<span class="title">createProduct</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">ConcreteProductB</span>();</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="工厂方法模式设计题">工厂方法模式设计题</h4>
@@ -454,7 +177,7 @@
 <p>抽象工厂模式能够保证一系列相关的产品一起使⽤，并且在不修改客户端代码的情况下，可以方便地替换整个产品系列。但是当需要增加新的产品类时，除了要增加新的具体产品类，还需要修改抽象工厂及其所有的具体工厂类，扩展性相对较差。</p>
 <p>典型的应用场景是使用抽象工厂模式来创建与不同数据库的连接对象。</p>
 <h4 id="抽象工厂模式的实现">抽象工厂模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_AbstractFactory.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_AbstractFactory.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_AbstractFactory.png" alt=""></p>
 <p>遵循以下步骤：</p>
 <ul>
 <li>定义（一个或多个）抽象产品，声明产品的公共方法。</li>
@@ -501,7 +224,7 @@
 <li>当产品的构建过程发⽣变化时，可能需要同时修改指导类和建造者类，这就使得重构变得相对困难。</li>
 </ul>
 <h4 id="建造者模式的实现">建造者模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Builder.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Builder.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Builder.png" alt=""></p>
 <p>参考代码：</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setPart1</span><span class="params">(<span class="type">const</span> std::string&amp; part1)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>-&gt;part1 = part1;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setPart2</span><span class="params">(<span class="type">const</span> std::string&amp; part2)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>-&gt;part2 = part2;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function">std::string <span class="title">getProduct</span><span class="params">()</span> <span class="type">const</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> part1 + <span class="string">" "</span> + part2;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string part1;</span><br><span class="line">    std::string part2;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Builder</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Builder</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">buildPart1</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">buildPart2</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> Product* <span class="title">getProduct</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteBuilder</span> : <span class="keyword">public</span> Builder {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">ConcreteBuilder</span>() {</span><br><span class="line">        product = <span class="keyword">new</span> <span class="built_in">Product</span>();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    ~<span class="built_in">ConcreteBuilder</span>() {</span><br><span class="line">        <span class="keyword">delete</span> product;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">buildPart1</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        product-&gt;<span class="built_in">setPart1</span>(<span class="string">"Part1"</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">buildPart2</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        product-&gt;<span class="built_in">setPart2</span>(<span class="string">"Part2"</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function">Product* <span class="title">getProduct</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> product;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Product* product = <span class="literal">nullptr</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Director</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">construct</span><span class="params">(Builder* builder)</span> </span>{</span><br><span class="line">        builder-&gt;<span class="built_in">buildPart1</span>();</span><br><span class="line">        builder-&gt;<span class="built_in">buildPart2</span>();</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="建造者模式设计题">建造者模式设计题</h4>
@@ -563,7 +286,7 @@
 <p>不同的项目和库可能使用不同的日志框架，不同的日志框架提供的 API 也不同，因此引⼊了适配器模式使得不同的 API 适配为统一接口。</p>
 <p>Spring MVC 中，<code>HandlerAdapter</code> 接口就是适配器模式，将处理器适配到框架中，使得不同类型的处理器能够统一处理请求。</p>
 <h4 id="适配器模式的实现">适配器模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Adapter.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Adapter.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Adapter.png" alt=""></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 目标接口</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Target</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">request</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 被适配者</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Adaptee</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">specificRequest</span><span class="params">()</span> </span>{</span><br><span class="line">		std::cout &lt;&lt; <span class="string">"specificRequest"</span> &lt;&lt; std::endl;</span><br><span class="line">	}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 适配器类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Adapter</span> : <span class="keyword">public</span> Target {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Adapter</span>(Adaptee *adaptee) {</span><br><span class="line">		m_adaptee = adaptee;</span><br><span class="line">	}</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">request</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">		m_adaptee-&gt;<span class="built_in">specificRequest</span>();</span><br><span class="line">	}</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Adaptee *m_adaptee;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="适配器模式设计题">适配器模式设计题</h4>
 <p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1085">【设计模式专题之适配器模式】6. 扩展坞 (kamacoder.com)</a>：</p>
@@ -600,7 +323,7 @@
 <li>Android 的 Glide 框架 使用代理模式实现图片的延迟加载。</li>
 </ul>
 <h4 id="代理模式的实现">代理模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Proxy.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Proxy.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Proxy.png" alt=""></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象对象类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Subject</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">request</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体对象类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RealSubject</span> : <span class="keyword">public</span> Subject {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">request</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">		std::cout &lt;&lt; <span class="string">"RealSubject: Handling request.\n"</span>;</span><br><span class="line">	}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Proxy</span> : <span class="keyword">public</span> Subject {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">request</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">		realSubject.<span class="built_in">request</span>();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	RealSubject realSubject;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <p>代理模式目的是控制对对象的访问，同时还可以加入一些额外的逻辑；</p>
 <p>适配器模式目的是使不兼容的对象能够协同工作，将一个类的接口转换成另一个类的接口。</p>
@@ -635,7 +358,7 @@
 </ul>
 <p>Java 的 I/O 库 中，装饰模式用于增强 I/O 的功能。</p>
 <h4 id="装饰模式的实现">装饰模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Decorator.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Decorator.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Decorator.png" alt=""></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Component</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">virtual</span> ~<span class="built_in">Component</span>() = <span class="keyword">default</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">operation</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteComponent</span> : <span class="keyword">public</span> Component {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">operation</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">		std::cout &lt;&lt; <span class="string">"ConcreteComponent operation"</span> &lt;&lt; std::endl;</span><br><span class="line">	}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Decorator</span> : <span class="keyword">public</span> Component {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Decorator</span>(Component *component) : <span class="built_in">m_component</span>(component) {}</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">operation</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">		m_component-&gt;<span class="built_in">operation</span>();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	Component *m_component;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteDecorator</span> : <span class="keyword">public</span> Decorator {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">ConcreteDecorator</span>(Component *component) : <span class="built_in">Decorator</span>(component) {}</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">operation</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">		Decorator::<span class="built_in">operation</span>();</span><br><span class="line">		std::cout &lt;&lt; <span class="string">"ConcreteDecorator operation"</span> &lt;&lt; std::endl;</span><br><span class="line">	}</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="装饰模式的设计题">装饰模式的设计题</h4>
 <p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1086">【设计模式专题装饰模式】8-咖啡加糖 (kamacoder.com)</a>：</p>
@@ -706,7 +429,7 @@
 </ul>
 <p>适用于多个独立变化维度，需要灵活扩展的系统。</p>
 <h4 id="桥接模式的实现">桥接模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Bridge.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Bridge.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Bridge.png" alt=""></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Implementation</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">operationImpl</span><span class="params">()</span> </span>{};</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体实现A</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteImplementationA</span> : <span class="keyword">public</span> Implementation {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">operationImpl</span><span class="params">()</span> <span class="keyword">override</span> </span>{};</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体实现B</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteImplementationB</span> : <span class="keyword">public</span> Implementation {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">operationImpl</span><span class="params">()</span> <span class="keyword">override</span> </span>{};</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抽象</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Abstraction</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">Abstraction</span>(Implementation *impl) : <span class="built_in">impl</span>(impl) {}</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">operation</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	Implementation *impl;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修正抽象</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RefinedAbstraction</span> : <span class="keyword">public</span> Abstraction {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">RefinedAbstraction</span>(Implementation *impl) : <span class="built_in">Abstraction</span>(impl) {}</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">operation</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">		impl-&gt;<span class="built_in">operationImpl</span>();</span><br><span class="line">	}</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="桥接模式的设计题">桥接模式的设计题</h4>
 <p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1092">【设计模式专题之桥接模式】10-万能遥控器 (kamacoder.com)</a>：</p>
@@ -738,7 +461,7 @@
 <h4 id="组合模式的使用情形">组合模式的使用情形</h4>
 <p>可以使得客户端统一处理单个对象和组合对象。适用于任何需要构建具有部分-整体层次结构的场景，比如组织架构管理、文件系统的文件和文件夹组织等。</p>
 <h4 id="组合模式的实现">组合模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Combination.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Combination.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Combination.png" alt=""></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 组件</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Component</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">virtual</span> ~<span class="built_in">Component</span>() = <span class="keyword">default</span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">operation</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 叶子节点</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Leaf</span> : <span class="keyword">public</span> Component {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">operation</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">		std::cout &lt;&lt; <span class="string">"Leaf operation"</span> &lt;&lt; std::endl;</span><br><span class="line">	}</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 组合节点：包含叶子节点的操作行为</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Composite</span> : <span class="keyword">public</span> Component {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(Component *component)</span> </span>{</span><br><span class="line">		m_component.<span class="built_in">push_back</span>(std::<span class="built_in">make_unique</span>&lt;Component&gt;(component));</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">remove</span><span class="params">(Component *component)</span> </span>{</span><br><span class="line">		<span class="comment">// ...</span></span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">operation</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">		std::cout &lt;&lt; <span class="string">"Composite operation"</span> &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span> &amp;component : m_component) {</span><br><span class="line">			component-&gt;<span class="built_in">operation</span>();</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	std::vector&lt;std::unique_ptr&lt;Component&gt;&gt; m_component;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="组合模式的设计题">组合模式的设计题</h4>
 <p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1090">【设计模式专题之组合模式】11-公司组织架构 (kamacoder.com)</a>：</p>
@@ -773,7 +496,7 @@
 <p>享元模式适用于包含大量相似对象，并且这些对象的内部状态可以共享。</p>
 <p>具体的应用场景包括文本编辑器，图形编辑器，游戏中的角色创建，这些对象的内部状态比较固定（外观，技能，形状），但是外部状态变化比较大时，可以使用。</p>
 <h4 id="享元模式的实现">享元模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_FlyWeight.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_FlyWeight.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_FlyWeight.png" alt=""></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FlyWeight</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">FlyWeight</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">operation</span><span class="params">(std::string externalState)</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteFlyWeight</span> : <span class="keyword">public</span> FlyWeight {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">ConcreteFlyWeight</span>(std::string <span class="type">const</span>&amp; state)</span><br><span class="line">            : <span class="built_in">m_state</span>(state) {}</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">operation</span><span class="params">(std::string externalState)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"ConcreteFlyWeight: "</span> &lt;&lt; m_state &lt;&lt; <span class="string">" "</span> &lt;&lt; externalState &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string m_state; <span class="comment">// 内部状态</span></span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FlyWeightFactory</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">FlyWeight* <span class="title">getFlyWeight</span><span class="params">(std::string key)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (m_flyweights.<span class="built_in">find</span>(key) == m_flyweights.<span class="built_in">end</span>()) {</span><br><span class="line">            FlyWeight* flyweight = <span class="keyword">new</span> <span class="built_in">ConcreteFlyWeight</span>(key);</span><br><span class="line">            m_flyweights[key] = flyweight;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> m_flyweights[key];</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::map&lt;std::string, FlyWeight*&gt; m_flyweights;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="享元模式的设计题">享元模式的设计题</h4>
 <p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1091">【设计模式专题之享元模式】12-图形编辑器 (kamacoder.com)</a>：</p>
@@ -814,7 +537,7 @@
 <li>分布式系统中，观察者模式可以用于实现节点之间的消息通知机制，节点的状态变化将通知其他相关节点。</li>
 </ul>
 <h4 id="观察者模式的实现">观察者模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Observer.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Observer.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Observer.png" alt=""></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Observer</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Observer</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">update</span><span class="params">(std::string message)</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Subject</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Subject</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">registerObserver</span><span class="params">(Observer *observer)</span> </span>= <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">removeObserver</span><span class="params">(Observer *observer)</span> </span>= <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">notifyObserver</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteSubject</span> : <span class="keyword">public</span> Subject {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~<span class="built_in">ConcreteSubject</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">registerObserver</span><span class="params">(Observer *observer)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        observers.<span class="built_in">emplace_back</span>(observer);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">removeObserver</span><span class="params">(Observer *observer)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        observers.<span class="built_in">erase</span>(std::<span class="built_in">remove</span>(observers.<span class="built_in">begin</span>(), observers.<span class="built_in">end</span>(), observer), observers.<span class="built_in">end</span>());</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">notifyObserver</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;observer : observers) {</span><br><span class="line">            observer-&gt;<span class="built_in">update</span>(state);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setState</span><span class="params">(std::string state)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>-&gt;state = state;</span><br><span class="line">        <span class="built_in">notifyObserver</span>();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::vector&lt;Observer *&gt; observers;</span><br><span class="line">    std::string state;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteObserver</span> : <span class="keyword">public</span> Observer {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~<span class="built_in">ConcreteObserver</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">update</span><span class="params">(std::string message)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"ConcreteObserver: "</span> &lt;&lt; message &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="观察者模式的设计题">观察者模式的设计题</h4>
 <p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1075">【设计模式专题之观察者模式】13. 时间观察者 (kamacoder.com)</a>：</p>
@@ -861,7 +584,7 @@
 </ul>
 <p>在已有的工具库中，Java 标准库中的 Comparator 接口就使用了策略模式，通过实现这个接口，可以创建不同的比较器（指定不同的排序策略）来满足不同的排序需求。</p>
 <h4 id="策略模式的实现">策略模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Strategy.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Strategy.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Strategy.png" alt=""></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Strategy</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Strategy</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">AlgorithmInterface</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteStrategyA</span> : <span class="keyword">public</span> Strategy {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">AlgorithmInterface</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"Called ConcreteStrategyA's AlgorithmInterface"</span> &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteStrategyB</span> : <span class="keyword">public</span> Strategy {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">AlgorithmInterface</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"Called ConcreteStrategyB's AlgorithmInterface"</span> &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Context</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Context</span>(Strategy* strategy)</span><br><span class="line">            : <span class="built_in">m_strategy</span>(strategy) {}</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">ContextInterface</span><span class="params">()</span> </span>{</span><br><span class="line">        m_strategy-&gt;<span class="built_in">AlgorithmInterface</span>();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Strategy* m_strategy;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="策略模式的设计题">策略模式的设计题</h4>
 <p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1082">【设计模式专题之策略模式】14. 超市打折 (kamacoder.com)</a>：</p>
@@ -952,7 +675,7 @@
 <p>中介者模式使得同事对象不需要知道彼此的细节，只需要与中介者进行通信，简化了系统的复杂度，也降低了各对象之间的耦合度，但是这也会使得中介者对象变得过于庞大和复杂，如果中介者对象出现问题，整个系统可能会受到影响。</p>
 <p>中介者模式适用于当系统对象之间存在复杂的交互关系或者系统需要在不同对象之间进行灵活的通信时使用，可以使得问题简化，</p>
 <h4 id="中介者模式的实现">中介者模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Mediator.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Mediator.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Mediator.png" alt=""></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Colleague</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抽象中介者</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mediator</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Mediator</span>() {}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Register</span><span class="params">(Colleague *colleague)</span> </span>= <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">Send</span><span class="params">(std::string <span class="type">const</span> &amp;message, Colleague *colleague)</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体中介者</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteMediator</span> : <span class="keyword">public</span> Mediator {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Register</span><span class="params">(Colleague *colleague)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        m_colleagues.<span class="built_in">push_back</span>(colleague);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Send</span><span class="params">(std::string <span class="type">const</span> &amp;message, Colleague *colleague)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> <span class="type">const</span> &amp;c : m_colleagues) {</span><br><span class="line">            <span class="keyword">if</span> (c != colleague) {</span><br><span class="line">                c-&gt;<span class="built_in">receive</span>(message);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::vector&lt;Colleague *&gt; m_colleagues;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抽象同事</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Colleague</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Colleague</span>() {}</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">send</span><span class="params">(std::string <span class="type">const</span> &amp;message)</span> </span>= <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">receive</span><span class="params">(std::string <span class="type">const</span> &amp;message)</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    Mediator *m_mediator;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体同事A</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteColleagueA</span> : <span class="keyword">public</span> Colleague {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">ConcreteColleagueA</span>(Mediator *mediator) {</span><br><span class="line">        m_mediator = mediator;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">send</span><span class="params">(std::string <span class="type">const</span> &amp;message)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        m_mediator-&gt;<span class="built_in">Send</span>(message, <span class="keyword">this</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">receive</span><span class="params">(std::string <span class="type">const</span> &amp;message)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"ColleagueA received: "</span> &lt;&lt; message &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体同事B</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteColleagueB</span> : <span class="keyword">public</span> Colleague {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">ConcreteColleagueB</span>(Mediator *mediator) {</span><br><span class="line">        m_mediator = mediator;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">send</span><span class="params">(std::string <span class="type">const</span> &amp;message)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        m_mediator-&gt;<span class="built_in">Send</span>(message, <span class="keyword">this</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">receive</span><span class="params">(std::string <span class="type">const</span> &amp;message)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"ColleagueB received: "</span> &lt;&lt; message &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="中介者模式的设计题">中介者模式的设计题</h4>
 <p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1094">【设计模式专题之中介者模式】16-简易聊天室 (kamacoder.com)</a>：</p>
@@ -1180,7 +903,7 @@
 <p>访问者模式结构较为复杂，但是访问者模式将同一类操作封装在一个访问者中，使得相关的操作彼此集中，提高了代码的可读性和维护性。</p>
 <p>常用于对象结构比较稳定，但经常需要在此对象结构上定义新的操作，这样就无需修改现有的元素类，只需要定义新的访问者来添加新的操作。</p>
 <h4 id="访问者模式的实现">访问者模式的实现</h4>
-<p><a target="_blank" rel="noopener" href="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Visitor.png" class="gallery-item" style="box-shadow: none;"> <img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Visitor.png" alt=""></a></p>
+<p><img src="https://fblog-1257020106.cos.ap-shanghai.myqcloud.com/imgs/designpattern_Visitor.png" alt=""></p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Visitor</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抽象元素类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Element</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Element</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">accept</span><span class="params">(Visitor *visitor)</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体元素 A</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteElementA</span> : <span class="keyword">public</span> Element {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">accept</span><span class="params">(Visitor *visitor)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        visitor-&gt;<span class="built_in">visit</span>(<span class="keyword">this</span>);</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体元素 B</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteElementB</span> : <span class="keyword">public</span> Element {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">accept</span><span class="params">(Visitor *visitor)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        visitor-&gt;<span class="built_in">visit</span>(<span class="keyword">this</span>);</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抽象访问者</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Visitor</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> ~<span class="built_in">Visitor</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">visit</span><span class="params">(ConcreteElementA *element)</span> </span>= <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">visit</span><span class="params">(ConcreteElementB *element)</span> </span>= <span class="number">0</span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抽象访问者 A</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteVisitorA</span> : <span class="keyword">public</span> Visitor {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visit</span><span class="params">(ConcreteElementA *element)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"ConcreteVisitorA visit ConcreElementA\n"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visit</span><span class="params">(ConcreteElementB *element)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"ConcreteVisitorA visit ConcreElementB\n"</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 抽象访问者 B</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ConcreteVisitorB</span> : <span class="keyword">public</span> Visitor {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visit</span><span class="params">(ConcreteElementA *element)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"ConcreteVisitorB visit ConcreElementA\n"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">visit</span><span class="params">(ConcreteElementB *element)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"ConcreteVisitorB visit ConcreElementB\n"</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象结构</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ObjectStructure</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">attach</span><span class="params">(Element *element)</span> </span>{</span><br><span class="line">        m_elements.<span class="built_in">emplace_back</span>(element);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">detach</span><span class="params">(Element *element)</span> </span>{</span><br><span class="line">        <span class="keyword">auto</span> it = std::<span class="built_in">find</span>(m_elements.<span class="built_in">begin</span>(), m_elements.<span class="built_in">end</span>(), element);</span><br><span class="line">        <span class="keyword">if</span> (it != m_elements.<span class="built_in">end</span>()) {</span><br><span class="line">            m_elements.<span class="built_in">erase</span>(it);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">accept</span><span class="params">(Visitor *visitor)</span> </span>{</span><br><span class="line">        <span class="keyword">for</span> (Element *element : m_elements) {</span><br><span class="line">            element-&gt;<span class="built_in">accept</span>(visitor);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::vector&lt;Element *&gt; m_elements;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
 <h4 id="访问者模式的设计题">访问者模式的设计题</h4>
 <p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1098">【设计模式专题之访问者模式】23-图形的面积 (kamacoder.com)</a>：</p>
@@ -1198,206 +921,743 @@
 <p>参考代码：</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Fingsinz/Patterns/blob/master/Visitor/main.cpp">Visitor/main.cpp(github.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://gitee.com/fingsinz/design-patterns-in-cpp/blob/master/Visitor/main.cpp">Visitor/main.cpp(gitee.com)</a></p>
-</div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-    </div>
-
-    <div class="post-meta">
-        <i>
-        
-            <span>2024-03-24</span>
-            
-                <span>该篇文章被 Fingsinz</span>
-            
-            
-                <span>打上标签:
-                    
-                    
-                        <a href='/tags/CPP/'>
-                            CPP
-                        </a>
-                    
-                        <a href='/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/'>
-                            设计模式
-                        </a>
-                    
-                </span>
-             
-             
-                <span>归为分类:
-                    
-                    
-                        <a href='/categories/%E7%AC%94%E8%AE%B0/'>
-                            笔记
-                        </a>
-                    
-                </span>
-            
-        
-        </i>
-    </div>
-    <br>
-    
-    
-        
-            
-    
-            <div class="post-footer-pre-next">
-                
-                    <span>上一篇：<a href='/2024/20/'>WSL安装记录</a></span>
-                
-
-                
-                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2024/LinuxServerCpp/">Linux 服务器编程入门尝试 - C++</a>
-                    </span>
-                
-            </div>
-    
-        
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script></article>
+<div class="article-footer">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
     
 
-    
-        
-
-     
 </div>
 
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/20/">WSL安装记录</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/LinuxServerCpp/">Linux 服务器编程入门尝试 - C++</a></div></section></div>
 
 
-                                      
-                    
-                    
-                    <div class="footer">
-    
-        <span> 
-            ©2023-2025 
 
-            
-                
 
-            
-                
-                    / <a href="/"> Fingsinz&#39;s Space </a>
-                
 
-            
-                
-                    / <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/fingsinz"> 知乎 </a>
-                
 
-            
-        </span>
-       
-    
+<footer class="page-footer footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/blog/categories/">分类</a><a href="/blog/tags/">标签</a><a href="/blog/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="/about/me/">关于我</a><a href="/about/site/">关于博客</a></div></div><div class="text"><p>本站由 <a href="/">Fingsinz</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0">Stellar 1.33.0</a> 主题创建。<br>
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="true"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">创建型设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">单例模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-text">单例模式的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"><span class="toc-text">单例模式的基本原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">单例模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">单例模式设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-text">工厂方法模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">工厂方法模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">工厂方法模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">工厂方法模式设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-text">抽象工厂模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">简单工厂、工厂方法、抽象工厂的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">工厂方法模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">抽象工厂模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">抽象工厂模式设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">建造者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">建造者模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%82%B9%E5%92%8C%E7%BC%BA%E7%82%B9"><span class="toc-text">建造者模式的优点和缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">建造者模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">建造者模式设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="toc-text">原型模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">原型模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">原型模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">原型模式设计题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">结构型设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-text">适配器模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">适配器模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">适配器模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">适配器模式设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="toc-text">代理模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">代理模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">代理模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">代理模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F"><span class="toc-text">装饰模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">装饰模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">装饰模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">装饰模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F"><span class="toc-text">外观模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">外观模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">外观模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">外观模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F"><span class="toc-text">桥接模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">桥接模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">桥接模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">桥接模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F"><span class="toc-text">组合模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">组合模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">组合模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">组合模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F"><span class="toc-text">享元模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">享元模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">享元模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">享元模式的设计题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E4%B8%BA%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">行为型设计模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">观察者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">观察者模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">观察者模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">观察者模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="toc-text">策略模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">策略模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">策略模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">策略模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-text">命令模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">命令模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">命令模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">命令模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">中介者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB"><span class="toc-text">与代理模式区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">中介者模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">中介者模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">中介者模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F"><span class="toc-text">备忘录模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">备忘录模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">备忘录模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">备忘录模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F"><span class="toc-text">模板方法模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">模板方法模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">模板方法模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">模板方法模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-text">迭代器模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">迭代器模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">迭代器模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">迭代器模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F"><span class="toc-text">状态模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">状态模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">状态模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">状态模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F"><span class="toc-text">责任链模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">责任链模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">责任链模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">责任链模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-text">解释器模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">解释器模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">解释器模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">解释器模式的设计题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-text">访问者模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E5%BD%A2"><span class="toc-text">访问者模式的使用情形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">访问者模式的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E8%80%85%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%A2%98"><span class="toc-text">访问者模式的设计题</span></a></li></ol></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
 </div>
-
-
-
-<!--这是指一条线往下的内容-->
-<div class="footer-last">
-    
-            <span>我在想，时下你所需要的，应该是痛痛快快换个心情，干干脆脆享受人生。</span>
-            
-    
-</div>
-
-
-    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
-    <!--目录-->
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
-        
-<script src="/js/toc.js"></script>
-
-    
-
-    
-<script src="/js/randomHeaderContent.js"></script>
-
-    <!--回到顶部按钮-->
-    
-        
-<script src="/js/returnToTop.js"></script>
-
-    
-
-    
-        
-<script src="/js/returnToLastPage.js"></script>
-
-    
-
-
-
-
-
-<script src="/js/lightgallery/lightgallery.umd.min.js"></script>
-
-
-
-<script src="/js/lightgallery/plugins/lg-thumbnail.umd.min.js"></script>
-
-
-
-<script src="/js/lightgallery/plugins/lg-fullscreen.umd.min.js"></script>
-
-
-<script src="/js/lightgallery/plugins/lg-autoplay.umd.min.js"></script>
-
-
-<script src="/js/lightgallery/plugins/lg-zoom.umd.min.js"></script>
-
-
-<script src="/js/lightgallery/plugins/lg-rotate.umd.min.js"></script>
-
-
-<script src="/js/lightgallery/plugins/lg-paper.umd.min.js"></script>
-
-
+</div><div class="scripts">
 
 
 <script type="text/javascript">
-     
-    if (typeof lightGallery !== "undefined") {
-        var options1 = {
-            selector: '.gallery-item',
-            plugins: [lgThumbnail, lgFullscreen, lgAutoplay, lgZoom, lgRotate, lgPager], // 启用插件
-            thumbnail: true,          // 显示缩略图
-            zoom: true,               // 启用缩放功
-            rotate: true,             // 启用旋转功能能
-            autoplay: true,        // 启用自动播放功能
-            fullScreen: true,      // 启用全屏功能
-            pager: false, //页码,
-            zoomFromOrigin: true,   // 从原始位置缩放
-            actualSize: true,       // 启用查看实际大小的功能
-            enableZoomAfter: 300,    // 延迟缩放，确保图片加载完成后可缩放
-        };
-        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1); // 修复选择器
+  window.canonical = {"originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
     }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
     
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.0" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
 </script>
 
 
-                </div>
-            
-            
-                <!-- 回到顶部的按钮-->  
-                <div class="progress-wrap shadow-drop-2-bottom">
-                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
-                    </svg>
-                </div>
-            
-            
-                <!-- 返回的按钮-->  
-                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
-                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
-                    </svg>
-                </div>
-            
-    </body>
-</html>
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
