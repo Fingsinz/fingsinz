@@ -1,0 +1,944 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0" theme-name="Stellar" theme-version="1.33.0">
+  
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>Style Transfer：基于改进的 MetaNet 风格迁移算法研究 - Fingsinz</title>
+
+  
+  <meta name="description" content="基于深度学习(元学习)的图像风格迁移算法研究">
+  
+  <meta name="keywords" content="Proposed Network">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.0">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://fingsinz.space/docs/style_transfer/proposed_network/","author":{"@type":"Person","name":"Fingsinz","sameAs":[],"image":"/images/avatar.jpg"},"name":"基于改进的 MetaNet 风格迁移算法研究","description":"\n.text {\n    text-indent: 2em;\n    font-size: 20px;\n}\n\n.note {\n    text-align: center;\n    font-size: 0.8em\"\n}\n\n3.1 MetaNet 算法原理分析\n\nMetaNet意为元网络，是一种基于元学习的深度学习模型，用于解决图像风格迁移中的速度、灵活性和质量平衡问题。本文讨论的超网络和元...","url":"https://fingsinz.space/docs/style_transfer/proposed_network/"}</script>
+  
+<link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+<body>
+
+
+
+<div class="l_body content" id="start" layout="page" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><div class="icon"><img no-lazy class="icon" src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2779789.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><a class="title" href="/docs/style_transfer/"><div class="main">Style Transfer</div><div class="sub cap">基于元学习的图像风格迁移</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="博客" href="/" style="color:#c7c6b6"><span>博客</span></a><a class="nav-item active" title="文档" href="/docs/" style="color:#a72126"><span>文档</span></a><a class="nav-item" title="探索" href="/explore/" style="color:#12264f"><span>探索</span></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/docs/style_transfer/" placeholder="在 style_transfer 中搜索..."></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<widget class="widget-wrapper doc-tree post-list"><div class="widget-header dis-select"><span class="name">快速开始</span></div><div class="widget-body fs14"><a class="link" href="/docs/style_transfer/#start"><span class="toc-text">基于深度学习的图像风格迁移算法研究</span></a></div><div class="widget-header dis-select"><span class="name">论文内容</span></div><div class="widget-body fs14"><a class="link" href="/docs/style_transfer/introduction/"><span class="toc-text">绪论</span></a><a class="link" href="/docs/style_transfer/related_work/"><span class="toc-text">相关理论基础</span></a><a class="link active" href="/docs/style_transfer/proposed_network/"><span class="toc-text">基于改进的 MetaNet 风格迁移算法研究</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="link" href="/docs/style_transfer/experiment/"><span class="toc-text">实验与评估</span></a><a class="link" href="/docs/style_transfer/conclusion/"><span class="toc-text">总结与展望</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/docs/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/docs/style_transfer/">Style Transfer</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2025-07-13T09:04:42.567Z">2025-07-13</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>基于改进的 MetaNet 风格迁移算法研究</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><style>
+.text {
+    text-indent: 2em;
+    font-size: 20px;
+}
+
+.note {
+    text-align: center;
+    font-size: 0.8em"
+}
+</style>
+<h2 id="3-1-metanet-算法原理分析">3.1 MetaNet 算法原理分析</h2>
+<div class="text">
+<p>MetaNet意为元网络，是一种基于元学习的深度学习模型，用于解决图像风格迁移中的速度、灵活性和质量平衡问题。本文讨论的超网络和元网络都是一种为其他网络生成权重参数的网络。在早期，Ha等人提出使用静态的超网络为卷积神经网络生成权重参数，并使用动态的超网络为循环网络生成权重参数^[34]^。</p>
+<p>元网络遵循元学习规律，通过分层学习策略实现跨任务知识迁移和单个任务的快速适应，生成的网络更为灵活和全面。元网络的工作采用两级学习，分别是跨任务执行的元级(Meta-Level)模型的缓慢学习和每个任务内执行的基本级(Base-Level)模型的快速学习。</p>
+<p>跨任务执行的元级模型缓慢学习意思是模型处理大规模跨任务数据时进行的长期知识积累。学习过程呈现显著的缓慢变化，称为“缓变性”。而且参数更新周期覆盖多个任务集合，优化目标聚焦于提取跨任务的通用先验知识，例如不同任务共享的特征表示空间、优化器超参数配置或归纳偏置模式。缓变学习机制使得元级模型能够捕捉任务间的共性结构，形成可迁移的元知识，如适用于多种任务类型的初始化参数分布或动态调整策略。</p>
+<p>每个任务内执行的基本级学习指的是针对具体任务场景中，网络在元级知识支撑下可以实现快速完成任务。当处理单个新任务时，基本级模型从元级输出的先验知识出发，只需通过少量样本或迭代步骤完成任务特定的参数调整。这种快速学习过程通常表现为在元级提供的初始状态基础上，进行局部参数的梯度更新或结构微调，其学习速率显著高于元级。例如在小样本学习场景中，基本级模型可利用元级预训练的特征提取器，仅通过数轮迭代即可在新类别上达到理想性能。</p>
+<p>Munkhdalai等人在小规模标本学习领域的研究中，提出了一种通过快速参数化实现一次性分类的元网络，能够快速泛化完成任务。他们设计的元网络核心在于构建一个能够动态生成特殊任务特定参数的元学习器，通过对支持集的快速编码，直接生成目标任务分类器所需的权重参数。这样的快速参数化过程无需重复迭代训练基本模型，而是通过元网络的前向传播实现一次性参数映射，将传统小样本学习中的模型适应时间从分钟级缩短至毫秒级^[35]^。</p>
+<p>在某些情况下，为了得到一个图像变换网络，需要通过SGD在风格图像数据集上多次训练最小化风格图像与输出结果图像的损失。训练的目标是获得一个性能较好的网络，在输入内容图像域与风格图像域之间建立一个映射。元网络的思想与SGD的思想不同，元网络尝试建立一个生成网络的网络，输入风格图像，输出相应的图像变换网络。</p>
+<p>基于元网络的图像风格迁移算法构建基于三个逐步递进的条件假设，从传统的参数优化问题过渡到动态网络的生成。令f(x)和h(x)为固定可微函数，记||·||为正则化，考虑优化问题式3.1。将a看作输入内容图像，b看作输入风格图像，f(x)看作内容感知函数，h(x)看作风格感知函数。</p>
+</div>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi mathvariant="normal">∥</mi><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>−</mo><mi>f</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mi mathvariant="normal">∥</mi><mo>+</mo><mi>λ</mi><mi mathvariant="normal">∥</mi><mi>h</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>−</mo><mi>h</mi><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo><mi mathvariant="normal">∥</mi></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(3.1)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">\Vert f(x) - f(a) \Vert + \lambda \Vert h(x) - h(b) \Vert\tag{3.1}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∥</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mclose">)</span><span class="mord">∥</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">λ</span><span class="mord">∥</span><span class="mord mathdefault">h</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">h</span><span class="mopen">(</span><span class="mord mathdefault">b</span><span class="mclose">)</span><span class="mord">∥</span></span><span class="tag"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">3</span><span class="mord">.</span><span class="mord">1</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<h3 id="3-1-1-条件假设一">3.1.1 条件假设一</h3>
+<div class="text">
+<p>固定a=a<sub>0</sub>，b=b<sub>0</sub>。这种条件下，对应固定内容图像的固定风格迁移。a<sub>0</sub>可以表示是苹果、汽车或建筑等某已知的内容图像，而b<sub>0</sub>表示是印象派、巴罗克风格或抽象派等某特定的绘画风格。</p>
+<p>为了解决这个问题，假设f(x)和h(x)是凸函数，则公式3.1是一个关于x的凸优化问题。凸优化问题中，不存在局部最小值，任何一个局部最优解就是全局最优解。基于凸优化问题的特性，该假设的解决方法是使用梯度下降法。梯度下降法是机器学习和深度学习领域最常用的迭代优化算法之一。梯度是一个向量，它的方向指的是目标函数在该点处增长最快的方向。梯度下降则根据梯度信息调整参数的更新方向，使得目标函数逼近最优解。在图像不断更新的过程中，梯度的方向指的是损失函数增长最快的方向，所以根据梯度的反向逐步更新合成图像。经过梯度下降迭代后，使得损失函数最小的图像即是目标图像。但是梯度下降法在实际应用中需要经过数百次的优化迭代才能得到每个样本的收敛结果。每次迭代都涉及损失函数和梯度的矩阵计算，消耗大量的计算资源和时间。</p>
+</div>
+<h3 id="3-1-2-条件假设二">3.1.2 条件假设二</h3>
+<div class="text">
+<p>固定b=b<sub>0</sub>，让a可变。无论输入什么内容a，整个风格迁移过程只能向着一种特定的风格迁移。</p>
+<p>为了解决条件假设二的问题，考虑引入一个具有可学习参数w的从a到输出x的映射 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">N</mi><mo>:</mo><mi>a</mi><mi mathvariant="normal">∣</mi><mo>→</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\mathcal{N}:a|\rightarrow x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.14736em;">N</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">a</span><span class="mord">∣</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>，将输入内容图像a通过参数w进行计算得到结果x。该过程为如公式3.2所示。为了找到这一映射，把学习映射的过程当作训练神经网络的过程，w包含神经网络的权重和偏置等可学习参数。通过大量的风格图像来训练神经网络，不断地调整参数w的值，将风格图像中的特征和风格信息编码到参数w中。</p>
+</div>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>x</mi><mo>=</mo><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">;</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(3.2)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">x=\mathcal{N}(a;w)\tag{3.2}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.14736em;">N</span></span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mclose">)</span></span><span class="tag"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">3</span><span class="mord">.</span><span class="mord">2</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<div class="text">
+<p>当神经网络训练至收敛时，参数w就被确定下来。对于每一张新的内容图像，只需要通过图像变换网络的前向传播即可生成对应的图像。一次前向传播的过程大大减少了计算的时间，在条件允许下可实现图像的实时风格迁移。</p>
+</div>
+<h3 id="3-1-3-条件假设三">3.1.3 条件假设三</h3>
+<div class="text">
+<p>当a和b都可变。这种条件下，网络需要处理内容和风格两个变量，自适应生成对应的风格迁移结果，对应图像风格迁移的第三个阶段——任意内容的任意风格迁移。</p>
+<p>根据条件假设2，已经存在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mo>⋅</mo><mo separator="true">;</mo><mi>w</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{N}(\cdot;w)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.14736em;">N</span></span><span class="mopen">(</span><span class="mord">⋅</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mclose">)</span></span></span></span>，引入元学习驱动的每个任务内执行的基本级模型的快速学习。假设存在高层映射 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>=</mo><mi>𝑚</mi><mi>𝑒</mi><mi>𝑡</mi><mi>𝑎</mi><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mi>b</mi><mo separator="true">;</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">w=𝑚𝑒𝑡𝑎\mathcal{N}(b;θ)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord"><span class="mord mathcal" style="margin-right:0.14736em;">N</span></span><span class="mopen">(</span><span class="mord mathdefault">b</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span></span></span></span>，通过输入b和参数θ计算图像转换网络的参数w，如公式3.3所示。对于每一个给定的风格特征b，都可以寻找一个最优的w，然后结合参数w和输入a计算得到输出x。</p>
+</div>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>w</mi><mo>=</mo><mi>m</mi><mi>e</mi><mi>t</mi><mi>a</mi><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mi>b</mi><mo separator="true">;</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(3.3)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">w = meta\mathcal{N}(b;\theta)\tag{3.3}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span><span class="mord"><span class="mord mathcal" style="margin-right:0.14736em;">N</span></span><span class="mopen">(</span><span class="mord mathdefault">b</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span></span><span class="tag"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">3</span><span class="mord">.</span><span class="mord">3</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<div class="text">
+<p>总而言之，元学习经过海量数据训练学习得到元级知识后，当需要迁移新的风格时，只需三个步骤即可生成迁移后的图像：第一步，将新风格图像输入预处理模型得到风格特征；第二步，将提取的风格特征传入训练后的元学习模型中，得到图像转换网络的权重参数w；第三步，将输入内容输入到由w参数化的神经网络中，经过一次前向传播得到迁移后的图像。这种范式突破了传统深度学习模型每一个模型只能完成每一个小任务的局限，实现了通过元级知识积累的任务级快速适配。</p>
+</div>
+<h3 id="3-1-4-metanet网络架构">3.1.4 MetaNet网络架构</h3>
+<div class="text">
+<p>Shen等人提出的元网络由一个预训练的VGG-16网络、元学习器和图像转换网络组成，思想是元网络两级学习中的每个任务内执行的基本级模型的快速学习。VGG-16网络从风格图像中提取风格特征，然后将纹理特征输入到元学习器中。元学习器经过大量风格图像的特征训练后，将风格特征投影到图像变换网络的参数中。图像转换网络经过元学习器填充权重参数后，便形成了某种风格的迁移转换网络。通过这种方式，他们首次提供了一种新的方法，在一次前馈传播中接受新风格图像并生成对应图像的图像变换网络^[36]^。这种方法的思想是让模型学习如何学习，即学习图像转换网络的生成方式，从而实现对新风格的快速适应。</p>
+<p>Shen提出的一个图像转换网络版本结构如图3.1所示，其中每个残差块由2层卷积层组成，5个残差块共10层卷积，整个图像转换网络共14层卷积层。下采样部分首先经过较大(40×40)的反射填充层将边界扩大，然后经第一个9×9卷积层将通道数增加到8，最后依次经过第二第三层3×3卷积层将输出特征图尺寸缩小一半，通道数翻倍；上采样部分首先依次经过第一第二层3×3反卷积层减少通道数和恢复特征图尺寸，然后经过第三层9×9卷积层将通道数降至3，从而输出正常的三通道彩色图像。每一个残差块都是两层3×3不填充卷积层，将输出特征图的长和宽各减少4。经过5个残差块后与下采样块连接。除了第一层卷积层和最后一层卷积层之外，每个卷积层后面接上一个实例批次归一化层和一个激活函数ReLU层，为了简化起见，图中省略。在模型训练阶段，绿色的卷积层卷积核与元网络一同训练。其他卷积层卷积核和残差块的卷积核固定不参与训练，后续不进行更新。在模型推理阶段，所有淡蓝色的卷积层卷积核和残差块卷积核都由元学习器生成。</p>
+<p>元网络的整体架构如图3.2所示。左侧将风格图像输入到预训练的VGG-16模型中，将VGG-16模型的第3、8、15、22层输出作为风格特征。元学习器指的是中间部分的全连接层。风格特征经过元学习器的两个全连接层得到对应图像变换网络中每个不参与训练的卷积层卷积核参数。其中第一个全连接层的输入维度为风格特征的维度，输出维度为1972；第二个全连接层将前一层的输出分组映射到图像生成网络各卷积层的卷积核权重参数。上述提到图像转换网络共需生成参数14层，每层的权重参数由128维向量通过全连接层生成，共得维度14×128维，即1972维。同时，通过预训练的VGG-16分别计算风格迁移后的生成图像的风格损失和内容损失。</p>
+</div>
+<p><img src="../static/images/Paper/TransformNet.svg" alt="图3.1图像转换网络的结构图"></p>
+<p class="note">图3.1图像转换网络的结构图</p>
+<p><img src="../static/images/Paper/MetaNet.svg" alt="图3.2MetaNet整体架构"></p>
+<p class="note">图3.2MetaNet整体架构</p>
+<div class="text">
+<p>在元学习器的风格图像特征处理方面，假设输入风格图像的大小为256×256，那么通过预训练VGG-16模型提取的特征输出尺寸分别为(64，256，256)、(128，128，128)、(256，64，64)、(512，32，32)。假设取Gram矩阵作为特征进行计算，输出尺寸为(64，64)、(128，128)、(256，256)、(512，512)，依靠这些尺寸特征生成对应的权值，可想而知计算量是非常庞大的。Shen提到，只计算卷积层输出的均值和标准差作为风格特征。通过这个思路进行计算，风格特征的维度变为(64+128+256+512)×2，即1920维。但是直接使用这1920维特征向量生成14层卷积层的卷积核权重参数还是比较困难，所涉及参数量仍然非常庞大，十分占用硬件资源。为了解决这个问题，设定图像转换网络的每层不参与训练的卷积层卷积核权重参数由单独的128维向量通过全连接层生成，14层卷积层共计1972个输出，元学习器将这些输出分组映射到图像转换网络中的每层权重参数，“*”表示图像转换网络中某层卷积层所需的参数数量，具体结构如图3.3所示。</p>
+</div>
+<p><img src="../static/images/Paper/MetaNetGroups.svg" alt="图3.3元学习器分组映射"></p>
+<p class="note">图3.3元学习器分组映射</p>
+<h3 id="3-1-5-损失函数设计">3.1.5 损失函数设计</h3>
+<div class="text">
+<p>Shen等人设计的损失函数由图像内容损失、图像风格损失和图像全变分损失组成。</p>
+<p>图像内容损失定义为图像风格迁移后的图像与原输入内容图像的内容特征均方误差。如图3.2所示，内容特征通过预训练VGG-16模型的relu3_3层输出得到。均方误差是比较常用的误差，通过预测值与真实值之间的差值平方和的均值计算得到。均方误差计算公式如式3.4，其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x_i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 为预测值，n为计算样本总数。均方误差的函数曲线光滑连续且处处可导，随着误差减小，梯度也随之减小，这一特性有利于训练过程中的收敛。</p>
+</div>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mi>M</mi><mi>S</mi><mi>E</mi><mo>=</mo><mfrac><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo><mo>−</mo><msub><mi>y</mi><mi>i</mi></msub><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><mi>n</mi></mfrac></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(3.4)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">MSE=\frac{\sum_{i=1}^n(f(x_i)-y_i)^2}{n}\tag{3.4}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.189818em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5038179999999999em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6897100000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span><span class="tag"><span class="strut" style="height:2.189818em;vertical-align:-0.686em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">3</span><span class="mord">.</span><span class="mord">4</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<div class="text">
+图像风格损失定义为图像风格迁移后的图像与原输入风格图像的风格特征均方误差。风格特征由图像经过预训练VGG-16模型的relu1_2层、relu2_2层、relu3_3层和relu4_3层输出特征图的均值和标准差拼接得到。
+<p>全变分损失的目的提高风格迁移后图像的质量，保持图像平滑。在图像生成的过程中，图像上的微小噪声会对结果产生比较大的影响，且受噪声污染的图像的总变分比无噪声图像的总变分大。所以将总变分损失作为正则项引入到损失函数中，以此达到一定程度上的降噪处理。</p>
+</div>
+<h2 id="3-2-模型改进设计">3.2 模型改进设计</h2>
+<h3 id="3-2-1-图像转换网络结构设计">3.2.1 图像转换网络结构设计</h3>
+<div class="text">
+<p>内容图像在输入图像转换网络时，原网络设置卷积层的卷积核步幅大小为2，在特征途中每隔2个像素进行卷积操作，以此进行下采样操作。虽然这种下采样方式的计算速度较快，但是容易出现特征信息提取丢失问题。如果一张高频细节比较丰富图像经过每隔2个像素的下采样操作，得到的结果相当于丢弃一半的空间信息。同时，固定的步幅卷积仅仅通过加权求和进行特征聚合，缺乏了对局部特征的选择性提取。所以，在改进方法中，将下采样卷积层的卷积核步幅大小设置为1，同时在后面增加一层2×2的最大池化层，以此进行下采样操作。在上采样操作中，网络通过双线性插值的方法代替原来固定缩放因子的方式，并且借助PyTorch深度学习框架的相关函数，动态尺寸计算实现恢复原来的空间尺寸。双线性插值法通过在两个方向上分别进行线性插值来得到未知点的像素值。</p>
+<p>经过改进后的图像转换网络结构如图3.4，整个图像转换网络总卷积层数不变，增加设置base作为卷积层的通道基数，控制卷积通道变化，每经过一个下采样块，输出特征图的尺寸就缩小一半，同时通道数加倍。原来设计中base为8，改进后base为32，增加图像转换网络的通道数以获得更多更全面的特征。与原来的设计一致，仍然保持第一层卷积层和最后一层卷积层（绿色卷积层）卷积核与元学习器一同训练。其他卷积层卷积核和残差块的卷积核参数使用Kaiming Normal正态初始化固定，后续不参与训练不进行更新，在推演时由元学习器生成。另外说明的是，残差块内部和上采样部分仍然包含反射填充层、实例归一化层和ReLU激活层，为简便起见，图中省略。下采样部分中引入最大池化层，通过选取2×2窗口中的最大值作为输出，最大值能够灵敏地捕捉到图像中最强的特征，同时能够抑制噪声信号。池化窗口使用2×2对应原来下采样卷积核步幅为2，以此达到相同的下采样效果。为了尽可能减少不同图像间亮度、对比度差异并且同时保留各图像的纹理风格信息，改进的网络中引入实例归一化层。实例归一化层可以针对单个样本单通道进行归一化，保留图像像素的细节。除了实例归一化，还有同批次所有样本同通道的批次归一化、单样本的单层所有通道的层归一化和单样本通道分组的分组归一化。与其他归一化方法相比，实例归一化更适用于图像风格迁移场景，而且忽略跨样本统计信息，避免风格混合不明确。</p>
+</div>
+<p><img src="../static/images/Paper/TransformNetImproved.svg" alt="图3.4改进后的图像转换网络"></p>
+<p class="note">图3.4改进后的图像转换网络</p>
+<h3 id="3-2-2-注意力模块设计">3.2.2 注意力模块设计</h3>
+<div class="text">
+<p>原网络结构中没有包含注意力机制。在模型改进中，针对元学习网络的模型结构分别设计了通道注意力模块、自注意力模块和Transformer模块。加入注意力模块后网络流程如图3.5所示，注意力机制模块用于增强元学习器的特征处理能力^[37]^。</p>
+</div>
+<p><img src="../static/images/Paper/flow.svg" alt="图3.5网络流程图"></p>
+<p class="note">图3.5网络流程图</p>
+<div class="text">
+<p>通道注意力模块通过对特征图的通道维度进行学习，能够有效学习不同通道特征的重要程度。通道注意力模块首先对输入特征进行全局维度的压缩，获取通道维度上的全局统计量，随后通过全连接层对通道统计信息进行非线性变换，生成与通道数量一致的权重向量，最后将生成的通道权重与原始输入特征进行逐通道相乘，实现对重要通道特征的增强和对次要通道特征的抑制。在本研究模型中，预训练的VGG模型将提取到的1920维风格特征输入到元学习器中并前向传播，经过全连接层生成G×128个输出，然后将一整批次大小的G×128个特征输入到基础通道注意力机制模块的输入层中。添加的基础通道注意力模块如图3.6所示，其中B表示批次大小，G表示分组数，此处G为14，即图像转换网络中不参与训练更新学习的14层卷积层。在基础通道注意力模块中，首先将输入分组重塑为三维的特征。接着基于SENet的思想，通过全局平均池化压缩三维分组信息形成B×128的二维特征，然后将二维特征输入到全连接块学习分组通道间的权重。全连接块包括两层全连接层和两层激活函数层，全连接层由ratio变量控制。二维特征经全连接块压缩激活处理后，再通过维度恢复操作还原为与输入分组维度匹配的特征，得到通道特征的注意力权重向量。最后将三维特征和通道特征的注意力权重通过张量广播相乘，得到添加注意力机制后的G×128个输出。这G×128个输出经过后续G个全连接层分组映射连接到图像转换网络中不参与训练的卷积层卷积核权重参数。</p>
+</div>
+<p><img src="../static/images/Paper/basic-channel-att.svg" alt="图3.6含基础通道注意力模块的元学习器"></p>
+<p class="note">图3.6含基础通道注意力模块的元学习器</p>
+<div class="text">
+<p>基础通道注意力仅关注全局信息。为了进一步考虑局部信息，对基础通道注意力机制进行增强改进，设计增强通道注意力机制模块，如图3.7所示。含增强通道注意力模块的元学习器输入同样为批次大小的1920维风格特征，经过隐藏层映射为G×128的特征，再输入到增强通道注意力模块中。与基础通道注意力模块相比，增强通道注意力模块主要引入全局权重和分组权重两部分，通过调整它们间的比例加权平衡局部与全局的特征信息。分组权重部分参考原来基础通道注意力模块的计算权重方式，学习每组内部的通道信息。另外，分组权重部分使用GELU（Gaussian Error Linear Unit）激活函数代替原来的ReLU激活函数，GELU函数可以近似地表达为公式3.5。GELU函数在x小于0的部分取值并不为零，在一定程度上可以缓解神经元失活的问题，避免梯度消失。分组权重模块还对全连接层的输出进行层归一化操作，提升模型的表达能力。全局权重由一层全连接层和一层Sigmoid激活函数层组成，融合所有分组的全局信息。</p>
+</div>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable width="100%"><mtr><mtd width="50%"></mtd><mtd><mrow><mtext>GELU</mtext><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0.5</mn><mi>x</mi><mo stretchy="false">[</mo><mn>1</mn><mo>+</mo><mi>tanh</mi><mo>⁡</mo><mo stretchy="false">(</mo><msqrt><mrow><mn>2</mn><mi mathvariant="normal">/</mi><mi>π</mi><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><mn>0.047715</mn><msup><mi>x</mi><mn>3</mn></msup><mo stretchy="false">)</mo></mrow></msqrt><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow></mtd><mtd width="50%"></mtd><mtd><mtext>(3.5)</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">\text{GELU}(x)=0.5x[1+\tanh(\sqrt{2/\pi(x+0.047715x^3)})]\tag{3.5}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">GELU</span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">5</span><span class="mord mathdefault">x</span><span class="mopen">[</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.24em;vertical-align:-0.25612499999999994em;"></span><span class="mop">tanh</span><span class="mopen">(</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.983875em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mord">2</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">0</span><span class="mord">4</span><span class="mord">7</span><span class="mord">7</span><span class="mord">1</span><span class="mord">5</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span><span style="top:-2.9438750000000002em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg width='400em' height='1.28em' viewBox='0 0 400000 1296' preserveAspectRatio='xMinYMin slice'><path d='M263,681c0.7,0,18,39.7,52,119
+c34,79.3,68.167,158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120
+c340,-704.7,510.7,-1060.3,512,-1067
+l0 -0
+c4.7,-7.3,11,-11,19,-11
+H40000v40H1012.3
+s-271.3,567,-271.3,567c-38.7,80.7,-84,175,-136,283c-52,108,-89.167,185.3,-111.5,232
+c-22.3,46.7,-33.8,70.3,-34.5,71c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1
+s-109,-253,-109,-253c-72.7,-168,-109.3,-252,-110,-252c-10.7,8,-22,16.7,-34,26
+c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26s76,-59,76,-59s76,-60,76,-60z
+M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25612499999999994em;"><span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">]</span></span><span class="tag"><span class="strut" style="height:1.24em;vertical-align:-0.25612499999999994em;"></span><span class="mord text"><span class="mord">(</span><span class="mord"><span class="mord">3</span><span class="mord">.</span><span class="mord">5</span></span><span class="mord">)</span></span></span></span></span></span></p>
+<p><img src="../static/images/Paper/enhanced-channel-att.svg" alt="图3.7含增强通道注意力模块的元学习器"></p>
+<p class="note">图3.7含增强通道注意力模块的元学习器</p>
+<div class="text">
+<p>自注意力机制能够捕捉输入特征图中不同位置的长距离依赖关系，将每个元素同时当成查询（Query）、键（Key）和值（Value），通过三者的计算实现对上下文的感知表示。自注意力机制模块设计如图3.8。元学习器在得到提取的风格特征并经过全连接层之后，将批次大小和G×128参数数量二维的特征空间变换为批次大小、通道数、高度和宽度的四维伪空间，其中通道数为参数数量G×128，高度和宽度均为1，以便于后续的投影和矩阵运算。随后将该尺寸的特征输入到自注意力模块的输入层，分别计算查询投影、键投影、值投影。查询投影通过降维生成查询向量，查询向量用于捕捉“需要关注什么”，能够聚焦于关键的语义信息，从而为后续的注意力权重计算提供引导。键投影通过降维生成键向量，键向量表示“被关注的内容”，能够描述输入特征中各个位置的特征表示，与查询向量共同计算位置之间的相似度。值投影保持原来的维度生成值向量，值向量表示“实际传递的信息”，同时也保留了输入特征的完整信息。计算得到查询向量、键向量和值向量后，将查询向量和键向量重塑为对应的尺度，使其适合进行矩阵乘法，计算每对位置的相似度。通过Softmax函数处理后，生成注意力权重矩阵。接着将值投影与注意力权重矩阵进行矩阵乘法，最后用参数γ进行残差连接，对值特征进行加权聚合，增强重要位置的特征。残差链接可以防止深层网络退化，保留原始特征中的重要信息，使得模型的训练较为稳定，参数γ用于调整残差连接的权重。</p>
+</div>
+<p><img src="../static/images/Paper/self-att.svg" alt="图3.8含自注意力模块的元学习器"></p>
+<p class="note">图3.8含自注意力模块的元学习器</p>
+<div class="text">
+<p>Transformer基于自注意力机制实现捕捉序列中元素间的全局依赖关系。在自然语言处理领域，Transformer被广泛应用于机器翻译、文本生成、问答系统等任务，但经过一定修改之后，可以扩展应用在图像处理领域。本设计中简单构建一个应用于视觉处理领域的Vision Transformer模块（以下简称ViT模块），具体流程如图3.9所示。首先预训练的VGG模型对输入风格图像进行特征提取，得到1920维风格特征向量。接着风格特征向量输入到含Transformer的元学习器中，经过全连接层将1920维映射到指定的Embed大小，再通过变换操作得到关于批次大小、通道数、高度和宽度的四维伪空间，其中通道数与 Embed 大小一致。得到四维伪空间特征后进入到ViT模块，ViT模块首先对输入的四维伪空间数据进行1×1卷积的Patch Embedding处理。1×1卷积能够在不改变特征图空间维度的前提下，对通道维度进行线性组合，从而将每个空间位置的特征转换为嵌入向量。接着将嵌入向量进行展平操作，并重塑为关于长度、批次大小和通道数的三维空间特征。该三维空间特征会输入到若干个Transformer块中进行加强处理。其中每个Transformer块由多头注意力模块、残差连接、层归一化、前馈网络等部分组成。三维特征进入多头注意力机制模块，通过多个不同的注意力头并行计算，从不同角度捕获全局上下文依赖关系，获取序列中各元素之间的全局关联信息。与单一的注意力机制相比，多头注意力机制显然扩展了模型对特征的处理和理解能力。随后特征通过残差连接与输入特征相加，再进行层归一化操作，稳定输出并防止梯度消失问题。最后通过前馈网络增强数据的非线性表示能力，使模型能够学习到更复杂的特征表示。</p>
+</div>
+<p><img src="../static/images/Paper/Transformer.svg" alt="图3.9含Transformer的元学习器"></p>
+<p class="note">图3.9含Transformer的元学习器</p>
+<h2 id="3-3-本章小结">3.3 本章小结</h2>
+<div class="text">
+<p>本章围绕基于改进的MetaNet的图像风格迁移算法展开，介绍了MetaNet的核心原理、网络结构以及改进设计。</p>
+<p>在MetaNet的算法原理部分，阐述了基本级模型通过元级模型积累的元级知识在单任务上的快速执行。通过三个条件假设，逐步推导从固定内容与风格的迁移问题过渡到任意内容与风格的动态生成场景，介绍了元网络通过生成图像转换网络参数实现快速风格迁移的核心思想。接着介绍了MetaNet的整体架构，包括特征提取器、元学习器和图像转换网络三部分。最后介绍内容损失、风格损失和全变分损失组成的损失函数体系，确保生成图像在内容、风格和结构上的一致性。</p>
+<p>在模型改进设计中，针对原网络的不足做出两点改进：一是对图像转换网络进行网络层上的优化；二是对元学习器引入注意力模块。在图像转换网络的改进上，使用池化层代替原来的固定步幅卷积下采样，使用双线性插值代替原来的固定缩放因子，还引入通道基数超参数和实例归一化层，优化网络结构。在元学习器的改进上，引入通道注意力、自注意力和Transformer模块，用于提升元学习器的特征处理能力。</p>
+<p>本章通过理论分析以及改进设计，搭建起新的图像风格迁移模型，为后续算法的实验验证奠定基础。</p>
+</div>
+<hr>
+<p>[34] Ha D, Dai A, Le QuocV. HyperNetworks[M/OL]//Hypernetworks in the Science of Complex Systems. 2014  151-176.<br>
+[35] Munkhdalai T, Yu H. Meta Networks[C]//International conference on machine learning. MLR, 2017  2554-2563.<br>
+[36] Shen F, Yan S, Zeng G. Neural Style Transfer via Meta Networks[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018  8061-8069.<br>
+[37] 王树声,李文书.基于神经网络与注意力的任意图像风格迁移研究综述[J].软件工程,2025,28(02) 27-31.</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script></article>
+<div class="article-footer">
+
+</div>
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/docs/style_transfer/related_work/">相关理论基础</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/docs/style_transfer/experiment/">实验与评估</a></div></section></div>
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="/about/me/">关于我</a><a href="/about/site/">关于博客</a></div></div><div class="text"><p>本站由 <a href="/">Fingsinz</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0">Stellar 1.33.0</a> 主题创建。<br>
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+<widget class="widget-wrapper ghrepo"><div class="widget-body"><div class="items data-service ds-ghinfo" data-api="https://api.github.com/repos/Fingsinz/StyleTransfer-PyTorch"><a class="repo" href="https://github.com/Fingsinz/StyleTransfer-PyTorch" target="_blank" rel="external nofollow noopener noreferrer"><div class="repo-name flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path></svg>Fingsinz/StyleTransfer-PyTorch</div><div class="repo-desc"><span type="text" id="description">&nbsp;</span></div><div class="grid"><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path></svg><span type="text" id="stargazers_count"></span></div><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg><span type="text" id="forks_count"></span></div><div class="flex-row data-service ds-ghinfo" index="0" data-api="https://api.github.com/repos/Fingsinz/StyleTransfer-PyTorch/tags"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path></svg><span type="text" id="latest-tag-name">0</span></div></div></a></div></div></widget>
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="true"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-metanet-%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-text">3.1 MetaNet 算法原理分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-%E6%9D%A1%E4%BB%B6%E5%81%87%E8%AE%BE%E4%B8%80"><span class="toc-text">3.1.1 条件假设一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E6%9D%A1%E4%BB%B6%E5%81%87%E8%AE%BE%E4%BA%8C"><span class="toc-text">3.1.2 条件假设二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-%E6%9D%A1%E4%BB%B6%E5%81%87%E8%AE%BE%E4%B8%89"><span class="toc-text">3.1.3 条件假设三</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-metanet%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="toc-text">3.1.4 MetaNet网络架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-5-%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E8%AE%BE%E8%AE%A1"><span class="toc-text">3.1.5 损失函数设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E6%A8%A1%E5%9E%8B%E6%94%B9%E8%BF%9B%E8%AE%BE%E8%AE%A1"><span class="toc-text">3.2 模型改进设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-%E5%9B%BE%E5%83%8F%E8%BD%AC%E6%8D%A2%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-text">3.2.1 图像转换网络结构设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="toc-text">3.2.2 注意力模块设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93"><span class="toc-text">3.3 本章小结</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.0" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

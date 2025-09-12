@@ -1,0 +1,906 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0" theme-name="Stellar" theme-version="1.33.0">
+  
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>Style Transfer：绪论 - Fingsinz</title>
+
+  
+  <meta name="description" content="基于深度学习(元学习)的图像风格迁移算法研究">
+  
+  <meta name="keywords" content="Introduction">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.0">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://fingsinz.space/docs/style_transfer/introduction/","author":{"@type":"Person","name":"Fingsinz","sameAs":[],"image":"/images/avatar.jpg"},"name":"绪论","description":"\n.text {\n    text-indent: 2em;\n    font-size: 20px;\n}\n\n.note {\n    text-align: center;\n    font-size: 0.8em\"\n}\n\n1.1 课题研究背景及意义\n\n随着信息技术的高速发展，当今社会信息的呈现方式日益多样化，图像已经成为一种至关重要的信息载体。人们的手机、相机等设备都可以获取大量的图像数据...","url":"https://fingsinz.space/docs/style_transfer/introduction/"}</script>
+  
+<link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+<body>
+
+
+
+<div class="l_body content" id="start" layout="page" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><div class="icon"><img no-lazy class="icon" src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2779789.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><a class="title" href="/docs/style_transfer/"><div class="main">Style Transfer</div><div class="sub cap">基于元学习的图像风格迁移</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="博客" href="/" style="color:#c7c6b6"><span>博客</span></a><a class="nav-item active" title="文档" href="/docs/" style="color:#a72126"><span>文档</span></a><a class="nav-item" title="探索" href="/explore/" style="color:#12264f"><span>探索</span></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/docs/style_transfer/" placeholder="在 style_transfer 中搜索..."></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<widget class="widget-wrapper doc-tree post-list"><div class="widget-header dis-select"><span class="name">快速开始</span></div><div class="widget-body fs14"><a class="link" href="/docs/style_transfer/#start"><span class="toc-text">基于深度学习的图像风格迁移算法研究</span></a></div><div class="widget-header dis-select"><span class="name">论文内容</span></div><div class="widget-body fs14"><a class="link active" href="/docs/style_transfer/introduction/"><span class="toc-text">绪论</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="link" href="/docs/style_transfer/related_work/"><span class="toc-text">相关理论基础</span></a><a class="link" href="/docs/style_transfer/proposed_network/"><span class="toc-text">基于改进的 MetaNet 风格迁移算法研究</span></a><a class="link" href="/docs/style_transfer/experiment/"><span class="toc-text">实验与评估</span></a><a class="link" href="/docs/style_transfer/conclusion/"><span class="toc-text">总结与展望</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/docs/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/docs/style_transfer/">Style Transfer</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2025-07-13T08:59:33.239Z">2025-07-13</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>绪论</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><style>
+.text {
+    text-indent: 2em;
+    font-size: 20px;
+}
+
+.note {
+    text-align: center;
+    font-size: 0.8em"
+}
+</style>
+<h2 id="1-1-课题研究背景及意义">1.1 课题研究背景及意义</h2>
+<div class="text">
+<p>随着信息技术的高速发展，当今社会信息的呈现方式日益多样化，图像已经成为一种至关重要的信息载体。人们的手机、相机等设备都可以获取大量的图像数据，自然而然地也产生了对图像数据处理的需求。计算机技术、数字图像处理技术以及深度学习技术的发展为图像处理领域的研究提供了强大的技术支持。</p>
+<p>图像风格迁移技术的目的是将一张内容图像从原始风格转换成特定图像的风格。 图像风格是指一幅图像所呈现出的视觉特征，如色彩、纹理、笔触等。不同的色彩搭配能够营造出迥异的氛围与情感基调，如梵高的《星月夜》中浓郁且对比强烈的蓝、黄色彩，赋予画面神秘而奇幻的风格；纹理体现图像表面的细腻质感，像古典油画中厚重的笔触纹理、木质材料的天然木纹纹理等；笔触反映了创作者的绘画手法，细腻流畅或粗犷豪放的笔触能传达出截然不同的艺术韵味，例如中国传统水墨画中灵动多变的笔墨笔触。</p>
+<p>图像内容指的是一幅图像所描绘的具体对象、场景及其布局结构。内容包括图像中的人物、物体、风景等实体元素以及这些元素之间的空间关系与组合方式。这些元素共同传达出画面的主题，也是图像语义理解的关键所在。</p>
+</div>
+<p><img src="../static/images/Paper/example1.webp" alt="图1.1 风格图像迁移示例"></p>
+<p class="note">图1.1风格图像迁移示例</p>
+<div class="text">
+<p>在图像风格迁移的过程中，图像的风格与内容具有一定程度的相对独立性，所以能够将一种风格图像的风格特征抽取出来，并迁移至具有不同内容的另一幅图像上。如图 1.1所示，将世界名画梵高的《星月夜》画作与校园的景色相融合，既保留原内容中校园建筑和道路主体，同时融入了梵高的风格元素，展现全新风格魅力的视觉效果。</p>
+<p>在艺术创作领域上，传统艺术创作受限于艺术家个人的技能、风格和创作工具，图像风格迁移技术的出现打破了艺术风格之间的壁垒，也降低了艺术创作的门槛。人们可以利用这一技术将富含特色的艺术绘画作品的风格应用到自己的照片中，创造出独特的艺术效果和氛围。例如，将自己的自拍照转化成素描画作，或者将现代摄影作品转化为古典油画风格或者山水画风格，或者将抽象画风应用到纪录照片上，拓展艺术创作的可能性，使艺术创作更加普及化、大众化^[1][2][3][4]^。在影视制作中，图像风格迁移可以用于特效制作，例如将现实拍摄下的场景转化为奇幻的动画风格^[5][6]^，或者将拍摄历史场景还原为特定的历史时期风格，增强影视作品的视觉效果和艺术感染力的同时降低制作成本。在医学上，医学图像通常具有高度复杂的结构和丰富的细节信息，通过风格迁移生成的图像既保留了图像的风格，又保留了图像的内容,使得生成的图像更具真实感和可信度^[7]^。此外，图像风格迁移技术还可以应用于文化创意产业领域。以戴娟的相关实践为例^[8]^，她运用图像风格迁移算法，通过将不同艺术风格与大熊猫形象有机融合，不仅为传统的文创设计赋予了崭新的视觉呈现形式，同时也拓展了文化周边产品的文化内涵与艺术感染力，进一步彰显了图像风格迁移算法在各领域应用中的潜力。</p>
+</div>
+<h2 id="1-2-国内外研究现状">1.2 国内外研究现状</h2>
+<div class="text">
+<p>目前，图像风格迁移算法的研究可以分为传统风格迁移和基于神经网络的风格迁移两个发展阶段。从图像风格迁移任务实现的维度上来看，又可以分为三个阶段，分别是固定内容的固定风格迁移、任意内容的固定风格迁移和任意内容的任意风格迁移。</p>
+</div>
+<h3 id="1-2-1-传统风格迁移方法">1.2.1 传统风格迁移方法</h3>
+<div class="text">
+<p>在深度学习兴起之前，传统的风格迁移方法主要基于手工设计算法和人工特征工程等计算机图形学知识实现风格迁移，比如通过数学建模或拼接现有图像的小块补丁进行融合内容与风格特征。这个阶段的图像风格迁移技术局限在固定内容图像或任意内容图像迁移<br>
+到固定的风格。</p>
+<p>固定的内容图像迁移到固定的风格主要通过传统图像处理技术实现。传统的图像处理技术中，基于滤波的方法有利用高斯滤波、拉普拉斯滤波等线性滤波器提取图像的低频轮廓和高频细节，试图通过调整不同频率成分的分布来模拟风格特征；基于纹理合成技术则通过统计风格图像的纹理模式(如灰度共生矩阵、局部二进制模式等)，在内容图像上复制类似的纹理结构。这些传统处理方法显然需要特殊情况特殊处理，要求研究人员针对特定的内容和风格进行定制分析。例如，在处理风景图像的风格迁移时，可能需要设计专门捕捉云层纹理的滤波器；而在处理人物肖像时，则需调整纹理模板以适配面部特征。这种人工设计的方式暴露出两大核心缺陷：一方面，算法的泛化能力非常弱，每一种新的内容或风格组合都需要重新设计处理流程，不能形成通用的解决方案；另一方面，传统方法仅仅解读图像的浅层视觉特征(如颜色分布、边缘方向、纹理重复模式等)，完全缺乏对图像深层语义的理解。</p>
+<p>有的研究人员尝试从不同角度挖掘风格图像中的纹理基元，通过拼接重组生成新图像。Efros等人提出了通过对目标图像的风格纹理进行拼接和重组操作，利用纹理元素之间的组合关系，最终合成全新风格的图像^[9]^。他们的方法能较好地复制风格图像的重复纹理(如砖墙、布料)，但在处理非周期性纹理(如绘画笔触)时，容易出现明显的拼接痕迹。</p>
+<p>研究人员们还试图通过模拟绘画的物理过程实现风格迁移。Hertzmann等人提出了图像类比框架进行图像纹理合成，通过建立内容图像与风格图像的局部块对应关系，将风格图像的色彩分布、边缘方向等统计特性迁移到内容图像，可以合成各种艺术绘画风格^[10]^。</p>
+<p>然而这些传统方法存在显著的缺陷，它们本质上是人工进行设计不同风格的特征表达，只是提取了图像的底层特征，未能表达图像的高层抽象特征。当遇到颜色和纹理复杂的图像时，生成的图像风格效果粗糙，不能满足如今高质量图像的需求。</p>
+</div>
+<h3 id="1-2-2-神经网络风格迁移方法">1.2.2 神经网络风格迁移方法</h3>
+<div class="text">
+<p>随着深度学习技术的逐渐发展以及人们对图像质量要求的不断攀升，这些传统方法所固有的局限性逐渐暴露出来。在特征提取这一关键层面，传统方法局限于运用相对简单的技术手段对图像底层特征的获取，仅聚焦于图像的基本像素信息、颜色直方图等初级特征。这种情况下图像所蕴含的高层抽象特征，如图像所传达的语义信息、物体之间的逻辑关系等深层次内涵，难以精准捕捉。正是因为传统方法缺乏对复杂特征的深度处理能力，所以此类传统方法所生成的图像在风格呈现效果上显得颇为粗糙，图像可能出现纹理模糊、风格杂糅不自然等问题，无法满足在视觉美感、语义准确性等方面的严苛需求。深度学习技术凭借自身强大的自动特征学习本领，依托海量的数据支撑以及复杂的神经网络架构，能够深入挖掘图像中的深层次信息，精准分离图像的内容与风格特征，并通过复杂的模型架构与训练机制，实现两者的有机融合，进而生成高度逼真、风格独特的图像^[11][12]^。</p>
+<p>早期的基于神经网络的固定内容的固定风格迁移方法将生成图像作为可优化变量。这样的风格迁移方法局限于较高的计算复杂度，而且固定输入的设定导致其缺乏对动态内容或风格的泛化能力。2015年，Gatys等人提出了基于卷积神经网络的图像风格迁移算法，将生成图像视为优化变量，通过预训练卷积神经网络提取的内容特征与风格特征，构建内容和风格双损失函数推进像素优化，首次证明了神经网络提取的深度特征可以有效分离内容与风格，为后续研究奠定了理论基础^[13]^。</p>
+<p>每次生成图像都需要对像素值进行数百次迭代优化的生成方式已经无法满足效率需求，研究人员们着手研究基于神经网络的任意内容的固定风格迁移方法。迁移方法基于深度卷积神经网络，通常采用编码器-解码器架构。编码器负责提取内容图像的语义特征，将图像数据变得抽象；解码器则将编码后的语义特征与目标风格信息结合，恢复图像内容生成风格化图像。</p>
+<p>任意内容图像的固定风格迁移将优化目标从图像空间转移到网络参数空间。2016年，斯坦福大学李飞飞团队针对Gatys方法的效率瓶颈，提出了基于感知损失的图像风格迁移方法，使用感知损失代替原损失，设计了一个包含残差连接的深层网络，直接以内容图像到风格图像作为训练数据，通过训练图像变换网络参数生成直接逼近最优解图像^[14]^。基于预训练模型的风格迁移算法在训练时，首先固定预训练网络模型的参数，然后仅对转换网络的权值进行更新。通过随机梯度下降等优化算法，在大规模内容图像数据集上进行迭代训练，使转换网络学习从任意内容图像到目标风格的映射关系。训练完成后，对于新的内容图像，只需将其输入训练好的网络，通过前向传播即可快速生成风格化结果，无需像早期方法那样对单张图像进行耗时的迭代优化。</p>
+<p>后续还针对Gatys 提出的方法进行了诸多改进。Li等人并未使用特征映射的Gram矩阵来表征风格，而是证实了其他几种损失函数同样能够有效地完成任务。其中，均值方差表示法尤为突出，相较于Gram矩阵表示，它更为紧凑，且性能表现相近^[15]^。此外，风格还有其他多种表示形式，诸如直方图损失^[16]^、MRF损失^[17]^以及CORAL损失^[18]^。Dumoulin等人提出利用条件实例归一化来适配每种风格。该方法通过调整特征通道的权重，成功实现对多种不同风格的表示^[19]^。Zhu等人提出了循环对抗生成框架，通过两个生成器学习两种图像域的映射，并使用两个判别器尝试区分生成图像和真实图像，在风格转移和季节转移方面彰显了该方法的优越性^[20]^。与此同时，Der-Lor Way等人在动漫风格迁移任务的基础上，提出了一种新颖的动漫风格迁移算法，达到了不错的图像风格迁移效果^[21]^。它们的算法针对图像的前景与背景在风格呈现上的差异，进行不同的处理策略，例如，对于动漫人物作为前景，人物的细节和风格需要更细致地刻画，而画面的背景可能更注重整体氛围的营造和与前景的融合。然而，这些方法无法推广应用于新的风格图像。</p>
+<p>面对新风格任务时上述的模型需重新训练。这样每一种风格一个模型的情况在实际应用中成本极高。为了进一步提高图像风格迁移的灵活性和通用性，研究人员开始探索任意内容的任意风格迁移技术。</p>
+<p>在这个阶段中，Huang等人提出了新颖的归一化思想，他们通过对齐内容图像与风格图像在预训练VGG-16网络多层特征空间的均值与方差统计量，将风格迁移过程转化为特征分布的匹配问题。虽然该方法能够处理任意新风格，但严重依赖VGG-16网络对图像进行编码，同时需要相应网络对特征进行解码，无法利用更先进的主干网络，这给模型的控制带来了困难^[22]^。Chen等人提出基于图像块的局部风格匹配，引入了风格交换来处理任意风格迁移。该方法将内容图像和风格图像分割为重叠的图像块，通过K近邻搜索在风格图像中找到与内容块最相似的补丁，然后将其替换到内容图像中，但是处理的速度非常缓慢^[23]^。Zhang等人提出一个多风格生成网络MSG-Net，设计CoMatch层匹配风格图像的Gram矩阵，捕捉特征之间的相关性。该方法整体采用类似U-Net的编码器-解码器框架，并且跳跃连接中引入风格调节模块，在风格实时迁移中实现了高质量的输出^[24]^。</p>
+<p>再后来，基于 Transformer的风格迁移算法利用自注意力机制和交叉注意力机制进行风格迁移，其中自注意力机制旨在捕捉图像内部的长距离依赖关系，而交叉注意力机制则用于融合内容图像和风格图像的特征，进而实现风格迁移。2022年，Jianbo Wang等人将自然语言处理中的Transformer架构引入风格迁移，提出了一种新颖的STyle TRansformer(STTR)网络，在风格迁移结果上具有令人满意的有效性和效率^[25]^。他们的网络将内容和风格图像分解为视觉标记，以实现细粒度的风格转换。网络中用到了两种注意力机制，其中自注意力机制用于编码内容和内容标记，然后在内容和风格标记之间融入交叉注意力机制。与其他一些基于传统卷积神经网络的方法相比，STTR的创新点在于其采用视觉标记化和双注意力机制，突破了传统全局特征转换的局限。</p>
+<p>2023 年，Chiyu Zhang等人提出了一种基于Transformer的新方法用于图像风格迁移，并引入基于Canny算子的边缘检测分支，可以明显增强内容细节。与其他基于Transformer的图像风格迁移方法相比，该方法能够有效避免因过度渲染风格特征而生成模糊结果^[26]^。颜明强等人提出了一个基于自注意力机制的渐进式流形特征映射模块(MFMM-AM)，用于协调一致地匹配相关内容和风格流形之间的特征；然后通过在图像特征空间中应用精确直方图匹配来实现风格和内容特征图的高阶分布匹配，减少了图像信息的丢失^[27]^。</p>
+<p>到目前，纪宗杏等人提出了一种新型的基于双路视觉 Transformer的图像风格迁移方法Bi-Trans，对内容图像域和风格图像域进行独立编码，通过交叉注意力机制与条件实例归一化将内容图像标定至目标域风格，从而生成风格化图像^[28]^。</p>
+</div>
+<h2 id="1-3-论文研究内容">1.3 论文研究内容</h2>
+<div class="text">
+<p>本文的研究主要针对基于MetaNet网络风格迁移算法存在的局限性进行改进，提出的改进方法提升原来的图像风格迁移效果。主要研究内容和创新点如下：</p>
+<p>(1)在特征提取方面，本研究采用预训练的VGG卷积神经网络作为特征提取模块，对比VGG-16与VGG-19两种卷积神经网络模型在风格特征提取中的差异，发现深层网络结构对风格迁移的影响机制。</p>
+<p>(2)本研究对元学习器与图像转换网络进行双重结构增强，并尝试引入新的超参数以强化模型的能力。元学习器中添加注意力机制增强处理特征信息的能力，同时改进图像转换网络的结构，以优化图像风格迁移的效果。</p>
+<p>(3)本研究使用COCO数据集和WikiArt数据集对模型进行训练，联合内容损失函数和风格损失函数以优化模型参数。后续对元网络与现有的图像风格迁移算法进行对比分析，评估模型生成图像的质量和效率，展示本研究方法的优越性。</p>
+</div>
+<h2 id="1-4-论文结构安排">1.4 论文结构安排</h2>
+<div class="text">
+<p>本文共五章，结构安排如下：</p>
+<p>第一章，绪论。本章首先简要介绍论文研究内容的背景及意义，接着阐述了图像风格迁移领域的国内外研究现状，最后介绍本文的研究内容和文章结构。</p>
+<p>第二章，相关理论基础。本章简单介绍卷积神经网络和编码器-解码器架构，为本研究模型的搭建打下基础。接着对本研究进行可行性分析，证明本研究的有效性。</p>
+<p>第三章，基于改进的MetaNet风格迁移算法研究。本章首先对原始模型MetaNet进行原理分析，接着阐述本章提出的改进方法，包括去除对图像尺寸的限制、改进的图像转换网络结构设计、添加超参数配置和注意力机制等。</p>
+<p>第四章，实验与评估。本章主要介绍本文改进方法的训练环境和配置参数，并将改进的算法和现有的一些风格迁移算法进行实验对比，通过定性和定量分析本文改进方法在风格迁移任务上的优越性。</p>
+<p>第五章，总结与展望。本章对本文的研究进行总结，并对后续研究方向展开探讨。</p>
+</div>
+<hr>
+<p>[1] 董心悦,傅鹏.基于改进生成对抗网络的人脸图像风格迁移方法[J].鄂州大学学报,2025,32(02) 94-97.<br>
+[2] 熊文楷.基于深度学习的中国画风格迁移[J].科技与创新,2023(13) 176-178.<br>
+[3] Liao M, Huang F. Deep Learning‐Based Application of Image Style Transfer[J]. Mathematical  roblems in Engineering, 2022  1-10.<br>
+[4] 胡琦瑶,刘乾,彭先霖,张翔,彭盛霖,范建平.SN-CL GAN 基于谱归一化的中国传统山水画风格迁移方法[J].西北大学学报（自然科学版）,2025,55(1) 63-74.<br>
+[5] 刘欢.基于改进生成对抗网络的图像动漫风格迁移研究[D].哈尔滨师范大学,2023.<br>
+[6] 蔡建禄.基于深度学习的多风格场景卡通化与图像风格化算法研究[D].浙江工商大学,2024.<br>
+[7] 赖灿芸.基于风格迁移的图像生成模型及其在医学领域的应用[D].浙江工商大学,2024.<br>
+[8] 戴娟.风格迁移算法在大熊猫文创设计中的运用[J].鞋类工艺与设计,2024,4(18) 192-194.<br>
+[9] Alexei A. Efros, William T. Freeman． Image Quilting for Texture Synthesis and Transfer[C]//Computer Graphics.Computer Science Division, University of California, Berkeley, Berkeley, CA 94720 USA, 2001 341-346.<br>
+[10] Hertzmann A, Jacobs E C, Oliver N, et al. Image Analogies[C]// roceedings of SIGGRA H. 2001  327-340.<br>
+[11] 镇家慧,罗明俐.基于卷积神经网络的图像风格变换[J].数码设计（下）,2021,10(6) 43.<br>
+[12] 廉露,田启川,谭润,等.基于神经网络的图像风格迁移研究进展[J].计算机工程与应用,2024,60(09) 30-47.<br>
+[13] Gatys L, Ecker A, Bethge M. A Neural Algorithm of Artistic Style[J].Journal of Vision, 2016, 16(12) 326-326.<br>
+[14] Johnson J, Alahi A, Fei-Fei L. Perceptual Losses for Real-Time Style Transfer and Super Resolution[C]//Computer Vision–ECCV 2016  14th European Conference, Amsterdam, The Netherlands, October 11-14, 2016,  roceedings,  art II 14. Springer International Publishing, 2016  694-711.<br>
+[15] Li C, Wand M. Precomputed Real-Time Texture Synthesis with Markovian Generative Adversarial Networks[C]//Computer vision–ECCV 2016  14th European conference, amsterdam, the netherlands, October 11-14, 2016, proceedings, part III 14. Springer International  ublishing, 2016  702-716.<br>
+[16] Risser E, Wilmot P, Barnes C. Stable and Controllable Neural Texture Synthesis and Style Transfer Using Histogram Losses[J]. CoRR, 2017.<br>
+[17] Li C, Wand M. Combining markov random fields and convolutional neural networks for image synthesis[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2016  2479-2486.<br>
+[18] Peng X, Saenko K. Synthetic to real adaptation with generative correlation alignment networks[C]//2018 IEEE Winter Conference on Applications of Computer Vision (WACV). IEEE, 2018  1982-1991.<br>
+[19] Dumoulin V, Shlens J, Kudlur M. A Learned Representation For Artistic Style[J]. CoRR, 2016.<br>
+[20] Zhu J Y, Park T, Isola P, et al. Unpaired Image-to-Image Translation Using Cycle Consistent Adversarial Networks[C]// roceedings of the IEEE international conference on computer vision. 2017  2223-2232.<br>
+[21] Way D L, Chang W C, Shih Z C. Deep Learning for Anime Style Transfer[C]// Proceedings of the 2019 3rd international conference on advances in image processing. 2019  139-143.<br>
+[22] Huang X , Belongie S. Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization[C]// roceedings of the IEEE international conference on computer vision. 2017  1501-1510.<br>
+[23] Chen Q T, Schmidt M. Fast  atch-based Style Transfer of Arbitrary Style[J]. CoRR, 2016.<br>
+[24] Zhang H, Dana K. Multi-style Generative Network for Real-time Transfer[M/OL]//Lecture Notes in Computer Science,Computer Vision – ECCV 2018 Workshops. 2019 349-365.<br>
+[25] JianBo Wang, Huan Yang, JianLong Fu, et al. Fine-Grained Image Style Transfer with Visual Transformers[C]//Computer vision – ACCV 2022,  art 3  16th Asian conference on computer vision (ACCV), December 4-8, 2022, Macao, China. 2023 427-443.<br>
+[26] Zhang C, Yang J, Dai Z, et al. Edge Enhanced Image Style Transfer via Transformers[J]. 2023 105-114.<br>
+[27] 颜明强,余鹏飞,李海燕,等.语义风格一致的任意图像风格迁移[J].计算机科学,2023,50(07) 129-136.<br>
+[28] 纪宗杏,贝佳,刘润泽,等.基于双路视觉 Transformer 的图像风格迁移[J].北京航空航天大学学报,2024 1-12.</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script></article>
+<div class="article-footer">
+
+</div>
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/docs/style_transfer/abstract/">style_transfer</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/docs/style_transfer/related_work/">相关理论基础</a></div></section></div>
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="/about/me/">关于我</a><a href="/about/site/">关于博客</a></div></div><div class="text"><p>本站由 <a href="/">Fingsinz</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0">Stellar 1.33.0</a> 主题创建。<br>
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+<widget class="widget-wrapper ghrepo"><div class="widget-body"><div class="items data-service ds-ghinfo" data-api="https://api.github.com/repos/Fingsinz/StyleTransfer-PyTorch"><a class="repo" href="https://github.com/Fingsinz/StyleTransfer-PyTorch" target="_blank" rel="external nofollow noopener noreferrer"><div class="repo-name flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path></svg>Fingsinz/StyleTransfer-PyTorch</div><div class="repo-desc"><span type="text" id="description">&nbsp;</span></div><div class="grid"><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path></svg><span type="text" id="stargazers_count"></span></div><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg><span type="text" id="forks_count"></span></div><div class="flex-row data-service ds-ghinfo" index="0" data-api="https://api.github.com/repos/Fingsinz/StyleTransfer-PyTorch/tags"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path></svg><span type="text" id="latest-tag-name">0</span></div></div></a></div></div></widget>
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="true"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E8%AF%BE%E9%A2%98%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF%E5%8F%8A%E6%84%8F%E4%B9%89"><span class="toc-text">1.1 课题研究背景及意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%9B%BD%E5%86%85%E5%A4%96%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">1.2 国内外研究现状</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E4%BC%A0%E7%BB%9F%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95"><span class="toc-text">1.2.1 传统风格迁移方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB%E6%96%B9%E6%B3%95"><span class="toc-text">1.2.2 神经网络风格迁移方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E8%AE%BA%E6%96%87%E7%A0%94%E7%A9%B6%E5%86%85%E5%AE%B9"><span class="toc-text">1.3 论文研究内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E8%AE%BA%E6%96%87%E7%BB%93%E6%9E%84%E5%AE%89%E6%8E%92"><span class="toc-text">1.4 论文结构安排</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.0" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

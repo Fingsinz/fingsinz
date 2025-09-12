@@ -1,0 +1,1145 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0" theme-name="Stellar" theme-version="1.33.0">
+  
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>基于YOLOv5的电瓶车识别入门级项目记录 - Fingsinz</title>
+
+  
+  <meta name="description" content="一次基于YOLOv5的深度学习项目，在GPU服务器完成模型训练，在Windows 10下进行图像识别推理（C++）。
+零 —— 前言
+此篇博客是我亲手做的一次项目记录（2023.7.3~2023.7.14），在GPU服务器完成基于YOLOv5的模型训练，在Windows 10下将训练得到的权重...">
+  
+  <meta name="keywords" content="CPP,深度学习,YOLOv5,TensorRT,OpenCV">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.0">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Fingsinz","sameAs":[],"image":"/images/avatar.jpg"},"dateCreated":"2023-07-18T11:21:13+08:00","dateModified":"2025-09-02T23:08:52+08:00","datePublished":"2023-07-18T11:21:13+08:00","description":"","headline":"基于YOLOv5的电瓶车识别入门级项目记录","mainEntityOfPage":{"@type":"WebPage","@id":"https://fingsinz.space/2023/yolov5/"},"publisher":{"@type":"Organization","name":"Fingsinz","sameAs":[],"image":"/images/avatar.jpg","logo":{"@type":"ImageObject","url":"/images/avatar.jpg"}},"url":"https://fingsinz.space/2023/yolov5/","keywords":"CPP, 深度学习, YOLOv5, TensorRT, OpenCV","thumbnailUrl":"https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5.webp","image":1}</script>
+  
+<link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+<body>
+
+<div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/avatar.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">Fingsinz</div><div class="sub cap">Fingsinz's space</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#c7c6b6"><span>博客</span></a><a class="nav-item" title="文档" href="/docs/" style="color:#a72126"><span>文档</span></a><a class="nav-item" title="探索" href="/explore/" style="color:#12264f"><span>探索</span></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+<widget class="widget-wrapper markdown"><div class="widget-body fs14"><p>欢迎来到我的博客<br>
+博客📄：一些小文章<br>
+笔记📔：个人学习记录<br>
+文档🗂️：一些项目的文档<br>
+探索💡：一些发现</p>
+
+<div class="linklist center" style="grid-template-columns:repeat(1,1fr);">
+<a class="link" title="Github" target="_blank" rel="noopener" href="https://github.com/Fingsinz"><div class="flex"><img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/08a41b181ce68.svg"/><span>Github</span></div></a></div></div></widget>
+
+
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2023-07-18T03:21:13.000Z">2023-07-18</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-09-02T15:08:52.204Z">2025-09-02</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>基于YOLOv5的电瓶车识别入门级项目记录</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><p>一次基于YOLOv5的深度学习项目，在GPU服务器完成模型训练，在Windows 10下进行图像识别推理（C++）。</p>
+<h2 id="零-前言">零 —— 前言</h2>
+<p>此篇博客是我亲手做的一次项目记录（2023.7.3~2023.7.14），在GPU服务器完成基于YOLOv5的模型训练，在Windows 10下将训练得到的权重文件作基本处理转化为.onnx文件和.engine文件分别进行C++下的推理，最后并做了简单界面，效果如下图。</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_chengguo.jpg" alt="成品展示"></p>
+<p>本人学术不精，此篇博客可能会因为一些深度学习上的知识不熟悉而造成的表达错误，此博客只是记录此次项目过程，并尽力使其有参考性、使其可复刻。</p>
+<p>项目代码放在<a target="_blank" rel="noopener" href="https://gitee.com/fingsinz/ele-bicycle-detection/">码云Gitee仓库</a></p>
+<p><br /><br /><br /></p>
+<h2 id="壹-环境准备">壹 —— 环境准备</h2>
+<p>本项目需要的环境：</p>
+<ul>
+<li><u>Python环境</u>：YOLOv5所需</li>
+<li><u>CUDA环境</u>：调用显卡进行显存加速</li>
+<li><u>OpenCV环境</u>：进行图像处理</li>
+</ul>
+<p>我的环境是CUDA12.0，OpenCV4.5.2，训练所用Python3.8.10，本机Windows 10所用Python3.11.4。</p>
+<p>下载安装CUDA可参考<a href="https://fingsinz.space/2023/5/#more">这篇博客</a><br>
+配置OpenCV和CUDA环境可参考<a href="https://fingsinz.space/2023/9/#more">这篇博客</a>。</p>
+<p><br /><br /><br /></p>
+<h2 id="贰-数据准备">贰 —— 数据准备</h2>
+<h3 id="2-1-数据集结构">2.1 数据集结构</h3>
+<p>本项目需要的数据集（不公开）：</p>
+<ul>
+<li><u>校园内电瓶车463张</u>：435张用于训练，28张用于验证</li>
+</ul>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_dataset.jpg" alt="数据集文件结构"></p>
+<p>这个数量上和比例上并不良好，也没有设测试集，建议照片尽量多，并按8:1:1的比例分配在训练集、验证集和测试集。</p>
+<ul>
+<li>训练集：用于YOLOv5模型调试神经网络；相当于学生的课本，学生根据课本里的内容来掌握知识。</li>
+<li>验证集：验证集用来查看训练效果；相当于作业，通过作业可以知道不同学生学习情况、进步的速度快慢。</li>
+<li>测试集：用来测试网络的实际学习能力；相当于考试，考的题是平常都没有见过，考察学生举一反三的能力。</li>
+</ul>
+<p>数据集的文件结构应如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dataset</span><br><span class="line">|---images</span><br><span class="line">|   |---train</span><br><span class="line">|   |---val</span><br><span class="line">|   |---test</span><br><span class="line">|---labels</span><br><span class="line">|   |---train</span><br><span class="line">|   |---val</span><br><span class="line">|   |---test</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-处理数据集">2.2 处理数据集</h3>
+<p>使用<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/550021453">LabelImg</a>进行对图片标记。或自行搜索使用安装教程。</p>
+<p>打标签时，选择YOLO格式，生成的是.txt文件，用于模型训练。</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_labeling.jpg" alt="使用LabelImg工具对数据集进行打标签"></p>
+<p>打完标签后，在labels文件夹下的train文件夹、val文件夹和test文件夹会生成一个对应images各文件夹的.txt文件，还会生成一个classes.txt文件。故labels文件夹下的各个文件夹会多一个文件。</p>
+<p>最后命名此数据集为<code>eleb</code>。</p>
+<p><br /><br /><br /></p>
+<h2 id="叁-模型训练及分析">叁 —— 模型训练及分析</h2>
+<h3 id="3-1-部署yolov5">3.1 部署YOLOv5</h3>
+<p>训练模型需要在专业的GPU加速服务器上运行， <strong>请勿尝试在自己的电脑上跑模型</strong>。</p>
+<p>挑选GPU服务器可参考<a href="https://fingsinz.space/%E5%85%B6%E4%BB%96%E5%88%86%E4%BA%AB/gpuserver/#more">这篇博客</a>。</p>
+<h4 id="3-1-1-使用社区镜像自动部署yolov5">3.1.1 使用社区镜像自动部署YOLOv5</h4>
+<p>我使用的是AutoDL算力云，其社区镜像默认安装了YOLOv5。在算力市场中寻找合适的地区，GPU型号尽量好，按量计费租用。我此次租用的是：<u>芜湖区-RTX3090</u>，1.58r/h，跑四百多张图片估计是四个小时左右。</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_ser.jpg" alt="租用GPU服务器"></p>
+<p>租用实例后开机，我选择JupyterLab的方式连接服务器。为了方便，我把默认的<code>yolov5</code>文件夹转到（剪贴粘贴）数据盘。有文件如下：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_yolov5.jpg" alt="yolov5文件夹"></p>
+<h4 id="3-1-2-手动部署yolov5">3.1.2 手动部署YOLOv5</h4>
+<p>建议租用Ubuntu系统，在有Python、Git等环境下，服务器新建文件夹，使用git命令克隆<a target="_blank" rel="noopener" href="https://github.com/ultralytics/yolov5">YOLOv5仓库</a>或者网页下载压缩包解压部署。如果有缺少的库可以<code>pip install</code>安装。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/ultralytics/yolov5.git</span><br></pre></td></tr></table></figure>
+<p>至此YOLOv5部署完毕。</p>
+<h3 id="3-2-上传数据">3.2 上传数据</h3>
+<p>将我们准备好的数据集压缩成.zip压缩文件，上传到<code>yolov5/data/eleb</code>（数据集根目录，新建文件夹eleb），由于文件比较大，上传速度也比较慢，比较费时间，也可以在服务器上创建文件夹后多选文件上传。</p>
+<p>在终端上进入<code>yolov5/data</code>运行下面的指令：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip xx.zip</span><br></pre></td></tr></table></figure>
+<p>如果提示有包没下载就去下载。</p>
+<p>解压后，复制data文件夹下的<code>coco.yaml</code>，并命名为数据集的名字。在上面我将数据集名字命名为<code>eleb</code>，故复制并命名为<code>eleb.yaml</code>。</p>
+<p>将eleb.yaml编辑如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 训练集、验证集、测试集路径设置</span></span><br><span class="line"><span class="attr">path:</span> <span class="string">./data/eleb</span>    <span class="comment"># 数据集根目录</span></span><br><span class="line"><span class="attr">train:</span> <span class="string">images/train</span>  <span class="comment"># 训练集目录</span></span><br><span class="line"><span class="attr">val:</span> <span class="string">images/val</span>      <span class="comment"># 验证集目录</span></span><br><span class="line"><span class="attr">test:</span>                <span class="comment"># 测试集目录，此处没设立</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 标签的类，此项目只有一个类</span></span><br><span class="line"><span class="attr">names:</span></span><br><span class="line">  <span class="attr">0:</span> <span class="string">elebike</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Download script/URL (optional) 不管，默认</span></span><br><span class="line"><span class="attr">download:</span> <span class="comment">#https://ultralytics.com/assets/coco128-seg.zip</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="3-3-配置训练参数">3.3 配置训练参数</h3>
+<h4 id="3-3-1-修改train-py文件">3.3.1 修改train.py文件</h4>
+<p><strong>回到<code>yolov5/</code>目录，找到<code>train.py</code>文件打开，找到<code>parse_opt()</code>函数，更改部分参数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ……</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># model.yaml是模型配置文件，在文件夹yolov5/models中，此处我使用yolov5l.yaml</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;--cfg&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">&#x27;&#x27;</span>, <span class="built_in">help</span>=<span class="string">&#x27;yolov5l.yaml path&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 配置数据集的yaml文件，即eleb.yaml</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;--data&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=ROOT / <span class="string">&#x27;data/eleb.yaml&#x27;</span>, <span class="built_in">help</span>=<span class="string">&#x27;dataset.yaml path&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 配置训练轮数，默认300轮</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;--epochs&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">300</span>, <span class="built_in">help</span>=<span class="string">&#x27;total training epochs&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 配置训练时所有GPU的总批量大小，为-1则自动</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;--batch-size&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">16</span>, <span class="built_in">help</span>=<span class="string">&#x27;所有GPU的总批量大小, -1 for autobatch&#x27;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 配置训练输入的照片大小，默认为640 × 640</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;--imgsz&#x27;</span>, <span class="string">&#x27;--img&#x27;</span>, <span class="string">&#x27;--img-size&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">640</span>, <span class="built_in">help</span>=<span class="string">&#x27;train, val image size (pixels)&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面保持默认即可</span></span><br><span class="line">	</span><br><span class="line"><span class="comment"># ……</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-3-2-修改val-py文件">3.3.2 修改val.py文件</h4>
+<p><strong>回到<code>yolov5/</code>目录，找到<code>val.py</code>文件打开，找到<code>parse_opt()</code>函数，更改部分参数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ……</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置数据集的yaml文件，即eleb.yaml</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;--data&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=ROOT / <span class="string">&#x27;data/eleb.yaml&#x27;</span>, <span class="built_in">help</span>=<span class="string">&#x27;dataset.yaml path&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># ……</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-3-3-修改模型配置">3.3.3 修改模型配置</h4>
+<p><strong>进入<code>yolov5/models/</code>目录，找到<code>train.py</code>设置的模型配置.yaml文件，我这里使用的是yolov5l模型，打开yolov5l.yaml，修改<code>nc</code>（分类数），此项目修改为1：</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ……</span></span><br><span class="line"><span class="attr">nc:</span> <span class="number">1</span>  <span class="comment"># number of classes</span></span><br><span class="line"><span class="attr">depth_multiple:</span> <span class="number">1.0</span>  <span class="comment"># model depth multiple</span></span><br><span class="line"><span class="attr">width_multiple:</span> <span class="number">1.0</span>  <span class="comment"># layer channel multiple</span></span><br><span class="line"><span class="attr">anchors:</span></span><br><span class="line">  <span class="bullet">-</span> [<span class="number">10</span>,<span class="number">13</span>, <span class="number">16</span>,<span class="number">30</span>, <span class="number">33</span>,<span class="number">23</span>]  <span class="comment"># P3/8</span></span><br><span class="line">  <span class="bullet">-</span> [<span class="number">30</span>,<span class="number">61</span>, <span class="number">62</span>,<span class="number">45</span>, <span class="number">59</span>,<span class="number">119</span>]  <span class="comment"># P4/16</span></span><br><span class="line">  <span class="bullet">-</span> [<span class="number">116</span>,<span class="number">90</span>, <span class="number">156</span>,<span class="number">198</span>, <span class="number">373</span>,<span class="number">326</span>]  <span class="comment"># P5/32</span></span><br><span class="line"><span class="comment"># ……</span></span><br></pre></td></tr></table></figure>
+<p>至此训练参数配置完毕。</p>
+<p>启动终端，进入yolov5文件夹，我这里是进入<code>autodl-tmp/yolov5/</code>，输入命令启动训练：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train.py</span><br></pre></td></tr></table></figure>
+<p>如下图即开始训练</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_train2.jpg" alt="训练开始"></p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_train.jpg" alt="训练结束"></p>
+<h3 id="3-4-训练可能出现的问题">3.4 训练可能出现的问题</h3>
+<p>如果出现训练过程长时间的<code>R</code>和<code>P</code>值为<code>0</code>或者<code>val/box_loss</code>和<code>val/obj_loss</code>为<code>nan</code>的情况，参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_55249340/article/details/125855686">此篇博客</a>。</p>
+<p>如果仍不能解决，可以考虑重新手动部署YOLOv5，接着修改参数运行train.py启动训练，如果缺少库就pip install安装。</p>
+<h3 id="3-5-训练结果分析">3.5 训练结果分析</h3>
+<p>等待训练结束，在 <code>yolov5/runs/train</code> 文件夹就存放在训练的数据，其中weights文件夹中还存放着此次训练的权重文件，用于后续推理。</p>
+<h4 id="3-5-1-保存训练结果">3.5.1 保存训练结果</h4>
+<p>在训练结果文件夹（我的是<code>runs/train/exp2</code>）中新建.py文件，输入下面代码，接着使用终端进入<code>runs/train/exp2</code>，使用命令<code>python save.py</code>可以变成压缩包，下载压缩包即下载全部训练结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># save.py</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> tarfile</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">recursive_files</span>(<span class="params">dir_name=<span class="string">&#x27;.&#x27;</span>, ignore=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">for</span> dir_name,subdirs,files <span class="keyword">in</span> os.walk(dir_name):</span><br><span class="line">        <span class="keyword">if</span> ignore <span class="keyword">and</span> os.path.basename(dir_name) <span class="keyword">in</span> ignore: </span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> file_name <span class="keyword">in</span> files:</span><br><span class="line">            <span class="keyword">if</span> ignore <span class="keyword">and</span> file_name <span class="keyword">in</span> ignore:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">yield</span> os.path.join(dir_name, file_name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">make_tar_file</span>(<span class="params">dir_name=<span class="string">&#x27;.&#x27;</span>, tar_file_name=<span class="string">&#x27;tarfile.tar&#x27;</span>, ignore=<span class="literal">None</span></span>):</span><br><span class="line">    tar = tarfile.<span class="built_in">open</span>(tar_file_name, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> file_name <span class="keyword">in</span> recursive_files(dir_name, ignore):</span><br><span class="line">        tar.add(file_name)</span><br><span class="line"></span><br><span class="line">    tar.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dir_name = <span class="string">&#x27;.&#x27;</span></span><br><span class="line">tar_file_name = <span class="string">&#x27;train.tar&#x27;</span></span><br><span class="line">ignore = &#123;<span class="string">&#x27;.ipynb_checkpoints&#x27;</span>, <span class="string">&#x27;__pycache__&#x27;</span>, tar_file_name&#125;</span><br><span class="line">make_tar_file(dir_name, tar_file_name, ignore)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>将训练结果下载到电脑上，解压有如下文件：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_results.jpg" alt=""></p>
+<h4 id="3-5-2-曲线类分析">3.5.2 曲线类分析</h4>
+<ul>
+<li>P_curve：准确率Precision和置信度Confidence的关系图，当设置某置信度时对应某个类别的识别准确率。随着置信度设置越高，某个类别识别准确率越高。</li>
+</ul>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_P_curve.png" alt="P曲线"></p>
+<ul>
+<li>R_curve：召回率Recall和置信度Confidence的关系图，当设置某置信度时对应某个类别的查找完全的概率。随着置信度设置越高，某个类别能被查找完全的概率越低。</li>
+</ul>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_R_curve.png" alt="R曲线"></p>
+<ul>
+<li>PR_cruve：准确率Precision和召回率Recall的关系图，尽可能希望准确率高的同时召回率也高，即曲线与坐标轴围成的面积越大，模型越好。</li>
+</ul>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_PR_curve.png" alt="PR曲线"></p>
+<ul>
+<li>F1_curve：精确率和召回率的调和平均数，某个分类对应F1的值，1为最好，0为最差。</li>
+</ul>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_F1_curve.png" alt="F1曲线"></p>
+<h4 id="3-5-3-混淆矩阵分析">3.5.3 混淆矩阵分析</h4>
+<ul>
+<li>confusion_matrix：矩阵的每一列代表一个类的实例预测，而每一行表示一个实际的类的实例，可以方便地看出机器是否将两个不同的类混淆。</li>
+</ul>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_confusion_matrix.png" alt="混淆矩阵"></p>
+<h4 id="3-5-4-标签相关分析">3.5.4 标签相关分析</h4>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_labels.jpg" alt="标签相关labels.jpg"></p>
+<ul>
+<li>左上角为训练集的数据量；</li>
+<li>右上角是框的尺寸和数量；</li>
+<li>左下角是打标签目标框中心点位置，由图可知中心点多为中心偏上。</li>
+<li>右下角是打标签目标框的高和宽，由图可知多聚集在0.2×0.2</li>
+</ul>
+<h4 id="3-5-5-训练验证结果分析">3.5.5 训练验证结果分析</h4>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_results.png" alt="results.png"></p>
+<p>前面加<code>train</code>为训练集的情况，加<code>val</code>表示验证集的情况。</p>
+<ul>
+<li>
+<p>定位损失box_loss：预测框与标定框之间的误差。</p>
+</li>
+<li>
+<p>置信度损失obj_loss：计算网络的置信度。</p>
+</li>
+<li>
+<p>分类损失cls_loss：计算锚框与对应标定分类是否正确。</p>
+</li>
+<li>
+<p>precision：模型精度。</p>
+</li>
+<li>
+<p>recall：真实为positive的准确率，即正样本有多少被找出来了。</p>
+</li>
+<li>
+<p>mAP：Mean Average Precision，均值平均精度，mAP_0.5表示阈值大于0.5的平均mAP。</p>
+</li>
+<li>
+<p>mAP_0.5:0.95：表示不同<a target="_blank" rel="noopener" href="https://blog.csdn.net/gaoyu1253401563/article/details/86484851">IoU</a>阈值（从0.5到0.95，步长0.05）上的平均mAP。</p>
+</li>
+</ul>
+<h4 id="3-5-6-其余分析">3.5.6 其余分析</h4>
+<ul>
+<li>
+<p><code>train_batch</code>、 <code>val_batch</code>表示一批次读取的照片数。</p>
+</li>
+<li>
+<p><code>results.csv</code>存放着每轮训练的数据。</p>
+</li>
+</ul>
+<p><br /><br /><br /></p>
+<h2 id="肆-模型转化处理-基于-onnx文件推理">肆 —— 模型转化处理（基于.onnx文件推理）</h2>
+<h3 id="4-1-转化为-onnx文件">4.1 转化为.onnx文件</h3>
+<p>将我们的.pt文件经过服务器上YOLOv5自带的<code>export.py</code>处理后即可得到.onnx文件。即下面的命令格式：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python export.py --weights yolov5s.pt --include onnx</span><br></pre></td></tr></table></figure>
+<p>我输入的是（位于yolov5文件夹）：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python export.py --weights runs/train/exp2/weights/best.pt --include onnx</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-通过c-利用-onnx文件进行推理识别">4.2 通过C++利用.onnx文件进行推理识别</h3>
+<h4 id="4-2-1-记录处理的数据结构">4.2.1 记录处理的数据结构</h4>
+<p>将置信度阈值<code>confThreshold</code>、NMS非极大值抑制阈值<code>nmsThreshold</code>、目标置信度阈值<code>objThreshold</code>和识别模型路径<code>modelpath</code>打包成结构体，用于识别时参数的配置。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义配置结构</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Configuration</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="type">float</span> confThreshold; <span class="comment">// Confidence threshold</span></span><br><span class="line">	<span class="type">float</span> nmsThreshold;  <span class="comment">// Non-maximum suppression threshold</span></span><br><span class="line">	<span class="type">float</span> objThreshold;  <span class="comment">// Object Confidence threshold</span></span><br><span class="line">	string modelpath;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>创建<code>YOLOv5</code>类，其成员变量有置信度阈值<code>confThreshold</code>、NMS非极大值抑制阈值<code>nmsThreshold</code>、目标置信度阈值<code>objThreshold</code>，以及输入图片宽度<code>inpWidth</code>、输入图片高度<code>inpHeight</code>两个照片参数，识别种类数<code>num_classes</code>，类名<code>classes</code>；</p>
+<p>主要函数为检测函数<code>detect</code>，辅助函数为预测画框函数<code>drawPred</code>和调整图片大小函数<code>resize_image</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">YOLOv5</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">// 初始化</span></span><br><span class="line">	<span class="built_in">YOLOv5</span>(Configuration config, <span class="type">bool</span> isCuda);</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">detect</span><span class="params">(Mat &amp;frame)</span></span>;  <span class="comment">// 检测函数</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="type">float</span> confThreshold;</span><br><span class="line">	<span class="type">float</span> nmsThreshold;</span><br><span class="line">	<span class="type">float</span> objThreshold;</span><br><span class="line">	<span class="type">int</span> inpWidth;</span><br><span class="line">	<span class="type">int</span> inpHeight;</span><br><span class="line">	<span class="type">int</span> num_classes;</span><br><span class="line">	string classes[<span class="number">1</span>] = &#123; <span class="string">&quot;eleb&quot;</span> &#125;;</span><br><span class="line">	<span class="comment">//vector&lt;string&gt; class_names;</span></span><br><span class="line">	<span class="type">const</span> <span class="type">bool</span> keep_ratio = <span class="literal">true</span>;</span><br><span class="line">	Net net;   <span class="comment">// dnn里的</span></span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">drawPred</span><span class="params">(<span class="type">float</span> conf, <span class="type">int</span> left, <span class="type">int</span> top, <span class="type">int</span> right, <span class="type">int</span> bottom, Mat &amp;frame, <span class="type">int</span> classid)</span></span>;</span><br><span class="line">	<span class="function">Mat <span class="title">resize_image</span><span class="params">(Mat srcimg, <span class="type">int</span> *newh, <span class="type">int</span> *neww, <span class="type">int</span> *top, <span class="type">int</span> *left)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="4-2-2-检测识别函数">4.2.2 检测识别函数</h4>
+<ol>
+<li>进行预处理：对输入图像（帧）进行大小调整和归一化处理，以便为模型做准备。调整后的图像会被转换为Blob，一个具有NCHW 维度（图像数、通道数、高度、宽度）的 4D 矩阵。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mat dstimg = <span class="keyword">this</span>-&gt;<span class="built_in">resize_image</span>(frame, &amp;newh, &amp;neww, &amp;padh, &amp;padw);</span><br><span class="line">Mat blob = <span class="built_in">blobFromImage</span>(dstimg, <span class="number">1</span> / <span class="number">255.0</span>, <span class="built_in">Size</span>(<span class="keyword">this</span>-&gt;inpWidth, <span class="keyword">this</span>-&gt;inpHeight), <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>), <span class="literal">true</span>, <span class="literal">false</span>);</span><br><span class="line"><span class="keyword">this</span>-&gt;net.<span class="built_in">setInput</span>(blob);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>模型推理：在Blob上运行模型以获得输出，即边界框和类别概率列表。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;Mat&gt; outs;</span><br><span class="line"><span class="keyword">this</span>-&gt;net.forward(outs, <span class="keyword">this</span>-&gt;net.<span class="built_in">getUnconnectedOutLayersNames</span>());</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>进行后处理：如果输出超过2维，则会对其进行重塑。对于每个边界框，它会检查对象的置信度是否高于阈值。计算最大类得分，同时检查其是否高于置信度阈值。如果超过了，就会保存边界框、置信度和类ID。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; num_proposal; ++i) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">if</span> (obj_conf &gt; <span class="keyword">this</span>-&gt;objThreshold)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">if</span> (max_class_socre &gt; <span class="keyword">this</span>-&gt;confThreshold)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">            confidences.<span class="built_in">push_back</span>((<span class="type">float</span>) max_class_socre);</span><br><span class="line">            boxes.<span class="built_in">push_back</span>(<span class="built_in">Rect</span>(left, top, (<span class="type">int</span>) (w * ratiow), (<span class="type">int</span>) (h * ratioh)));</span><br><span class="line">            classIds.<span class="built_in">push_back</span>(class_idx);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>非最大值抑制 (NMS)：NMS用于移除重叠的边界框。剩余的边界框在原始图像上绘制。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; indices;</span><br><span class="line">dnn::<span class="built_in">NMSBoxes</span>(boxes, confidences, <span class="keyword">this</span>-&gt;confThreshold, <span class="keyword">this</span>-&gt;nmsThreshold, indices);</span><br><span class="line"><span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; indices.<span class="built_in">size</span>(); ++i)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">this</span>-&gt;<span class="built_in">drawPred</span>(confidences[idx], box.x, box.y, box.x + box.width, box.y + box.height, frame, classIds[idx]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-2-3-预测画框函数">4.2.3 预测画框函数</h4>
+<p>预测画框函数用于将预测函数所得到的目标区域，经OpenCV的工具在图片上绘制出方框。首先传入的参数有置信度，图片的四个角落点，Mat类型图片和类id，接着借助OpenCV的<code>rectangle</code>函数和<code>putText</code>函数绘制。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绘制预测目标的边界框</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">YOLOv5::drawPred</span><span class="params">(<span class="type">float</span> conf, <span class="type">int</span> left, <span class="type">int</span> top, <span class="type">int</span> right, <span class="type">int</span> bottom, Mat &amp;frame, <span class="type">int</span> classid)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 绘制一个显示边界框的矩形</span></span><br><span class="line">	<span class="built_in">rectangle</span>(frame, <span class="built_in">Point</span>(left, top), <span class="built_in">Point</span>(right, bottom), <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 得到目标的类名和置信度</span></span><br><span class="line">	string label = cv::format(<span class="string">&quot;%.2f&quot;</span>, conf);</span><br><span class="line">	label = <span class="keyword">this</span>-&gt;classes[classid] + <span class="string">&quot;:&quot;</span> + label;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 绘制目标的类名和置信度文本</span></span><br><span class="line">	<span class="type">int</span> baseLine;</span><br><span class="line">	Size labelSize = <span class="built_in">getTextSize</span>(label, FONT_HERSHEY_SIMPLEX, <span class="number">0.5</span>, <span class="number">1</span>, &amp;baseLine);</span><br><span class="line">	top = <span class="built_in">max</span>(top, labelSize.height);</span><br><span class="line">	<span class="built_in">putText</span>(frame, label, <span class="built_in">Point</span>(left, top), FONT_HERSHEY_SIMPLEX, <span class="number">0.75</span>, <span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-2-4-主函数">4.2.4 主函数</h4>
+<p>本程序通过<code>main</code>函数的参数进行传参。如C/C++语言语法， <code>argc</code> 是argument count的缩写，表示传入main函数中的参数个数，包括这个程序本身； <code>argv</code> 是 argument vector的缩写，表示传入 <code>main</code> 函数中的参数列表，其中 <code>argv[0]</code> 表示这个程序的名字。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//yolov5-onnx.cpp</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (argc != <span class="number">3</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;Run like this:\n    &quot;</span> &lt;&lt; argv[<span class="number">0</span>] &lt;&lt; <span class="string">&quot; yolov5s.onnx input.jpg&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	Configuration yolo_nets = &#123; <span class="number">0.3</span>, <span class="number">0.5</span>, <span class="number">0.3</span>, argv[<span class="number">1</span>] &#125;; <span class="comment">// 初始化数据</span></span><br><span class="line">	<span class="function">YOLOv5 <span class="title">yolo_model</span><span class="params">(yolo_nets, <span class="literal">false</span>)</span></span>;</span><br><span class="line">	Mat srcimg = <span class="built_in">imread</span>(argv[<span class="number">2</span>]);  <span class="comment">// 读入图片</span></span><br><span class="line">	yolo_model.<span class="built_in">detect</span>(srcimg);     <span class="comment">// 进行推理</span></span><br><span class="line">	<span class="built_in">imwrite</span>(<span class="string">&quot;result.jpg&quot;</span>, srcimg); <span class="comment">// 输出图片</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以当调用该程序时，只需在命令提示符的当前目录下，输入指令格式：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yolov5-onnx.exe best.onnx input.jpg</span><br></pre></td></tr></table></figure>
+<p><br /><br /><br /></p>
+<h2 id="伍-模型转化加速处理-基于-engine文件推理">伍 —— 模型转化加速处理（基于.engine文件推理）</h2>
+<h3 id="5-1-转化为-engine文件">5.1 转化为.engine文件</h3>
+<h4 id="5-1-1-通过yolov5自带的export-py转换">5.1.1 通过YOLOv5自带的export.py转换</h4>
+<p>将我们的.pt文件经过服务器上YOLOv5自带的<code>export.py</code>处理后即可得到.engine文件（可能会自动下载TensorRT）。即下面的命令格式：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python export.py --weights yolov5s.pt --include engine</span><br></pre></td></tr></table></figure>
+<p>我输入的是（位于yolov5文件夹）：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python export.py --weights runs/train/exp2/weights/best.pt --include engine</span><br></pre></td></tr></table></figure>
+<h4 id="5-1-2-通过自己下载安装的tensorrt转换">5.1.2 通过自己下载安装的TensorRT转换</h4>
+<p>在<a href="https://fingsinz.space/%E6%97%A5%E5%B8%B8/5/#more">安装TensorRT</a>后，在TensorRT文件夹下有一个名为 <code>bin</code> 的文件夹，里面存在一个<code>trtexec.exe</code>文件。可以通过这个文件进行文件转换。在 <code>bin</code> 目录启动命令提示符，命令格式如下：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trtexec --onnx=best.onnx --saveEngine=best.engine</span><br></pre></td></tr></table></figure>
+<h3 id="5-2-通过c-利用-engine文件进行推理识别">5.2 通过C++利用.engine文件进行推理识别</h3>
+<h4 id="5-2-1-记录识别结果的数据结构">5.2.1 记录识别结果的数据结构</h4>
+<p>一个记录识别结果的结构体，包括检测物体置信度 <code>score</code>，目标预测框 <code>box</code> 和类ID <code>class_id</code> 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Result</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">float</span> score;</span><br><span class="line">	cv::Rect box;</span><br><span class="line">	<span class="type">int</span> class_id;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="5-2-2-日志模块">5.2.2 日志模块</h4>
+<p>在构建TensorRT Runtime时需要作为参数传入。日志模块必须继承自<code>nvinfer1::ILogger</code>类。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TensorRT需要日志</span></span><br><span class="line"><span class="comment">// 参考: https://github.com/cyrusbehr/tensorrt-cpp-api</span></span><br><span class="line"><span class="keyword">using</span> Severity = nvinfer1::ILogger::Severity;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Logger</span> : <span class="keyword">public</span> nvinfer1::ILogger</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">log</span><span class="params">(Severity severity, <span class="type">const</span> <span class="type">char</span> *msg)</span> <span class="keyword">noexcept</span> <span class="keyword">override</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Logger::log</span><span class="params">(Severity severity, <span class="type">const</span> <span class="type">char</span> *msg)</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (severity &lt;= Severity::kWARNING)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; msg &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Logger logger;</span><br></pre></td></tr></table></figure>
+<h4 id="5-2-3-计算内存大小模块">5.2.3 计算内存大小模块</h4>
+<p>一个计算内存大小的辅助函数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">size_t</span> <span class="title">get_memory_size</span><span class="params">(<span class="type">const</span> nvinfer1::Dims &amp;dims, <span class="type">const</span> <span class="type">int32_t</span> elem_size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> std::<span class="built_in">accumulate</span>(dims.d, dims.d + dims.nbDims, <span class="number">1</span>, std::<span class="built_in">multiplies</span>&lt;<span class="type">int64_t</span>&gt;()) * <span class="built_in">static_cast</span>&lt;<span class="type">size_t</span>&gt;(elem_size);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-2-4-检测识别模块">5.2.4 检测识别模块</h4>
+<p>基于.engine文件的推理识别涉及到显卡的调用，故需用到CUDA的Context。</p>
+<p>CUDA的Context是由CUDA驱动程序创建的数据结构，包含执行CUDA操作所需的所有信息，如设备代码、数据以及线程、内存和硬件设置等资源。每个线程都有一个当前Context，该线程上的所有CUDA操作都在该Context中执行。</p>
+<ol>
+<li>初始化YOLOv5模型</li>
+</ol>
+<ul>
+<li>首先从<code>engine_file_path</code>指定的文件中加载TensorRT引擎。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读取TensorRT引擎</span></span><br><span class="line"><span class="function">std::ifstream <span class="title">engine_file</span><span class="params">(engine_file_path, std::ios::binary)</span></span>;</span><br><span class="line"><span class="keyword">if</span> (engine_file.<span class="built_in">fail</span>())</span><br><span class="line">&#123;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Failed to read model file.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line">engine_file.<span class="built_in">seekg</span>(<span class="number">0</span>, std::ifstream::end);</span><br><span class="line"><span class="keyword">auto</span> fsize = engine_file.<span class="built_in">tellg</span>();</span><br><span class="line">engine_file.<span class="built_in">seekg</span>(<span class="number">0</span>, std::ifstream::beg);</span><br><span class="line"><span class="function">std::vector&lt;<span class="type">char</span>&gt; <span class="title">engineData</span><span class="params">(fsize)</span></span>;</span><br><span class="line">engine_file.<span class="built_in">read</span>(engineData.<span class="built_in">data</span>(), fsize);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>其次，推演运行时 <code>nvinfer1::IRuntime</code> 是一切资源的源头，是第一个需要被初始化的对象，注意运行时的初始化需要将辅助模块中定义好的 <code>logger</code> 作为传入参数。同时这段代码使用 <code>unique_ptr</code> 来跟踪初始化后的运行时对象。引擎 <code>nvinfer1::ICudaEngine</code> 存储了模型的权重参数，它的初始化分2步：首先将模型文件读入内存，然后使用运行时的 <code>deserializeCudaEngine</code> 方法初始化引擎对象。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化IRuntime和ICudaEngine</span></span><br><span class="line">std::unique_ptr&lt;nvinfer1::IRuntime&gt; runtime&#123; nvinfer1::<span class="built_in">createInferRuntime</span>(logger) &#125;;</span><br><span class="line">std::unique_ptr&lt;nvinfer1::ICudaEngine&gt; mEngine&#123; runtime-&gt;<span class="built_in">deserializeCudaEngine</span>(engineData.<span class="built_in">data</span>(), fsize) &#125;;</span><br><span class="line"><span class="keyword">if</span> (mEngine.<span class="built_in">get</span>() == <span class="literal">nullptr</span>)</span><br><span class="line">&#123;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Failed to deserialize CUDA engine.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最后创建CUDA的context，并为输入和输出绑定分配CUDA内存。引擎的本质是专为TensorRT优化后的模型。可使用<code>createExecutionContext</code> 方法来构建推演环境 <code>nvinfer1::IExecutionContext</code> 。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">std::unique_ptr&lt;nvinfer1::IExecutionContext&gt; context&#123; mEngine-&gt;<span class="built_in">createExecutionContext</span>() &#125;;</span><br><span class="line"><span class="keyword">if</span> (context.<span class="built_in">get</span>() == <span class="literal">nullptr</span>)</span><br><span class="line">&#123;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Failed to create CUDA context.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>准备模型输入</li>
+</ol>
+<ul>
+<li>了解模型结构，通过<a target="_blank" rel="noopener" href="https://netron.app">netron.app</a>输入.onnx文件查看自己的神经网络结构。我这里输入名字为 <code>images</code> ，尺寸为3×640×640；输出名字为 <code>output0</code> ，尺寸为1×25200×6。</li>
+</ul>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/yolov5_model.jpg" alt="模型结构"></p>
+<ul>
+<li>TensorRT的模型推演在GPU上进行，需要在显存上为用于计算的数据申请空间。输入尺寸为3×640×640，使用内存大小计算函数得到显存中应当开辟的空间大小，然后使用 <code>cudaMalloc</code> 申请显存。其中 <code>cuda_mem_input</code> 为指向该显存区域的指针。为了方便后续推演，这里使用一个指针数组 <code>bindings</code> 记录下与推演有关的内存区域。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记录与推演相关的内存区域</span></span><br><span class="line"><span class="type">void</span> *bindings[<span class="number">5</span>];</span><br><span class="line"><span class="type">const</span> <span class="type">char</span> *input_name = <span class="string">&quot;images&quot;</span>;</span><br><span class="line"><span class="type">int32_t</span> input_idx = mEngine-&gt;<span class="built_in">getBindingIndex</span>(input_name);</span><br><span class="line"><span class="keyword">if</span> (input_idx == <span class="number">-1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;ERROR: failed to get input by name: &quot;</span> &lt;&lt; input_name &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算显存大小并开辟</span></span><br><span class="line"><span class="type">int32_t</span> channels = <span class="number">3</span>, height = <span class="number">640</span>, width = <span class="number">640</span>;</span><br><span class="line">nvinfer1::Dims4 input_dims &#123; <span class="number">1</span>, channels, height, width &#125;;</span><br><span class="line"><span class="type">size_t</span> input_mem_size = <span class="built_in">get_memory_size</span>(input_dims, <span class="built_in">sizeof</span>(<span class="type">float</span>));</span><br><span class="line"><span class="type">void</span>* cuda_mem_input &#123; <span class="literal">nullptr</span> &#125;;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">cudaMalloc</span>(&amp;cuda_mem_input, input_mem_size) != cudaSuccess) </span><br><span class="line">&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;ERROR: input cuda memory allocation failed, size = &quot;</span> &lt;&lt; input_mem_size &lt;&lt; <span class="string">&quot; bytes&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bindings[<span class="number">0</span>] = cuda_mem_input;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>同时还需为输出区域计算并开辟内存。模型的输出包含一个或多个对象，必须为每个输出对象分配独立的显存区域。在循环体中，首先通过 <code>getBindingDimensions</code> 获得输出每个对象的维度，然后计算其占据的显存区域大小，并调用 <code>cudaMalloc</code> 函数分配显存，最后将指向该存储区域的指针存入之前创建好的 <code>bindings</code> 。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;std::string&gt; output_node_names&#123; <span class="string">&quot;output0&quot;</span> &#125;;</span><br><span class="line">std::vector&lt;<span class="type">size_t</span>&gt; output_mem_sizes;</span><br><span class="line"><span class="type">bool</span> output_mem_initialized = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; output_node_names.<span class="built_in">size</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int32_t</span> output_idx = mEngine-&gt;<span class="built_in">getBindingIndex</span>(output_node_names[i].<span class="built_in">c_str</span>());</span><br><span class="line">	<span class="keyword">if</span> (output_idx == <span class="number">-1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;ERROR: failed to get output by name: &quot;</span> &lt;&lt; output_node_names[i] &lt;&lt; std::endl;</span><br><span class="line">		output_mem_initialized = <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">auto</span> output_dims = context-&gt;<span class="built_in">getBindingDimensions</span>(output_idx);</span><br><span class="line">	<span class="keyword">auto</span> output_size = <span class="built_in">get_memory_size</span>(output_dims, <span class="built_in">sizeof</span>(<span class="type">float</span>));</span><br><span class="line">	output_mem_sizes.<span class="built_in">push_back</span>(output_size);</span><br><span class="line">	<span class="type">void</span> *cuda_mem_output&#123; <span class="literal">nullptr</span> &#125;;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">cudaMalloc</span>(&amp;cuda_mem_output, output_size) != cudaSuccess)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;ERROR: output cuda memory allocation failed, size = &quot;</span> &lt;&lt; output_size &lt;&lt; <span class="string">&quot; bytes&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">		output_mem_initialized = <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		bindings[<span class="number">1</span> + i] = cuda_mem_output;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>显存空间初始化完成后，还需要初始化最后一个对象 <code>cudaStream</code> 。它用来在异步操作中同步结果。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cudaStream_t stream&#123; <span class="literal">nullptr</span> &#125;;</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">cudaStreamCreate</span>(&amp;stream) != cudaSuccess)</span><br><span class="line">&#123;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;ERROR: cuda stream creation failed.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>从<code>image_file_path</code>中读取图像，将其调整为所需尺寸，并复制到GPU内存中。输入图像在进入神经网络之前，首先会进行预处理操作。典型的预处理操作包括：缩放到指定尺寸、减去均值、归一化、除方差。另外如果模型对输入通道的顺序有要求，预处理也会调整通道顺序。YOLOv5的输入大小为640x640像素，通道顺序为RGB， 预处理也非常简单，像素值除以255即可。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cv::Mat img_bgr = cv::<span class="built_in">imread</span>(image_file_path);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 预处理</span></span><br><span class="line">cv::<span class="built_in">resize</span>(img_bgr, img_bgr, cv::<span class="built_in">Size</span>(width, height));</span><br><span class="line"><span class="type">int32_t</span> tmp = height * width * channels;</span><br><span class="line"><span class="type">float</span> *input_buffer = <span class="keyword">new</span> <span class="type">float</span>[tmp]();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> c = <span class="number">0</span>; c &lt; channels; c++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>, HW = height * width; j &lt; HW; ++j)</span><br><span class="line">	&#123;</span><br><span class="line">		input_buffer[c * HW + j] = <span class="built_in">static_cast</span>&lt;<span class="type">float</span>&gt;(img_bgr.data[j * channels + <span class="number">2</span> - c]) / <span class="number">255.0f</span>;</span><br><span class="line">		<span class="comment">// 其中 img_bgr.data 为指向像素存储区域的指针，而括号内下表运算中的 +2 实现了BGR数据到RGB的转换。</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>数据预处理的操作是在HOST（CPU）侧完成，在推演之前还需要将预处理后的数据拷贝到GPU一侧。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">cudaMemcpyAsync</span>(cuda_mem_input, input_buffer, input_mem_size, cudaMemcpyHostToDevice, stream) != cudaSuccess)</span><br><span class="line">&#123;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;ERROR: CUDA memory copy of input failed, size = &quot;</span> &lt;&lt; input_mem_size &lt;&lt; <span class="string">&quot; bytes&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>运行推理</li>
+</ol>
+<ul>
+<li>使用执行Context的 <code>enqueueV2</code> 方法异步运行模型。 <code>enqueueV2</code> 是真正触发模型推演的操作。参数中的 <code>bindings</code> 是之前记录的指向输入与输出显存的指针数组。 <code>stream</code> 是在初始化资源章节创建的 <code>cudaStream</code> 对象，用于同步数据。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> status = context-&gt;<span class="built_in">enqueueV2</span>(bindings, stream, <span class="literal">nullptr</span>);</span><br><span class="line"><span class="keyword">if</span> (!status)</span><br><span class="line">&#123;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;ERROR: TensorRT inference failed.&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>模型输出后处理</li>
+</ol>
+<ul>
+<li>首先按照输出数据的规格申请输出内存空间。为输出结果 <code>output0</code> 申请了一份内存空间，并将指向这些内存区域的指针存储在 <code>output_buffers</code> 指针数组中。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;<span class="type">float</span> *&gt; output_buffers;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; output_mem_sizes.<span class="built_in">size</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">float</span> *buf = <span class="keyword">new</span> <span class="type">float</span>[output_mem_sizes[i] / <span class="built_in">sizeof</span>(<span class="type">float</span>)];</span><br><span class="line">	output_buffers.<span class="built_in">push_back</span>(buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>接着将输出从GPU内存复制到CPU内存。使用 <code>cudaMemcpyAsync</code> 函数。其中参数 <code>output_buffers</code> 为刚才申请好的内存空间， <code>bindings</code> 为GPU一侧的显存空间， <code>output_mem_sizes</code> 为输出结果所占据的内存大小， <code>cudaMemcpyDeviceToHost</code> 指定了拷贝操作的方向，由于这是一个异步操作，所以要使用 <code>stream</code> 作为同步数据的依据。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; output_mem_sizes.<span class="built_in">size</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">auto</span> mem_to_host_result = <span class="built_in">cudaMemcpyAsync</span>(output_buffers[i], bindings[<span class="number">1</span> + i], output_mem_sizes[i], cudaMemcpyDeviceToHost, stream);</span><br><span class="line">	<span class="keyword">if</span> (mem_to_host_result != cudaSuccess)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;ERROR: CUDA memory copy of output &quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot; failed, size = &quot;</span> &lt;&lt; output_mem_sizes[i] &lt;&lt; <span class="string">&quot; bytes&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>等待同步，已经调用了3个异步操作函数，因此这里需要使用同步操作来等待执行真正完成。同步之后，模型推演的结果才真正存储在了内存 <code>output_buffers</code> 中。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cudaStreamSynchronize</span>(stream);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对输出进行后处理。首先定义三个向量分别存储检测获得的物体边界框 <code>boxes</code> 、分值 <code>scores</code> 与类别ID <code>class_ids</code> 。此次训练的YOLOv5模型有1个输出，即 <code>output0</code> 。 其本身是一个巨大的矩阵，其行数为25200，代表模型给出的物体检测结果。为此，可以定义一个指针 <code>p</code> 指向 <code>output0</code> ，然后通过一个循环来轮询结果。 此次训练中， <code>output0</code> 每行具有6个元素：第0~3个元素为物体边界框中心x，物体边界框中心y，物体边界框宽度和物体边界框高度；第4个元素为预测框分值；第5个元素是物体类别ID的概率，可以按照最大值获取到分类结果。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;<span class="type">float</span>&gt; scores;</span><br><span class="line">std::vector&lt;cv::Rect&gt; boxes;</span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; class_ids;</span><br><span class="line"></span><br><span class="line"><span class="type">float</span> *p = output_buffers[<span class="number">0</span>]; <span class="comment">// 指向output0的第一个元素</span></span><br><span class="line"><span class="type">int</span> step = <span class="number">6</span>, proposal_count = <span class="number">25200</span>;</span><br><span class="line"><span class="type">float</span> score_threshold = <span class="number">0.5</span>, nms_threshold = <span class="number">0.45</span>; <span class="comment">// 分支阈值和NMS阈值</span></span><br><span class="line"><span class="type">float</span> scale = <span class="number">1.0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; proposal_count; i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">// 置信度低于分数阈值</span></span><br><span class="line">	<span class="type">float</span> obj_score = p[<span class="number">4</span>]; <span class="comment">// 第4个元素是预测框分值</span></span><br><span class="line">	<span class="keyword">if</span> (obj_score &lt; score_threshold)</span><br><span class="line">	&#123;</span><br><span class="line">		p += step;</span><br><span class="line">		<span class="keyword">continue</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 判断对象分类</span></span><br><span class="line">	<span class="type">int</span> c_id = <span class="number">-1</span>;</span><br><span class="line">	<span class="type">float</span> c_score = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">size_t</span> j = <span class="number">1</span>; j &lt; step; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (p[j] &gt; c_score)</span><br><span class="line">		&#123;</span><br><span class="line">			c_score = p[j];</span><br><span class="line">			c_id = j - <span class="number">2</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	scores.<span class="built_in">push_back</span>(c_score * obj_score);</span><br><span class="line">	class_ids.<span class="built_in">push_back</span>(c_id);</span><br><span class="line">	boxes.<span class="built_in">push_back</span>(cv::<span class="built_in">Rect</span>((p[<span class="number">0</span>] - p[<span class="number">2</span>] / <span class="number">2</span>) / scale, (p[<span class="number">1</span>] - p[<span class="number">3</span>] / <span class="number">2</span>) / scale, p[<span class="number">2</span>] / scale, p[<span class="number">3</span>] / scale));</span><br><span class="line">	p += step; <span class="comment">// 指向下一行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用了OpenCV提供的NMS方法 <code>cv::dnn::NMSBoxes</code> 。其中 <code>boxes</code> 为存储了 <code>Rect</code> 类的向量， <code>scores</code> 为存储了分值的向量， <code>score_threshold</code> 为检测分值阈值， <code>nms_threshold</code> 为NMS操作的阈值， <code>indices</code> 为一个空向量，用来存储NMS的结果。最后按照 <code>indices</code> 给出的物体序号提取最终结果。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 执行非最大值抑制以消除具有较低置信度的冗余重叠框</span></span><br><span class="line">std::vector&lt;<span class="type">int</span>&gt; indices;</span><br><span class="line">cv::dnn::<span class="built_in">NMSBoxes</span>(boxes, scores, score_threshold, nms_threshold, indices);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 收集检测结果</span></span><br><span class="line">std::vector&lt;Result&gt; results;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> i : indices) </span><br><span class="line">&#123;</span><br><span class="line">    results.<span class="built_in">push_back</span>(Result &#123; scores[i], boxes[i], class_ids[i] &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>保存结果：它将包含绘制结果的图像保存下来。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;r : results)</span><br><span class="line">&#123;</span><br><span class="line">	cv::<span class="built_in">rectangle</span>(img_bgr, r.box, cv::<span class="built_in">Scalar</span>(<span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span>), <span class="number">5</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cv::<span class="built_in">imwrite</span>(<span class="string">&quot;result.jpg&quot;</span>, img_bgr);</span><br></pre></td></tr></table></figure>
+<h4 id="5-2-5-主函数设计">5.2.5 主函数设计</h4>
+<p>此程序主函数与基于.onnx文件推理程序类似，通过<code>main</code>函数的参数进行传参。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//yolov5-engine.cpp</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (argc != <span class="number">3</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		std::cout &lt;&lt; <span class="string">&quot;Run like this:\n    &quot;</span> &lt;&lt; argv[<span class="number">0</span>] &lt;&lt; <span class="string">&quot; yolov5s.engine input.jpg&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">	<span class="built_in">run</span>(argv[<span class="number">1</span>], argv[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以当调用该程序时，只需在命令提示符的当前目录下，输入指令格式：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yolov5-engine.exe best.engine input.jpg</span><br></pre></td></tr></table></figure>
+<p><br /><br /><br /></p>
+<h2 id="陆-打包软件">陆 —— 打包软件</h2>
+<h3 id="6-1-基于-onnx文件图像推理程序打包">6.1 基于.onnx文件图像推理程序打包</h3>
+<p>打包程序考虑其可用性，在输出文件的时候做了处理：在当前目录输出一张照片，在<code>output/</code>文件夹也输出一张照片并做名字冲突处理。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导出名冲突</span></span><br><span class="line"><span class="function">string <span class="title">getUniqueFileName</span><span class="params">(<span class="type">const</span> std::string &amp;fileName, <span class="type">const</span> std::string &amp;outputDirectory)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	string baseName, extension;</span><br><span class="line">	<span class="type">size_t</span> dotIndex = fileName.<span class="built_in">rfind</span>(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">	<span class="keyword">if</span> (dotIndex != string::npos)</span><br><span class="line">	&#123;</span><br><span class="line">		baseName = fileName.<span class="built_in">substr</span>(<span class="number">0</span>, dotIndex);</span><br><span class="line">		extension = fileName.<span class="built_in">substr</span>(dotIndex);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		baseName = fileName;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	string newFileName = fileName;</span><br><span class="line">	<span class="type">int</span> counter = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (ifstream(outputDirectory + newFileName).<span class="built_in">good</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		newFileName = baseName + <span class="string">&quot;_&quot;</span> + <span class="built_in">to_string</span>(counter) + extension;</span><br><span class="line">		counter++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> newFileName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 备份存储</span></span><br><span class="line">string dir = <span class="string">&quot;output/&quot;</span>; <span class="comment">//文件夹路径</span></span><br><span class="line"><span class="keyword">if</span> (_access(dir.<span class="built_in">c_str</span>(), <span class="number">0</span>) == <span class="number">-1</span>)<span class="comment">//判断该文件夹是否存在</span></span><br><span class="line">&#123;</span><br><span class="line">	_mkdir(dir.<span class="built_in">c_str</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">imwrite</span>(<span class="string">&quot;result.jpg&quot;</span>, srcimg);</span><br><span class="line">string newname = <span class="built_in">getUniqueFileName</span>(<span class="string">&quot;result.jpg&quot;</span>, <span class="string">&quot;output/&quot;</span>);</span><br><span class="line"><span class="built_in">imwrite</span>(<span class="string">&quot;output/&quot;</span> + newname, srcimg);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>由于主函数设计为可用命令提示符运行，故只需使用Visual Studio的Release版本生成.exe文件，再参考<a href="https://fingsinz.space/2023/11/#more">此博客</a>进行打包即可。</p>
+<p>打包之后即可移植到其他PC设备使用。</p>
+<h3 id="6-2-基于-engine文件图像推理程序打包">6.2 基于.engine文件图像推理程序打包</h3>
+<p>同理，打包程序考虑其可用性，在输出文件的时候做了处理：在当前目录输出一张照片，在<code>output/</code>文件夹也输出一张照片并做名字冲突处理。</p>
+<p>由于主函数设计为可用命令提示符运行，故只需使用Visual Studio的Release版本生成.exe文件，再参考<a href="https://fingsinz.space/2023/11/#more">此博客</a>进行打包即可。</p>
+<p>注意一点，由于.engine文件需要调用显卡驱动，故不能移植到别的电脑使用（暂时我是没成功）。</p>
+<h3 id="6-3-整体打包">6.3 整体打包</h3>
+<p>此次项目整体打包采用Qt作为前端页面，将上面两个打包好的程序结合，使用时只需调用指定程序模块即可。具体Qt打包可参考<a href="https://fingsinz.space/2023/10/">此博客</a></p>
+<p>具体代码不细展开，分享于<a target="_blank" rel="noopener" href="https://gitee.com/fingsinz/ele-bicycle-detection/">码云仓库</a>。</p>
+<p><br /><br /><br /></p>
+<h2 id="柒-总结及后话">柒 —— 总结及后话</h2>
+<p>实际上，如5.1的步骤，将参数改为.trt，即可导出.trt文件。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trtexec --onnx=best.onnx --saveEngine=best.trt</span><br></pre></td></tr></table></figure>
+<p>至于如何根据.trt文件设计算法进一步进行推测识别，此次项目未能完成，有待补充，深度学习很多方面的知识也有待补充。故此次项目仅能作为一个带有启发性的入门级别的项目。</p>
+<p>深度学习是机器学习领域中的一个新的研究方向，旨在让机器能够像人一样具有分析学习能力，能够识别文字、图像和声音等数据。深度学习试图为数据的高层次摘要进行建模，通过使用多个处理层和对这些层的结果进行线性和非线性的转换，来实现对数据的识别和理解。深度学习在搜索技术、数据挖掘、机器翻译、自然语言处理、多媒体学习、语音、推荐和个性化技术等领域都取得了了很多成果。经过这次项目，我感受到了深度学习的有趣，写下这篇博客，用于记录与分享。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script></article>
+<div class="article-footer">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+
+</div>
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/tofreshman/">给大一的你</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/11/">Visual Studio2022的C++项目打包成软件记录</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="/about/me/">关于我</a><a href="/about/site/">关于博客</a></div></div><div class="text"><p>本站由 <a href="/">Fingsinz</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0">Stellar 1.33.0</a> 主题创建。<br>
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="true"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%B6-%E5%89%8D%E8%A8%80"><span class="toc-text">零 —— 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A3%B9-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">壹 —— 环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%B0-%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="toc-text">贰 —— 数据准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%95%B0%E6%8D%AE%E9%9B%86%E7%BB%93%E6%9E%84"><span class="toc-text">2.1 数据集结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">2.2 处理数据集</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%81-%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%8F%8A%E5%88%86%E6%9E%90"><span class="toc-text">叁 —— 模型训练及分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E9%83%A8%E7%BD%B2yolov5"><span class="toc-text">3.1 部署YOLOv5</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-%E4%BD%BF%E7%94%A8%E7%A4%BE%E5%8C%BA%E9%95%9C%E5%83%8F%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2yolov5"><span class="toc-text">3.1.1 使用社区镜像自动部署YOLOv5</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-%E6%89%8B%E5%8A%A8%E9%83%A8%E7%BD%B2yolov5"><span class="toc-text">3.1.2 手动部署YOLOv5</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%B8%8A%E4%BC%A0%E6%95%B0%E6%8D%AE"><span class="toc-text">3.2 上传数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E9%85%8D%E7%BD%AE%E8%AE%AD%E7%BB%83%E5%8F%82%E6%95%B0"><span class="toc-text">3.3 配置训练参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-%E4%BF%AE%E6%94%B9train-py%E6%96%87%E4%BB%B6"><span class="toc-text">3.3.1 修改train.py文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-%E4%BF%AE%E6%94%B9val-py%E6%96%87%E4%BB%B6"><span class="toc-text">3.3.2 修改val.py文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-3-%E4%BF%AE%E6%94%B9%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE"><span class="toc-text">3.3.3 修改模型配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E8%AE%AD%E7%BB%83%E5%8F%AF%E8%83%BD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">3.4 训练可能出现的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E8%AE%AD%E7%BB%83%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="toc-text">3.5 训练结果分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-1-%E4%BF%9D%E5%AD%98%E8%AE%AD%E7%BB%83%E7%BB%93%E6%9E%9C"><span class="toc-text">3.5.1 保存训练结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-2-%E6%9B%B2%E7%BA%BF%E7%B1%BB%E5%88%86%E6%9E%90"><span class="toc-text">3.5.2 曲线类分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-3-%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5%E5%88%86%E6%9E%90"><span class="toc-text">3.5.3 混淆矩阵分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-4-%E6%A0%87%E7%AD%BE%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90"><span class="toc-text">3.5.4 标签相关分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-5-%E8%AE%AD%E7%BB%83%E9%AA%8C%E8%AF%81%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="toc-text">3.5.5 训练验证结果分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-6-%E5%85%B6%E4%BD%99%E5%88%86%E6%9E%90"><span class="toc-text">3.5.6 其余分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%82%86-%E6%A8%A1%E5%9E%8B%E8%BD%AC%E5%8C%96%E5%A4%84%E7%90%86-%E5%9F%BA%E4%BA%8E-onnx%E6%96%87%E4%BB%B6%E6%8E%A8%E7%90%86"><span class="toc-text">肆 —— 模型转化处理（基于.onnx文件推理）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E8%BD%AC%E5%8C%96%E4%B8%BA-onnx%E6%96%87%E4%BB%B6"><span class="toc-text">4.1 转化为.onnx文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E9%80%9A%E8%BF%87c-%E5%88%A9%E7%94%A8-onnx%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E6%8E%A8%E7%90%86%E8%AF%86%E5%88%AB"><span class="toc-text">4.2 通过C++利用.onnx文件进行推理识别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-%E8%AE%B0%E5%BD%95%E5%A4%84%E7%90%86%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">4.2.1 记录处理的数据结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2-%E6%A3%80%E6%B5%8B%E8%AF%86%E5%88%AB%E5%87%BD%E6%95%B0"><span class="toc-text">4.2.2 检测识别函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-3-%E9%A2%84%E6%B5%8B%E7%94%BB%E6%A1%86%E5%87%BD%E6%95%B0"><span class="toc-text">4.2.3 预测画框函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-4-%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="toc-text">4.2.4 主函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%8D-%E6%A8%A1%E5%9E%8B%E8%BD%AC%E5%8C%96%E5%8A%A0%E9%80%9F%E5%A4%84%E7%90%86-%E5%9F%BA%E4%BA%8E-engine%E6%96%87%E4%BB%B6%E6%8E%A8%E7%90%86"><span class="toc-text">伍 —— 模型转化加速处理（基于.engine文件推理）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E8%BD%AC%E5%8C%96%E4%B8%BA-engine%E6%96%87%E4%BB%B6"><span class="toc-text">5.1 转化为.engine文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-1-%E9%80%9A%E8%BF%87yolov5%E8%87%AA%E5%B8%A6%E7%9A%84export-py%E8%BD%AC%E6%8D%A2"><span class="toc-text">5.1.1 通过YOLOv5自带的export.py转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-2-%E9%80%9A%E8%BF%87%E8%87%AA%E5%B7%B1%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E7%9A%84tensorrt%E8%BD%AC%E6%8D%A2"><span class="toc-text">5.1.2 通过自己下载安装的TensorRT转换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E9%80%9A%E8%BF%87c-%E5%88%A9%E7%94%A8-engine%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E6%8E%A8%E7%90%86%E8%AF%86%E5%88%AB"><span class="toc-text">5.2 通过C++利用.engine文件进行推理识别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-1-%E8%AE%B0%E5%BD%95%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">5.2.1 记录识别结果的数据结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-2-%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97"><span class="toc-text">5.2.2 日志模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-3-%E8%AE%A1%E7%AE%97%E5%86%85%E5%AD%98%E5%A4%A7%E5%B0%8F%E6%A8%A1%E5%9D%97"><span class="toc-text">5.2.3 计算内存大小模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-4-%E6%A3%80%E6%B5%8B%E8%AF%86%E5%88%AB%E6%A8%A1%E5%9D%97"><span class="toc-text">5.2.4 检测识别模块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-5-%E4%B8%BB%E5%87%BD%E6%95%B0%E8%AE%BE%E8%AE%A1"><span class="toc-text">5.2.5 主函数设计</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%86-%E6%89%93%E5%8C%85%E8%BD%AF%E4%BB%B6"><span class="toc-text">陆 —— 打包软件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%9F%BA%E4%BA%8E-onnx%E6%96%87%E4%BB%B6%E5%9B%BE%E5%83%8F%E6%8E%A8%E7%90%86%E7%A8%8B%E5%BA%8F%E6%89%93%E5%8C%85"><span class="toc-text">6.1 基于.onnx文件图像推理程序打包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E5%9F%BA%E4%BA%8E-engine%E6%96%87%E4%BB%B6%E5%9B%BE%E5%83%8F%E6%8E%A8%E7%90%86%E7%A8%8B%E5%BA%8F%E6%89%93%E5%8C%85"><span class="toc-text">6.2 基于.engine文件图像推理程序打包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E6%95%B4%E4%BD%93%E6%89%93%E5%8C%85"><span class="toc-text">6.3 整体打包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%92-%E6%80%BB%E7%BB%93%E5%8F%8A%E5%90%8E%E8%AF%9D"><span class="toc-text">柒 —— 总结及后话</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.0" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

@@ -1,0 +1,1112 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0" theme-name="Stellar" theme-version="1.33.0">
+  
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>OpenCV的基本操作：图像形态学处理 - Fingsinz</title>
+
+  
+  <meta name="description" content="从OpenCV入门图像处理">
+  
+  <meta name="keywords" content=",">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.0">
+
+
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://fingsinz.space/notes/basic_opencv/morphology/","author":{"@type":"Person","name":"Fingsinz","sameAs":[],"image":"/images/avatar.jpg"},"name":"图像形态学处理","description":"腐蚀\n定义B对A的腐蚀为：\nA⊖B={z∣(B)z⊆A}A\\ominus B = \\{z|(B)_z\\subseteq A\\}\nA⊖B={z∣(B)z​⊆A}\n其中，A是前景像素的一个集合，B是一个结构元，z项是前景像素值。\n腐蚀的目的是去除图像中的某些部分以及会缩小细化目标。\n但是，对于白色背景，黑色目标变大；对于黑色背景，白色目标变小。\n可以理解为结构元像素是白色的，腐蚀是腐蚀图像中的白...","url":"https://fingsinz.space/notes/basic_opencv/morphology/"}</script>
+  
+<link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+<body>
+
+
+
+<div class="l_body content" id="start" layout="page" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><div class="icon"><img no-lazy class="icon" src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2779789.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><a class="title" href="/notes/basic_opencv/install"><div class="main">OpenCV的基本操作</div><div class="sub cap">从OpenCV入门图像处理</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="博客" href="/" style="color:#c7c6b6"><span>博客</span></a><a class="nav-item active" title="文档" href="/docs/" style="color:#a72126"><span>文档</span></a><a class="nav-item" title="探索" href="/explore/" style="color:#12264f"><span>探索</span></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/docs/basic_opencv/" placeholder="在 基础图像处理操作 中搜索..."></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<widget class="widget-wrapper doc-tree post-list"><div class="widget-header dis-select"><span class="name">目录</span></div><div class="widget-body fs14"><a class="link" href="/notes/basic_opencv/install/#start"><span class="toc-text">安装和配置OpenCV</span></a><a class="link" href="/notes/basic_opencv/opers/"><span class="toc-text">OpenCV基本操作</span></a><a class="link" href="/notes/basic_opencv/gray_transform/"><span class="toc-text">灰度变换</span></a><a class="link" href="/notes/basic_opencv/hist/"><span class="toc-text">直方图处理</span></a><a class="link" href="/notes/basic_opencv/spatial_filtering/"><span class="toc-text">空间滤波</span></a><a class="link" href="/notes/basic_opencv/frequency_domain_filtering/"><span class="toc-text">频率域滤波</span></a><a class="link" href="/notes/basic_opencv/noise_and_filtering/"><span class="toc-text">噪声模型及估计和滤波方法</span></a><a class="link" href="/notes/basic_opencv/color_image/"><span class="toc-text">彩色图像处理</span></a><a class="link active" href="/notes/basic_opencv/morphology/"><span class="toc-text">图像形态学处理</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="link" href="/notes/basic_opencv/segmentation/"><span class="toc-text">图像分割</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/docs/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/notes/basic_opencv/install/">OpenCV的基本操作</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2025-09-01T15:02:42.446Z">2025-09-01</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>图像形态学处理</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h2 id="腐蚀">腐蚀</h2>
+<p>定义B对A的腐蚀为：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⊖</mo><mi>B</mi><mo>=</mo><mo stretchy="false">{</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mo stretchy="false">(</mo><mi>B</mi><msub><mo stretchy="false">)</mo><mi>z</mi></msub><mo>⊆</mo><mi>A</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">A\ominus B = \{z|(B)_z\subseteq A\}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊖</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊆</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mclose">}</span></span></span></span></span></p>
+<p>其中，A是前景像素的一个集合，B是一个结构元，z项是前景像素值。</p>
+<p>腐蚀的目的是<strong>去除图像中的某些部分以及会缩小细化目标</strong>。</p>
+<p>但是，对于<strong>白色背景，黑色目标变大；对于黑色背景，白色目标变小</strong>。</p>
+<p>可以理解为结构元像素是白色的，腐蚀是腐蚀图像中的白色像素，白色像素被腐蚀，则黑色元素膨胀。</p>
+<p>代码如下：</p>
+<p>相关函数有：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">threshold</span><span class="params">(InputArray src,</span></span></span><br><span class="line"><span class="params"><span class="function">			     OutputArray dst,</span></span></span><br><span class="line"><span class="params"><span class="function">			     <span class="type">double</span> thresh,</span></span></span><br><span class="line"><span class="params"><span class="function">			     <span class="type">double</span> maxval,</span></span></span><br><span class="line"><span class="params"><span class="function">			     <span class="type">int</span> type)</span></span>;  <span class="comment">// 二值化</span></span><br></pre></td></tr></table></figure>
+<p>参数列表有：</p>
+<ul>
+<li>src：输入数组(多通道，8位或32位浮点)。</li>
+<li>dst：与src相同大小和类型、相同通道数的输出数组。</li>
+<li>thresh：阈值.</li>
+<li>maxval：dst图像中的最大值。</li>
+<li>type：阈值。</li>
+</ul>
+<p>type可选有：</p>
+<ul>
+<li><code>cv::THRESH_BINARY</code>，效果：</li>
+</ul>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>s</mi><mi>t</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.3599999999999999em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>v</mi><mi>a</mi><mi>l</mi><mo separator="true">,</mo><mspace width="1em"/><mi>i</mi><mi>f</mi><mtext> </mtext><mi>s</mi><mi>r</mi><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>&gt;</mo><mi>t</mi><mi>h</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>h</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>0</mn><mo separator="true">,</mo><mspace width="1em"/><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>w</mi><mi>i</mi><mi>s</mi><mi>e</mi></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">dst(x,y)=
+\begin{cases}
+maxval,\quad if\ src(x,y)&gt; thresh\\
+0, \quad otherwise
+\end{cases}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace"> </span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">c</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mord mathdefault">h</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<ul>
+<li><code>cv::THRESH_BINARY_INV</code>，效果：</li>
+</ul>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>s</mi><mi>t</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.3599999999999999em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>0</mn><mo separator="true">,</mo><mspace width="1em"/><mi>i</mi><mi>f</mi><mtext> </mtext><mi>s</mi><mi>r</mi><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>&gt;</mo><mi>t</mi><mi>h</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>h</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mi>v</mi><mi>a</mi><mi>l</mi><mo separator="true">,</mo><mspace width="1em"/><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>w</mi><mi>i</mi><mi>s</mi><mi>e</mi></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">dst(x,y)=
+\begin{cases}
+0,\quad if\ src(x,y)&gt; thresh\\
+maxval, \quad otherwise
+\end{cases}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace"> </span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">c</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mord mathdefault">h</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<ul>
+<li><code>cv::THRESH_TRUNC</code>，效果：</li>
+</ul>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>s</mi><mi>t</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.3599999999999999em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>t</mi><mi>h</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>h</mi><mi>o</mi><mi>l</mi><mi>d</mi><mo separator="true">,</mo><mspace width="1em"/><mi>i</mi><mi>f</mi><mtext> </mtext><mi>s</mi><mi>r</mi><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>&gt;</mo><mi>t</mi><mi>h</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>h</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>s</mi><mi>r</mi><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="1em"/><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>w</mi><mi>i</mi><mi>s</mi><mi>e</mi></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">dst(x,y)=
+\begin{cases}
+threshold,\quad if\ src(x,y)&gt; thresh\\
+src(x,y), \quad otherwise
+\end{cases}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mord mathdefault">h</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">d</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace"> </span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">c</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mord mathdefault">h</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">c</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<ul>
+<li><code>cv::THRESH_TOZERO</code>，效果：</li>
+</ul>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>s</mi><mi>t</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.3599999999999999em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>s</mi><mi>r</mi><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="1em"/><mi>i</mi><mi>f</mi><mtext> </mtext><mi>s</mi><mi>r</mi><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>&gt;</mo><mi>t</mi><mi>h</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>h</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>0</mn><mo separator="true">,</mo><mspace width="1em"/><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>w</mi><mi>i</mi><mi>s</mi><mi>e</mi></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">dst(x,y)=
+\begin{cases}
+src(x,y),\quad if\ src(x,y)&gt; thresh\\
+0, \quad otherwise
+\end{cases}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">c</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace"> </span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">c</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mord mathdefault">h</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<ul>
+<li><code>cv::THRESH_TOZERO_INV</code>，效果：</li>
+</ul>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>s</mi><mi>t</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.3599999999999999em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>0</mn><mo separator="true">,</mo><mspace width="1em"/><mi>i</mi><mi>f</mi><mtext> </mtext><mi>s</mi><mi>r</mi><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>&gt;</mo><mi>t</mi><mi>h</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>h</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>s</mi><mi>r</mi><mi>c</mi><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="1em"/><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>w</mi><mi>i</mi><mi>s</mi><mi>e</mi></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">dst(x,y)=
+\begin{cases}
+0,\quad if\ src(x,y)&gt; thresh\\
+src(x,y), \quad otherwise
+\end{cases}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0000299999999998em;vertical-align:-1.25003em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace"> </span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">c</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mord mathdefault">h</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">c</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:1em;"></span><span class="mord mathdefault">o</span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<ul>
+<li>
+<p><code>cv::THRESH_OTSU</code>，效果：标志，使用Otsu算法选择最优阈值。</p>
+</li>
+<li>
+<p><code>cv::THRESH_TRIANGLE</code>，效果：标志，使用三角算法选择最优阈值。</p>
+</li>
+<li>
+<p><code>cv::THRESH_MASK</code>。</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Mat <span class="title">getStructuringElement</span><span class="params">(<span class="type">int</span> shape,</span></span></span><br><span class="line"><span class="params"><span class="function">						  Size ksize,</span></span></span><br><span class="line"><span class="params"><span class="function">						  Point anchor = Point(<span class="number">-1</span>,<span class="number">-1</span>))</span></span>; <span class="comment">// 构造结构元函数 </span></span><br></pre></td></tr></table></figure>
+<p>参数列表有：</p>
+<ul>
+<li>shape：结构元形状，0表示矩形，1表示十字架，2表示椭圆。</li>
+<li>ksize：结构元大小。</li>
+<li>anchor：结构元中心点所在位置。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">erode</span><span class="params">(InputArray src,</span></span></span><br><span class="line"><span class="params"><span class="function">		   OutputArray dst,</span></span></span><br><span class="line"><span class="params"><span class="function">		   InputArray kernel,</span></span></span><br><span class="line"><span class="params"><span class="function">		   Point anchor = Point(<span class="number">-1</span>,<span class="number">-1</span>),</span></span></span><br><span class="line"><span class="params"><span class="function">		   <span class="type">int</span> iterations = <span class="number">1</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">		   <span class="type">int</span> borderType = BORDER_CONSTANT,</span></span></span><br><span class="line"><span class="params"><span class="function">		   <span class="type">const</span> Scalar&amp; borderValue = morphologyDefaultBorderValue())</span></span>;</span><br></pre></td></tr></table></figure>
+<p>参数列表有：</p>
+<ul>
+<li>src：输入图像，通道的数量可以是任意的，但深度应该是CV_8U, CV_16U, CV_16S, CV_32F或CV_64F。</li>
+<li>dst：输出与src相同大小和类型的图像。</li>
+<li>kernel：用于腐蚀的结构元。</li>
+<li>anchor：中心点在元素中的位置。</li>
+<li>iterations：应用侵蚀的次数。</li>
+<li>borderType：推断图像外部像素的边界模式。</li>
+<li>borderValue：当边界为常数时的边界值。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat input = cv::<span class="built_in">imread</span>(<span class="string">&quot;src/test.jpg&quot;</span>, <span class="number">0</span>);</span><br><span class="line">    cv::Mat image_bw, image_erosion;    <span class="comment">// 二值化图像和腐蚀后的图像</span></span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">threshold</span>(input, image_bw, <span class="number">100</span>, <span class="number">255</span>, cv::THRESH_BINARY);                    <span class="comment">// 二值化</span></span><br><span class="line">    cv::Mat se = cv::<span class="built_in">getStructuringElement</span>(<span class="number">0</span>, cv::<span class="built_in">Size</span>(<span class="number">3</span>, <span class="number">3</span>));        <span class="comment">// 腐蚀核</span></span><br><span class="line">    cv::<span class="built_in">erode</span>(image_bw, image_erosion, se, cv::<span class="built_in">Point</span>(<span class="number">-1</span>, <span class="number">-1</span>), <span class="number">3</span>);    <span class="comment">// 腐蚀</span></span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;before&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;before&quot;</span>, input);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;二值化后&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;二值化后&quot;</span>, image_bw);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;after&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;after&quot;</span>, image_erosion);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果展示：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/opencv_b14_run.jpg" alt=""></p>
+<h2 id="膨胀">膨胀</h2>
+<p>定义B对A的膨胀为：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⊕</mo><mi>B</mi><mo>=</mo><mo stretchy="false">{</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mo stretchy="false">[</mo><mo stretchy="false">(</mo><mover accent="true"><mi>B</mi><mo>^</mo></mover><msub><mo stretchy="false">)</mo><mi>z</mi></msub><mo>∩</mo><mi>A</mi><mo stretchy="false">]</mo><mo>⊆</mo><mi>A</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">A\oplus B = \{z|[(\hat{B})_z\cap A]\subseteq A \}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.19677em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mopen">[</span><span class="mopen">(</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9467699999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.16666em;"><span class="mord">^</span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊆</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mclose">}</span></span></span></span></span></p>
+<p>其中，A是前景像素的一个集合，B是一个结构元，z项是前景像素值。</p>
+<p>膨胀的目的是<strong>增大图像中的目标，或者填充、连接某些目标</strong>。</p>
+<p>但是，对于<strong>白色背景，黑色目标变小；对于黑色背景，白色目标变大</strong>。</p>
+<p>可以理解为结构元像素是白色的，膨胀是膨胀图像中的白色像素，白色像素被膨胀，则黑色元素腐蚀。</p>
+<p>代码如下：</p>
+<p>相关函数有：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dilate</span><span class="params">(InputArray src,</span></span></span><br><span class="line"><span class="params"><span class="function">		   OutputArray dst,</span></span></span><br><span class="line"><span class="params"><span class="function">		   InputArray kernel,</span></span></span><br><span class="line"><span class="params"><span class="function">		   Point anchor = Point(<span class="number">-1</span>,<span class="number">-1</span>), </span></span></span><br><span class="line"><span class="params"><span class="function">		   <span class="type">int</span> iterations = <span class="number">1</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">		   <span class="type">int</span> borderType = BORDER_CONSTANT,</span></span></span><br><span class="line"><span class="params"><span class="function">		   <span class="type">const</span> Scalar&amp; borderValue = morphologyDefaultBorderValue())</span></span>;</span><br></pre></td></tr></table></figure>
+<p>参数列表有：</p>
+<ul>
+<li>src：输入图像，通道的数量可以是任意的，但深度应该是CV_8U, CV_16U, CV_16S, CV_32F或CV_64F。</li>
+<li>dst：输出与src相同大小和类型的图像。</li>
+<li>kernel：用于腐蚀的结构元。</li>
+<li>anchor：中心点在元素中的位置。</li>
+<li>iterations：应用侵蚀的次数。</li>
+<li>borderType：推断图像外部像素的边界模式。</li>
+<li>borderValue：当边界为常数时的边界值。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat input = cv::<span class="built_in">imread</span>(<span class="string">&quot;src/test.jpg&quot;</span>, <span class="number">0</span>);</span><br><span class="line">    cv::Mat image_bw, image_dilate;    <span class="comment">// 二值化图像和膨胀后的图像</span></span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">threshold</span>(input, image_bw, <span class="number">100</span>, <span class="number">255</span>, cv::THRESH_BINARY);    <span class="comment">// 二值化</span></span><br><span class="line">    cv::Mat se = cv::<span class="built_in">getStructuringElement</span>(<span class="number">0</span>, cv::<span class="built_in">Size</span>(<span class="number">3</span>, <span class="number">3</span>));        <span class="comment">// 膨胀核</span></span><br><span class="line">    cv::<span class="built_in">dilate</span>(image_bw, image_dilate, se, cv::<span class="built_in">Point</span>(<span class="number">-1</span>, <span class="number">-1</span>), <span class="number">3</span>);    <span class="comment">// 膨胀</span></span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;before&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;before&quot;</span>, input);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;二值化后&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;二值化后&quot;</span>, image_bw);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;after&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;after&quot;</span>, image_dilate);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果展示：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/opencv_b14_run1.jpg" alt=""></p>
+<h2 id="开运算与闭运算">开运算与闭运算</h2>
+<p>结构元B对集合A的开运算定义为：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>∘</mo><mi>B</mi><mo>=</mo><mo stretchy="false">(</mo><mi>A</mi><mo>⊖</mo><mi>B</mi><mo stretchy="false">)</mo><mo>⊕</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A\circ B=(A\ominus B)\oplus B
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∘</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊖</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span></span></p>
+<p>即B对A先腐蚀，接着B对腐蚀结果膨胀。</p>
+<ul>
+<li>作用是：平滑物体轮廓、断开狭窄的狭颈、消除细长的突出和物体。</li>
+</ul>
+<p>结构元B对集合A的闭运算定义为：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>∙</mo><mi>B</mi><mo>=</mo><mo stretchy="false">(</mo><mi>A</mi><mo>⊕</mo><mi>B</mi><mo stretchy="false">)</mo><mo>⊖</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A\bullet B=(A\oplus B)\ominus B
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∙</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊕</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊖</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span></span></span></p>
+<p>即B对A先膨胀，接着B对膨胀结果腐蚀。</p>
+<ul>
+<li>作用是：弥合狭窄的狭颈或断裂处、消除小孔、填补轮廓缝隙。</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">imageOpenOperation</span><span class="params">(cv::Mat input, cv::Mat &amp;output)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    output = input.<span class="built_in">clone</span>();</span><br><span class="line">    cv::Mat se = cv::<span class="built_in">getStructuringElement</span>(cv::MORPH_RECT, cv::<span class="built_in">Size</span>(<span class="number">3</span>, <span class="number">3</span>));</span><br><span class="line">    cv::<span class="built_in">erode</span>(input, output, se);</span><br><span class="line">    cv::<span class="built_in">dilate</span>(output, output, se);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">imageCloseOperation</span><span class="params">(cv::Mat input, cv::Mat &amp;output)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    output = input.<span class="built_in">clone</span>();</span><br><span class="line">    cv::Mat se = cv::<span class="built_in">getStructuringElement</span>(cv::MORPH_RECT, cv::<span class="built_in">Size</span>(<span class="number">3</span>, <span class="number">3</span>));</span><br><span class="line">    cv::<span class="built_in">dilate</span>(input, output, se);</span><br><span class="line">    cv::<span class="built_in">erode</span>(output, output, se);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat input = cv::<span class="built_in">imread</span>(<span class="string">&quot;src/pic2.png&quot;</span>, <span class="number">0</span>);</span><br><span class="line">    cv::Mat img_bw, result1, result2;    <span class="comment">// 二值化后的图像、开运算结果、比运算结果</span></span><br><span class="line">    cv::<span class="built_in">threshold</span>(input, img_bw, <span class="number">100</span>, <span class="number">255</span>, cv::THRESH_BINARY);    <span class="comment">// 二值化</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">imageOpenOperation</span>(img_bw, result1);</span><br><span class="line">    <span class="built_in">imageCloseOperation</span>(img_bw, result2);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;before&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;开运算后&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;闭运算后&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;before&quot;</span>, img_bw);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;开运算后&quot;</span>, result1);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;闭运算后&quot;</span>, result2);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/opencv_b15_run.jpg" alt=""></p>
+<h2 id="morphologyex-函数的运用">morphologyEx() 函数的运用</h2>
+<p><em>膨胀腐蚀、开运算闭运算、击中-击不中变换、顶帽变换与底帽变换、形态学梯度</em></p>
+<h3 id="相关函数原型">相关函数原型</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">morphologyEx</span><span class="params">(  InputArray src,</span></span></span><br><span class="line"><span class="params"><span class="function">                    OutputArray dst,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="type">int</span> op, </span></span></span><br><span class="line"><span class="params"><span class="function">                    InputArray kernel,</span></span></span><br><span class="line"><span class="params"><span class="function">                    Point anchor = Point(<span class="number">-1</span>,<span class="number">-1</span>), </span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="type">int</span> iterations = <span class="number">1</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="type">int</span> borderType = BORDER_CONSTANT,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="type">const</span> Scalar&amp; borderValue = morphologyDefaultBorderValue() )</span></span>;</span><br></pre></td></tr></table></figure>
+<p>参数如下：</p>
+<ul>
+<li>
+<p>src：输入图像，图像数据类型必须为CV_8U, CV_16U, CV_16S, CV_32F or CV_64F中的一种。</p>
+</li>
+<li>
+<p>dst：输出图像，数据类型与大小和输入图像一样。</p>
+</li>
+<li>
+<p>op：形态学处理的类型。</p>
+</li>
+</ul>
+<blockquote>
+<p>MORPH_ERODE = 0：腐蚀处理</p>
+<p>MORPH_DILATE = 1：膨胀处理</p>
+<p>MORPH_OPEN = 2：开运算处理</p>
+<p>MORPH_CLOSE = 3：闭运算处理</p>
+<p>MORPH_GRADIENT = 4：形态学梯度</p>
+<p>MORPH_TOPHAT = 5：顶帽变换</p>
+<p>MORPH_BLACKHAT = 6：黑帽变换</p>
+<p>MORPH_HITMISS = 7 ：击中-击不中变换</p>
+</blockquote>
+<ul>
+<li>
+<p>kernel：结构元矩阵。</p>
+</li>
+<li>
+<p>iterations：腐蚀膨胀处理的次数，默认值为1；如果是开运算闭运算，次数表示先腐蚀或者膨胀几次，再膨胀腐蚀几次，而不是开运算闭运算几次。</p>
+</li>
+<li>
+<p>borderType：图像边框插值类型，默认类型为固定值填充。</p>
+</li>
+<li>
+<p>borderValue：边界值（如果是恒定边界）。默认值具有特殊含义。</p>
+</li>
+</ul>
+<h3 id="进行腐蚀膨胀">进行腐蚀膨胀</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat input = cv::<span class="built_in">imread</span>(<span class="string">&quot;src/pic2.png&quot;</span>, <span class="number">0</span>);</span><br><span class="line">    cv::Mat img_bw, result1, result2;</span><br><span class="line">    cv::<span class="built_in">threshold</span>(input, img_bw, <span class="number">100</span>, <span class="number">255</span>, cv::THRESH_BINARY);    <span class="comment">// 二值化</span></span><br><span class="line"></span><br><span class="line">    cv::Mat kernel = cv::<span class="built_in">getStructuringElement</span>(cv::MORPH_RECT, cv::<span class="built_in">Size</span>(<span class="number">3</span>, <span class="number">3</span>));</span><br><span class="line">    cv::<span class="built_in">morphologyEx</span>(img_bw, result1, <span class="number">0</span>, kernel);    <span class="comment">// 腐蚀</span></span><br><span class="line">    cv::<span class="built_in">morphologyEx</span>(img_bw, result2, <span class="number">1</span>, kernel);    <span class="comment">// 膨胀</span></span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;before&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;腐蚀结果&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;膨胀结果&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;before&quot;</span>, img_bw);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;腐蚀结果&quot;</span>, result1);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;膨胀结果&quot;</span>, result2);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果展示：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/opencv_b16_run.jpg" alt=""></p>
+<h3 id="进行开运算和闭运算">进行开运算和闭运算</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat input = cv::<span class="built_in">imread</span>(<span class="string">&quot;src/pic2.png&quot;</span>, <span class="number">0</span>);</span><br><span class="line">    cv::Mat img_bw, result1, result2;</span><br><span class="line">    cv::<span class="built_in">threshold</span>(input, img_bw, <span class="number">100</span>, <span class="number">255</span>, cv::THRESH_BINARY);    <span class="comment">// 二值化</span></span><br><span class="line"></span><br><span class="line">    cv::Mat kernel = cv::<span class="built_in">getStructuringElement</span>(cv::MORPH_RECT, cv::<span class="built_in">Size</span>(<span class="number">3</span>, <span class="number">3</span>));</span><br><span class="line">    cv::<span class="built_in">morphologyEx</span>(img_bw, result1, <span class="number">2</span>, kernel);    <span class="comment">// 开运算</span></span><br><span class="line">    cv::<span class="built_in">morphologyEx</span>(img_bw, result2, <span class="number">3</span>, kernel);    <span class="comment">// 闭运算</span></span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;before&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;开运算结果&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;闭运算结果&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;before&quot;</span>, img_bw);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;开运算结果&quot;</span>, result1);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;闭运算结果&quot;</span>, result2);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果展示：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/opencv_b16_2.jpg" alt=""></p>
+<h3 id="击中-击不中变换">击中-击不中变换</h3>
+<p>原理：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo>⊛</mo><mi>B</mi><mo>=</mo><mo stretchy="false">{</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mo stretchy="false">(</mo><mi>B</mi><msub><mo stretchy="false">)</mo><mi>z</mi></msub><mo>⊆</mo><mi>I</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">I\circledast B=\{z|(B)_z\subseteq I\}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7653099999999999em;vertical-align:-0.08198em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin amsrm">⊛</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊆</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mclose">}</span></span></span></span></span></p>
+<p>可以检测图像中满足结构元B的所有像素点，如：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/opencv_b16_1.png" alt=""></p>
+<p>图中结构元B中深色像素为前景，白色表示为背景， <code>×</code> 表示不关心像素（即不影响结果）。</p>
+<p>击中-击不中变换是形状检测的基本工具，寻找与结构元相符合的像素。</p>
+<p>在击中击不中变换的结构元中，-1表示背景，1表示前景，0表示不关心。</p>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat input = cv::<span class="built_in">imread</span>(<span class="string">&quot;src/rice.jpg&quot;</span>, <span class="number">0</span>);</span><br><span class="line">    cv::Mat img_bw, result;</span><br><span class="line">    cv::<span class="built_in">threshold</span>(input, img_bw, <span class="number">100</span>, <span class="number">255</span>, cv::THRESH_BINARY);    <span class="comment">// 二值化</span></span><br><span class="line"></span><br><span class="line">    cv::Mat kernel = (cv::<span class="built_in">Mat_</span>&lt;<span class="type">float</span>&gt;(<span class="number">3</span>, <span class="number">3</span>) &lt;&lt; <span class="number">1</span>, <span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">morphologyEx</span>(img_bw, result, <span class="number">7</span>, kernel);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;before&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;击中-击不中变换结果&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;before&quot;</span>, img_bw);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;击中-击不中变换结果&quot;</span>, result);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果展示：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/opencv_b16_3.jpg" alt=""></p>
+<h3 id="顶帽变换与底帽变换">顶帽变换与底帽变换</h3>
+<p>顶帽变换（礼帽变换）</p>
+<ul>
+<li>
+<p>是原图像与开运算结果图之差。</p>
+</li>
+<li>
+<p>作用：提取出细线状的部分或者噪声。</p>
+</li>
+</ul>
+<p>底帽变换（黑帽变换）</p>
+<ul>
+<li>
+<p>是闭运算与原图像结果图之差。</p>
+</li>
+<li>
+<p>作用：得到图像内部的小孔，或前景色的小黑点。</p>
+</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat input = cv::<span class="built_in">imread</span>(<span class="string">&quot;src/rice.jpg&quot;</span>, <span class="number">0</span>);</span><br><span class="line">    cv::Mat img_bw, result1, result2;</span><br><span class="line">    cv::<span class="built_in">threshold</span>(input, img_bw, <span class="number">100</span>, <span class="number">255</span>, cv::THRESH_BINARY);</span><br><span class="line">    cv::Mat kernel = cv::<span class="built_in">getStructuringElement</span>(<span class="number">0</span>, cv::<span class="built_in">Size</span>(<span class="number">5</span>, <span class="number">5</span>));</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">morphologyEx</span>(img_bw, result1, <span class="number">5</span>, kernel);</span><br><span class="line">    cv::<span class="built_in">morphologyEx</span>(img_bw, result2, <span class="number">6</span>, kernel);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;before&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;顶帽变换结果&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;底帽变换结果&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;before&quot;</span>, img_bw);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;顶帽变换结果&quot;</span>, result1);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;底帽变换结果&quot;</span>, result2);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果截图：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/opencv_b16_4.jpg" alt=""></p>
+<h3 id="形态学梯度">形态学梯度</h3>
+<ul>
+<li>
+<p>膨胀图与腐蚀图之差；</p>
+</li>
+<li>
+<p>对二值图进行这一操作可以得到图像中白色区域的边界，因此可以用形态学梯度来保留物体的边界轮廓。</p>
+</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat input = cv::<span class="built_in">imread</span>(<span class="string">&quot;src/pic2.png&quot;</span>, <span class="number">0</span>);</span><br><span class="line">    cv::Mat img_bw, result;</span><br><span class="line">    cv::<span class="built_in">threshold</span>(input, img_bw, <span class="number">100</span>, <span class="number">255</span>, cv::THRESH_BINARY_INV);</span><br><span class="line">    cv::Mat kernel = cv::<span class="built_in">getStructuringElement</span>(<span class="number">0</span>, cv::<span class="built_in">Size</span>(<span class="number">5</span>, <span class="number">5</span>));</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">morphologyEx</span>(img_bw, result, <span class="number">4</span>, kernel);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;before&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;形态学梯度结果&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;before&quot;</span>, img_bw);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;形态学梯度结果&quot;</span>, result);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果截图：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/opencv_b16_5.jpg" alt=""></p>
+<h2 id="连通域分析">连通域分析</h2>
+<p>连通域：指图像中具有相同像素值且位置相邻的像素组成的区域。</p>
+<h3 id="connectedcomponents-函数">connectedComponents 函数</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">connectedComponents</span><span class="params">(InputArray image,</span></span></span><br><span class="line"><span class="params"><span class="function">						OutputArray labels,</span></span></span><br><span class="line"><span class="params"><span class="function">						<span class="type">int</span> connectivity = <span class="number">8</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">						<span class="type">int</span> ltype = CV_32S)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>参数如下：</p>
+<ul>
+<li>
+<p>image：输入图像，待标记8位单通道图像。</p>
+</li>
+<li>
+<p>labels：输出图像，目标标记图像。</p>
+</li>
+<li>
+<p>connectivity：连通域大小，四连通域还是八连通域。</p>
+</li>
+<li>
+<p>输出类型：<code>CV32S</code> 和 <code>CV_16U</code> ，默认是 <code>CV_32S</code> 。</p>
+</li>
+<li>
+<p>返回连通域个数。</p>
+</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat input = cv::<span class="built_in">imread</span>(<span class="string">&quot;src/rice.jpg&quot;</span>);</span><br><span class="line">    cv::Mat img_bw, connectimg;</span><br><span class="line">    cv::<span class="built_in">cvtColor</span>(input, img_bw, cv::COLOR_BGR2GRAY);</span><br><span class="line">    cv::<span class="built_in">threshold</span>(img_bw, img_bw, <span class="number">100</span>, <span class="number">255</span>, cv::THRESH_BINARY_INV);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 做一些膨胀和腐蚀使得图像连通域明显</span></span><br><span class="line">    cv::Mat element = cv::<span class="built_in">getStructuringElement</span>(cv::MORPH_RECT, cv::<span class="built_in">Size</span>(<span class="number">5</span>, <span class="number">5</span>));</span><br><span class="line">    cv::<span class="built_in">erode</span>(img_bw, img_bw, element, cv::<span class="built_in">Point</span>(<span class="number">-1</span>, <span class="number">-1</span>), <span class="number">2</span>);</span><br><span class="line">    cv::<span class="built_in">dilate</span>(img_bw, img_bw, element, cv::<span class="built_in">Point</span>(<span class="number">-1</span>, <span class="number">-1</span>), <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> num = cv::<span class="built_in">connectedComponents</span>(img_bw, connectimg, <span class="number">8</span>, CV_16U);</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;连通域个数：&quot;</span> &lt;&lt; num &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;原图&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;原图&quot;</span>, img_bw);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//以不同颜色标记出不同的连通域</span></span><br><span class="line">    cv::Mat result = cv::Mat::<span class="built_in">zeros</span>(img_bw.<span class="built_in">size</span>(), CV_8UC3); <span class="comment">//定义标记结果图像</span></span><br><span class="line">    <span class="comment">//定义五种颜色</span></span><br><span class="line">    std::vector&lt;cv::Vec3b&gt; color;</span><br><span class="line">    color.<span class="built_in">push_back</span>(cv::<span class="built_in">Vec3b</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>));</span><br><span class="line">    color.<span class="built_in">push_back</span>(cv::<span class="built_in">Vec3b</span>(<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>));</span><br><span class="line">    color.<span class="built_in">push_back</span>(cv::<span class="built_in">Vec3b</span>(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">    color.<span class="built_in">push_back</span>(cv::<span class="built_in">Vec3b</span>(<span class="number">0</span>, <span class="number">255</span>, <span class="number">255</span>));</span><br><span class="line">    color.<span class="built_in">push_back</span>(cv::<span class="built_in">Vec3b</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; result.cols; i ++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; result.rows; j ++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> label = connectimg.<span class="built_in">at</span>&lt;<span class="type">uint16_t</span>&gt;(i, j);</span><br><span class="line">            <span class="keyword">if</span> (label == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">continue</span>;    <span class="comment">//背景的黑色不改变</span></span><br><span class="line">            &#125;</span><br><span class="line">            result.<span class="built_in">at</span>&lt;cv::Vec3b&gt;(i, j) = color[label % <span class="number">5</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">namedWindow</span>(<span class="string">&quot;标记连通域后&quot;</span>, cv::WINDOW_NORMAL);</span><br><span class="line">    cv::<span class="built_in">imshow</span>(<span class="string">&quot;标记连通域后&quot;</span>, result);</span><br><span class="line"></span><br><span class="line">    cv::<span class="built_in">waitKey</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果截图：</p>
+<p><img src="https://fblog-img.oss-cn-hangzhou.aliyuncs.com/blog/opencv_b17_run.jpg" alt=""></p>
+<p><em>注：黑色也算一个连通域</em></p>
+<h3 id="connectedcomponentswithstats-函数">connectedComponentsWithStats 函数</h3>
+<p>函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">connectedComponentsWithStats</span><span class="params">(InputArray image,</span></span></span><br><span class="line"><span class="params"><span class="function">								 OutputArray labels,</span></span></span><br><span class="line"><span class="params"><span class="function">								 OutputArray stats,</span></span></span><br><span class="line"><span class="params"><span class="function">								 OutputArray centroids,</span></span></span><br><span class="line"><span class="params"><span class="function">								 <span class="type">int</span> connectivity = <span class="number">8</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">								 <span class="type">int</span> ltype = CV_32S)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>参数如下：</p>
+<ul>
+<li>
+<p>image：要标记的8位单通道图像</p>
+</li>
+<li>
+<p>labels：目标标签图像</p>
+</li>
+<li>
+<p>stats：每个标签的统计输出，是一个5列的矩阵，每一行对应每个连通区域的外接矩形的左上角坐标x、y，以及外接矩形的宽高width、height和面积area。</p>
+</li>
+<li>
+<p>centroids：连通域中心点，数据类型CV_64F。</p>
+</li>
+<li>
+<p>connectivity：8或4分别用于八连通域和四连通域。</p>
+</li>
+<li>
+<p>ltype输出图像标签类型。目前支持CV_32S和CV_16U。</p>
+</li>
+<li>
+<p>返回连通域个数。</p>
+</li>
+</ul>
+<p>其中， stats包含了标签为i的连通域的一些信息，可以如下访问标签为i的连通域的面积：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stats.<span class="built_in">at</span>&lt;<span class="type">int</span>&gt;(i, CC_STAT_AREA)</span><br></pre></td></tr></table></figure>
+<p>连通域外接矩形的参数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 矩形左上角x</span></span><br><span class="line">x = stats.<span class="built_in">at</span>&lt;<span class="type">int</span>&gt;(max_idx, cv::CC_STAT_LEFT);</span><br><span class="line"><span class="comment">// 矩形左上角y</span></span><br><span class="line">y = stats.<span class="built_in">at</span>&lt;<span class="type">int</span>&gt;(max_idx, cv::CC_STAT_TOP);</span><br><span class="line"><span class="comment">// 矩形高</span></span><br><span class="line">h = stats.<span class="built_in">at</span>&lt;<span class="type">int</span>&gt;(max_idx, cv::CC_STAT_HEIGHT);</span><br><span class="line"><span class="comment">// 矩形宽</span></span><br><span class="line">w = stats.<span class="built_in">at</span>&lt;<span class="type">int</span>&gt;(max_idx, cv::CC_STAT_WIDTH);</span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script></article>
+<div class="article-footer">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+
+</div>
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/notes/basic_opencv/color_image/">彩色图像处理</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/notes/basic_opencv/segmentation/">图像分割</a></div></section></div>
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap" style="column-count:2;"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期发布</a><a href="/categories/">分类</a><a href="/tags/">标签</a><a href="/archives/">归档</a></div><div class="sitemap-group"><span class="fs15">关于</span><a href="/about/me/">关于我</a><a href="/about/site/">关于博客</a></div></div><div class="text"><p>本站由 <a href="/">Fingsinz</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.0">Stellar 1.33.0</a> 主题创建。<br>
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="true"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%85%90%E8%9A%80"><span class="toc-text">腐蚀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%86%A8%E8%83%80"><span class="toc-text">膨胀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E8%BF%90%E7%AE%97%E4%B8%8E%E9%97%AD%E8%BF%90%E7%AE%97"><span class="toc-text">开运算与闭运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#morphologyex-%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%90%E7%94%A8"><span class="toc-text">morphologyEx() 函数的运用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0%E5%8E%9F%E5%9E%8B"><span class="toc-text">相关函数原型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E8%85%90%E8%9A%80%E8%86%A8%E8%83%80"><span class="toc-text">进行腐蚀膨胀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%BC%80%E8%BF%90%E7%AE%97%E5%92%8C%E9%97%AD%E8%BF%90%E7%AE%97"><span class="toc-text">进行开运算和闭运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BB%E4%B8%AD-%E5%87%BB%E4%B8%8D%E4%B8%AD%E5%8F%98%E6%8D%A2"><span class="toc-text">击中-击不中变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B6%E5%B8%BD%E5%8F%98%E6%8D%A2%E4%B8%8E%E5%BA%95%E5%B8%BD%E5%8F%98%E6%8D%A2"><span class="toc-text">顶帽变换与底帽变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A2%E6%80%81%E5%AD%A6%E6%A2%AF%E5%BA%A6"><span class="toc-text">形态学梯度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E9%80%9A%E5%9F%9F%E5%88%86%E6%9E%90"><span class="toc-text">连通域分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#connectedcomponents-%E5%87%BD%E6%95%B0"><span class="toc-text">connectedComponents 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#connectedcomponentswithstats-%E5%87%BD%E6%95%B0"><span class="toc-text">connectedComponentsWithStats 函数</span></a></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"><path stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/><path d="M7 3.338A9.95 9.95 0 0 1 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12c0-1.821.487-3.53 1.338-5"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://gcore.jsdelivr.net/npm/vanilla-lazyload@19.1/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.0" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://gcore.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
